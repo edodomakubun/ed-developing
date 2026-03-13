@@ -1,70 +1,45 @@
 <!DOCTYPE html>
-<html lang="id" class="scroll-smooth">
+<html lang="id">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="Developer Sekolah & Aplikasi Manajemen">
-    <title>Edward Domakubun | Creative Developer</title>
-
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- FontAwesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <!-- AOS Animation CSS -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
-    <!-- Google Fonts: Syne (Artsy) & Inter (Clean) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Edward Domakubun | Developer</title>
+    
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Syne:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
 
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        bgDark: '#09090b', // Zinc 950
-                        accentPrimary: '#c084fc', // Purple 400
-                        accentSecondary: '#38bdf8', // Light Blue 400
-                        accentPink: '#f472b6', // Pink 400
+                        'brutal-yellow': '#FFE600',
+                        'brutal-pink': '#FF006E',
+                        'brutal-cyan': '#00F5FF',
+                        'brutal-orange': '#FF5E00',
+                        'brutal-purple': '#9D00FF',
+                        'brutal-black': '#111111',
+                        'brutal-white': '#FFFFFF',
+                        'brutal-gray': '#E5E5E5',
                     },
                     fontFamily: {
-                        display: ['"Syne"', 'sans-serif'],
-                        body: ['"Inter"', 'sans-serif'],
+                        'display': ['"Archivo Black"', 'sans-serif'],
+                        'mono': ['"Space Mono"', 'monospace'],
+                        'body': ['"Inter"', 'sans-serif'],
                     },
-                    animation: {
-                        'blob': 'blob 10s infinite alternate',
-                        'marquee': 'marquee 25s linear infinite',
-                        'float-icon': 'floatIcon 3s ease-in-out infinite',
-                        'shimmer': 'shimmer 2.5s infinite linear',
-                        'pulse-glow': 'pulseGlow 3s infinite alternate',
-                    },
-                    keyframes: {
-                        blob: {
-                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
-                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
-                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
-                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
-                        },
-                        marquee: {
-                            '0%': { transform: 'translateX(0%)' },
-                            '100%': { transform: 'translateX(-50%)' },
-                        },
-                        floatIcon: {
-                            '0%, 100%': { transform: 'translateY(0) scale(1)' },
-                            '50%': { transform: 'translateY(-15px) scale(1.05)' },
-                        },
-                        shimmer: {
-                            '0%': { transform: 'translateX(-200%) skewX(-15deg)' },
-                            '100%': { transform: 'translateX(300%) skewX(-15deg)' }
-                        },
-                        pulseGlow: {
-                            '0%': { transform: 'translate(-50%, -50%) scale(1)', opacity: 0.5 },
-                            '100%': { transform: 'translate(-50%, -50%) scale(1.5)', opacity: 0.8 }
-                        }
+                    boxShadow: {
+                        'brutal': '4px 4px 0px 0px #111111',
+                        'brutal-hover': '6px 6px 0px 0px #111111',
+                        'brutal-sm': '2px 2px 0px 0px #111111',
                     }
                 }
             }
@@ -72,225 +47,602 @@
     </script>
 
     <style>
-        body {
-            background-color: #09090b;
-            color: #f4f4f5;
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
             overflow-x: hidden;
+            width: 100%;
+        }
+
+        body {
+            background-color: #FFE600;
+            color: #111111;
             font-family: 'Inter', sans-serif;
         }
 
-        h1, h2, h3, h4, h5, h6, .font-display {
-            font-family: 'Syne', sans-serif;
+        section {
+            width: 100%;
+            max-width: 100vw;
         }
 
-        ::selection { background: #c084fc; color: #fff; }
-        ::-webkit-scrollbar { display: none; }
-        * { -ms-overflow-style: none; scrollbar-width: none; }
-
-        /* Fluid Aurora Background */
-        .aurora-bg {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            overflow: hidden; z-index: -1;
-            background: #09090b;
+        .bg-grid {
+            background-image: 
+                linear-gradient(#111111 1px, transparent 1px),
+                linear-gradient(90deg, #111111 1px, transparent 1px);
+            background-size: 30px 30px;
         }
-        .orb {
+
+        .bg-grid-small {
+            background-image: 
+                linear-gradient(#111111 1px, transparent 1px),
+                linear-gradient(90deg, #111111 1px, transparent 1px);
+            background-size: 15px 15px;
+        }
+
+        .glitch {
+            position: relative;
+            display: inline-block;
+        }
+
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
             position: absolute;
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.5;
-            animation: blob 15s infinite alternate;
-        }
-        .orb-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: #c084fc; animation-delay: 0s; }
-        .orb-2 { top: 40%; right: -20%; width: 60vw; height: 60vw; background: #38bdf8; animation-delay: -5s; }
-        .orb-3 { bottom: -20%; left: 20%; width: 40vw; height: 40vw; background: #f472b6; animation-delay: -10s; }
-
-        /* Glassmorphism Cards */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 2.5rem;
-            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-        .glass-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4), inset 0 0 0 1px rgba(255,255,255,0.15);
-            background: rgba(255, 255, 255, 0.06);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
         }
 
-        /* Mobile Floating Text Animations */
-        @keyframes floatText { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-8px); } }
-        .float-nav { animation: floatText 4s ease-in-out infinite; }
+        .glitch::before {
+            left: 1px;
+            text-shadow: -1px 0 #FF006E;
+            clip: rect(24px, 550px, 90px, 0);
+            animation: glitch-anim-2 3s infinite linear alternate-reverse;
+        }
 
-        /* Horizontal Scroll Carousel for Portfolio */
-        .scrolling-wrapper {
-            display: flex; flex-wrap: nowrap; overflow-x: auto;
-            scroll-snap-type: x mandatory; padding-bottom: 3rem; padding-top: 1rem;
-            gap: 1.5rem;
-            -webkit-overflow-scrolling: touch;
+        .glitch::after {
+            left: -1px;
+            text-shadow: -1px 0 #00F5FF;
+            clip: rect(85px, 550px, 140px, 0);
+            animation: glitch-anim 2.5s infinite linear alternate-reverse;
         }
-        
-        .carousel-card {
-            flex: 0 0 auto;
-            scroll-snap-align: center;
-            transition: transform 0.5s ease, opacity 0.5s ease, filter 0.5s ease;
-            transform-origin: center center;
-            opacity: 0.6;
-            transform: scale(0.85);
-            filter: grayscale(40%);
+
+        @keyframes glitch-anim {
+            0% { clip: rect(10px, 9999px, 85px, 0); }
+            20% { clip: rect(65px, 9999px, 99px, 0); }
+            40% { clip: rect(25px, 9999px, 145px, 0); }
+            60% { clip: rect(85px, 9999px, 40px, 0); }
+            80% { clip: rect(120px, 9999px, 80px, 0); }
+            100% { clip: rect(45px, 9999px, 60px, 0); }
         }
-        .carousel-card.active {
-            opacity: 1;
-            transform: scale(1);
-            filter: grayscale(0%);
+
+        @keyframes glitch-anim-2 {
+            0% { clip: rect(65px, 9999px, 99px, 0); }
+            20% { clip: rect(10px, 9999px, 85px, 0); }
+            40% { clip: rect(85px, 9999px, 40px, 0); }
+            60% { clip: rect(25px, 9999px, 145px, 0); }
+            80% { clip: rect(45px, 9999px, 60px, 0); }
+            100% { clip: rect(120px, 9999px, 80px, 0); }
+        }
+
+        .marquee-container {
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .marquee-content {
+            display: inline-flex;
+            animation: marquee 25s linear infinite;
+            white-space: nowrap;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .sticker {
+            animation: rotate 15s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .wiggle:hover {
+            animation: wiggle 0.5s ease-in-out;
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-2deg); }
+            50% { transform: rotate(2deg); }
+        }
+
+        .scanlines {
+            position: relative;
+        }
+
+        .scanlines::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.1),
+                rgba(0, 0, 0, 0.1) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            pointer-events: none;
+        }
+
+        .tape {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+            transform: rotate(-2deg);
             z-index: 10;
         }
 
-        /* Continuous Shine Effect Overlay */
-        .shine-layer {
-            position: absolute;
-            top: 0; left: 0; width: 50%; height: 100%;
-            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0) 100%);
-            z-index: 20;
-            pointer-events: none;
-            animation: shimmer 2.5s infinite linear;
+        .doodle-border {
+            border: 3px solid #111111;
+            border-radius: 20px 5px 20px 5px;
         }
 
-        /* Running Text (Marquee) */
-        .marquee-container {
-            overflow: hidden; white-space: nowrap; width: 100%;
-            background: rgba(255,255,255,0.02); border-y: 1px solid rgba(255,255,255,0.05);
-            padding: 1.5rem 0; transform: rotate(-2deg) scale(1.05);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            z-index: 10; position: relative;
+        .doodle-border-2 {
+            border: 3px solid #111111;
+            border-radius: 5px 20px 5px 20px;
         }
-        .marquee-content { display: inline-block; animation: marquee 20s linear infinite; }
-        .marquee-item {
-            display: inline-block; font-family: 'Syne', sans-serif;
-            font-size: 2rem; font-weight: 800; text-transform: uppercase;
-            color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.4);
-            margin: 0 2rem; transition: color 0.3s;
+
+        ::selection {
+            background: #FF006E;
+            color: #FFFFFF;
         }
-        .marquee-item:hover { color: #c084fc; -webkit-text-stroke: 0px; }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #FFE600;
+            border-left: 2px solid #111111;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #111111;
+            border: 2px solid #FFE600;
+        }
+
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        h1, h2, h3, h4, h5, h6, p {
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+        }
+
+        @media (max-width: 768px) {
+            .glitch::before,
+            .glitch::after {
+                display: none;
+            }
+            
+            .sticker {
+                animation: none;
+            }
+        }
+
+        a, button {
+            min-height: 44px;
+            min-width: 44px;
+        }
+
+        /* Preview Modal Styles */
+        .preview-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.9);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .preview-modal.active {
+            display: flex;
+        }
+
+        .preview-container {
+            width: 100%;
+            max-width: 1200px;
+            height: 90vh;
+            background: #111;
+            border: 4px solid #111;
+            position: relative;
+        }
+
+        .preview-iframe {
+            width: 100%;
+            height: calc(100% - 50px);
+            border: none;
+            background: white;
+        }
+
+        .preview-header {
+            height: 50px;
+            background: #111;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            color: white;
+            font-family: 'Space Mono', monospace;
+        }
+
+        .preview-close {
+            background: #FF006E;
+            border: none;
+            color: white;
+            width: 32px;
+            height: 32px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .preview-close:hover {
+            background: #ff3385;
+        }
+
+        /* Card Preview Thumbnail */
+        .card-preview {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+            background: #f0f0f0;
+        }
+
+        .card-preview iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            pointer-events: none;
+            transform: scale(0.25);
+            transform-origin: 0 0;
+            width: 400%;
+            height: 400%;
+        }
+
+        .preview-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .card-preview:hover .preview-overlay {
+            opacity: 1;
+        }
+
+        .preview-btn {
+            background: #FF006E;
+            color: white;
+            border: 3px solid #111;
+            padding: 10px 20px;
+            font-family: 'Space Mono', monospace;
+            font-weight: bold;
+            cursor: pointer;
+            transform: scale(0.9);
+            transition: transform 0.2s;
+        }
+
+        .preview-btn:hover {
+            transform: scale(1);
+        }
+
+        /* Loading state */
+        .preview-loading {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f0f0f0;
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .preview-fallback {
+            position: absolute;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-family: 'Space Mono', monospace;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .preview-fallback.active {
+            display: flex;
+        }
+
+        .preview-fallback i {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 10px;
+        }
+
+        /* Mobile optimizations */
+        @media (max-width: 640px) {
+            .card-preview {
+                height: 160px;
+            }
+            
+            .preview-container {
+                height: 95vh;
+                width: 95vw;
+            }
+            
+            .preview-modal {
+                padding: 10px;
+            }
+        }
     </style>
 </head>
+<body class="bg-brutal-yellow">
 
-<body class="selection:bg-accentPrimary selection:text-white">
-
-    <!-- Fluid Aurora Background -->
-    <div class="aurora-bg">
-        <div class="orb orb-1"></div>
-        <div class="orb orb-2"></div>
-        <div class="orb orb-3"></div>
-        <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.85%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E')] opacity-[0.04] mix-blend-overlay"></div>
-    </div>
-
-    <!-- Desktop Navbar -->
-    <div class="hidden md:flex fixed w-full top-6 z-50 justify-center px-4" data-aos="fade-down">
-        <nav class="bg-white/5 backdrop-blur-xl px-8 py-4 rounded-full flex justify-between items-center gap-16 border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
-            <a href="#" class="font-display font-extrabold text-2xl text-white tracking-tight hover:scale-105 transition-transform">
-                Edward<span class="text-accentPrimary animate-pulse">.</span>
-            </a>
-            <div class="flex space-x-10 items-center">
-                <a href="#about" class="text-sm font-medium text-zinc-300 hover:text-white hover:-translate-y-1 transition-all">Profile</a>
-                <a href="#expertise" class="text-sm font-medium text-zinc-300 hover:text-white hover:-translate-y-1 transition-all">Expertise</a>
-                <a href="#works" class="text-sm font-medium text-zinc-300 hover:text-white hover:-translate-y-1 transition-all">Works</a>
+    <!-- Preview Modal -->
+    <div id="previewModal" class="preview-modal">
+        <div class="preview-container">
+            <div class="preview-header">
+                <span id="previewTitle">Website Preview</span>
+                <div class="flex items-center gap-3">
+                    <a id="previewLink" href="#" target="_blank" class="text-sm hover:text-brutal-cyan transition-colors flex items-center gap-1">
+                        <span>Open in New Tab</span>
+                        <i data-lucide="external-link" class="w-4 h-4"></i>
+                    </a>
+                    <button class="preview-close" onclick="closePreview()" aria-label="Close preview">
+                        <i data-lucide="x" class="w-5 h-5"></i>
+                    </button>
+                </div>
             </div>
-            <a href="https://wa.me/6282238128216" class="px-6 py-2.5 rounded-full bg-white text-black text-sm font-bold hover:bg-accentPrimary hover:text-white transition-all shadow-[0_0_20px_rgba(192,132,252,0.3)] hover:shadow-[0_0_30px_rgba(192,132,252,0.6)] hover:scale-105">
-                Say Hello <i class="fa-brands fa-whatsapp ml-2 text-green-500"></i>
-            </a>
-        </nav>
+            <iframe id="previewFrame" class="preview-iframe" src=""></iframe>
+        </div>
     </div>
 
-    <!-- Mobile Bouncy Floating Nav (Adjusted padding & text size to prevent cut-off) -->
-    <div class="md:hidden fixed bottom-6 left-0 w-full z-50 flex justify-center flex-wrap gap-x-2 gap-y-2 px-3 pointer-events-none">
-        <a href="#home" class="float-nav pointer-events-auto px-4 py-2 sm:px-5 sm:py-2.5 bg-white/10 backdrop-blur-xl border border-white/20 rounded-full text-[10px] sm:text-xs font-display font-bold text-white shadow-xl hover:bg-white hover:text-black transition-colors" style="animation-delay: 0s;">HOME</a>
-        <a href="#about" class="float-nav pointer-events-auto px-4 py-2 sm:px-5 sm:py-2.5 bg-white/10 backdrop-blur-xl border border-white/20 rounded-full text-[10px] sm:text-xs font-display font-bold text-white shadow-xl hover:bg-white hover:text-black transition-colors" style="animation-delay: 0.2s;">ABOUT</a>
-        <a href="#expertise" class="float-nav pointer-events-auto px-4 py-2 sm:px-5 sm:py-2.5 bg-white/10 backdrop-blur-xl border border-white/20 rounded-full text-[10px] sm:text-xs font-display font-bold text-white shadow-xl hover:bg-white hover:text-black transition-colors" style="animation-delay: 0.4s;">SKILLS</a>
-        <a href="#works" class="float-nav pointer-events-auto px-4 py-2 sm:px-5 sm:py-2.5 bg-white/10 backdrop-blur-xl border border-white/20 rounded-full text-[10px] sm:text-xs font-display font-bold text-white shadow-xl hover:bg-white hover:text-black transition-colors" style="animation-delay: 0.6s;">WORKS</a>
-        <a href="https://wa.me/6282238128216" class="float-nav pointer-events-auto px-4 py-2 sm:px-5 sm:py-2.5 bg-accentPrimary text-white backdrop-blur-xl border border-accentPrimary rounded-full text-[10px] sm:text-xs font-display font-bold shadow-[0_0_20px_rgba(192,132,252,0.5)] hover:scale-110 transition-transform" style="animation-delay: 0.8s;">
-            <i class="fa-brands fa-whatsapp text-xs sm:text-sm mr-1"></i> CHAT
-        </a>
-    </div>
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-brutal-white border-b-4 border-brutal-black">
+        <div class="w-full px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16 sm:h-20">
+                <a href="#" class="font-display text-xl sm:text-2xl tracking-tighter hover:text-brutal-pink transition-colors shrink-0">
+                    EDWARD<span class="text-brutal-pink">.</span>
+                </a>
+
+                <div class="hidden md:flex items-center gap-2">
+                    <a href="#about" class="font-mono text-xs lg:text-sm font-bold px-3 py-2 border-2 border-transparent hover:border-brutal-black hover:bg-brutal-cyan transition-all wiggle">
+                        PROFILE
+                    </a>
+                    <a href="#services" class="font-mono text-xs lg:text-sm font-bold px-3 py-2 border-2 border-transparent hover:border-brutal-black hover:bg-brutal-pink hover:text-white transition-all wiggle">
+                        SERVICES
+                    </a>
+                    <a href="#works" class="font-mono text-xs lg:text-sm font-bold px-3 py-2 border-2 border-transparent hover:border-brutal-black hover:bg-brutal-purple hover:text-white transition-all wiggle">
+                        WORKS
+                    </a>
+                    <a href="https://wa.me/6282238128216" class="font-mono text-xs lg:text-sm font-bold px-4 py-2 bg-brutal-black text-brutal-yellow border-2 border-brutal-black hover:bg-brutal-yellow hover:text-brutal-black transition-all shadow-brutal hover:shadow-brutal-hover transform hover:-translate-y-0.5 ml-2">
+                        LET'S TALK!
+                    </a>
+                </div>
+
+                <button id="mobile-menu-btn" class="md:hidden p-2 border-2 border-brutal-black bg-brutal-cyan active:scale-95 transition-transform">
+                    <i data-lucide="menu" class="w-5 h-5"></i>
+                </button>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden bg-brutal-cyan border-t-4 border-brutal-black absolute top-full left-0 right-0">
+            <div class="px-4 py-4 space-y-2">
+                <a href="#about" class="block font-mono font-bold text-base py-3 border-2 border-brutal-black bg-white text-center hover:bg-brutal-pink hover:text-white transition-colors">PROFILE</a>
+                <a href="#services" class="block font-mono font-bold text-base py-3 border-2 border-brutal-black bg-white text-center hover:bg-brutal-purple hover:text-white transition-colors">SERVICES</a>
+                <a href="#works" class="block font-mono font-bold text-base py-3 border-2 border-brutal-black bg-white text-center hover:bg-brutal-orange hover:text-white transition-colors">WORKS</a>
+                <a href="https://wa.me/6282238128216" class="block font-mono font-bold text-base py-3 border-2 border-brutal-black bg-brutal-black text-brutal-yellow text-center">CHAT NOW!</a>
+            </div>
+        </div>
+    </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="relative min-h-[90vh] flex flex-col items-center justify-center pt-24 px-4 sm:px-6 z-10 text-center">
+    <section class="pt-24 sm:pt-28 md:pt-32 pb-12 sm:pb-16 px-4 relative overflow-hidden min-h-[calc(100vh-80px)] flex items-center">
+        <div class="absolute inset-0 bg-grid opacity-20 pointer-events-none"></div>
         
-        <!-- Profile Bubble with Float -->
-        <div data-aos="zoom-in" data-aos-duration="1000" class="mb-6 sm:mb-8 relative group animate-[floatText_6s_ease-in-out_infinite]">
-            <div class="absolute inset-0 bg-gradient-to-tr from-accentPrimary to-accentSecondary rounded-[3rem] blur-xl opacity-60 group-hover:opacity-100 transition-opacity duration-700 group-hover:rotate-12"></div>
-            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhcgX_ACgXPCUAXU8VnYkern3AmVP500MT7r7YUKzF2qR3Tb28_lpFsqTrj_MIQl4GzikDse4jM1D7f55p0_vs-uPwKCib4zHziZC8jEYzMXV4jLsvRax5ERjZwNGiX5ZCpKdV5dy-ftNYwGWitVnKjwY_L7r5yn81b2ovGGVA9C0dzMSWjQv6IeGn9_fT7/s250/IMG-20251212-WA0016.jpg" 
-                 alt="Edward" class="relative w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 rounded-[2.5rem] object-cover border-2 border-white/20 shadow-2xl transition-transform duration-500 group-hover:scale-105">
+        <div class="absolute top-28 left-4 sticker hidden lg:block">
+            <div class="w-16 h-16 sm:w-20 sm:h-20 bg-brutal-pink border-3 border-brutal-black rounded-full flex items-center justify-center shadow-brutal-sm">
+                <span class="font-display text-white text-[10px] sm:text-xs text-center leading-tight">NEW<br>2026</span>
+            </div>
         </div>
 
-        <div data-aos="fade-up" data-aos-delay="200" class="inline-flex items-center gap-3 px-4 py-1.5 sm:px-5 sm:py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-6 hover:bg-white/10 transition-colors cursor-pointer">
-            <span class="relative flex h-2.5 w-2.5 sm:h-3 sm:w-3">
-              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-              <span class="relative inline-flex rounded-full h-2.5 w-2.5 sm:h-3 sm:w-3 bg-green-500"></span>
-            </span>
-            <span class="text-xs sm:text-sm font-medium text-zinc-200 tracking-wide">Developer Sekolah & Edukasi</span>
+        <div class="absolute bottom-20 right-4 sticker hidden lg:block" style="animation-direction: reverse;">
+            <div class="w-20 h-20 sm:w-24 sm:h-24 bg-brutal-cyan border-3 border-brutal-black rotate-12 shadow-brutal-sm p-1">
+                <div class="w-full h-full border-2 border-brutal-black border-dashed flex items-center justify-center">
+                    <i data-lucide="code-2" class="w-8 h-8 sm:w-10 sm:h-10"></i>
+                </div>
+            </div>
         </div>
 
-        <h1 data-aos="fade-up" data-aos-delay="300" class="font-display text-4xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-extrabold tracking-tight leading-[1.2] md:leading-[1.1] mb-6 max-w-4xl mx-auto break-words">
-            Membangun <span class="text-transparent bg-clip-text bg-gradient-to-r from-accentPrimary via-accentSecondary to-accentPink animate-pulse">Masa Depan</span> Digital Sekolah.
-        </h1>
+        <div class="w-full max-w-7xl mx-auto relative z-10">
+            <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                <div class="order-2 lg:order-1 text-center lg:text-left">
+                    <div class="inline-block mb-4 sm:mb-6 transform -rotate-2">
+                        <div class="bg-brutal-white border-3 border-brutal-black px-3 py-1.5 sm:px-4 sm:py-2 shadow-brutal-sm font-mono text-xs sm:text-sm font-bold">
+                            <span class="inline-block w-2 h-2 sm:w-3 sm:h-3 bg-brutal-pink rounded-full mr-1 sm:mr-2 animate-pulse"></span>
+                            DEVELOPER SEKOLAH & EDUKASI
+                        </div>
+                    </div>
 
-        <p data-aos="fade-up" data-aos-delay="400" class="text-zinc-400 text-base sm:text-lg md:text-xl max-w-2xl font-light mb-12 leading-relaxed px-2">
-            Menghadirkan solusi teknologi modern, aplikasi cerdas, dan website responsif untuk memajukan ekosistem pendidikan di Kepulauan Tanimbar.
-        </p>
+                    <h1 class="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-tight mb-4 sm:mb-6">
+                        MEMBANGUN<br>
+                        <span class="text-brutal-pink">MASA DEPAN</span><br>
+                        <span class="bg-brutal-black text-brutal-yellow px-2 inline-block transform -rotate-1 mt-1">DIGITAL</span>
+                    </h1>
+
+                    <p class="font-mono text-sm sm:text-base md:text-lg mb-6 sm:mb-8 max-w-lg mx-auto lg:mx-0 bg-brutal-white border-3 border-brutal-black p-3 sm:p-4 shadow-brutal transform rotate-1">
+                        Solusi teknologi modern untuk ekosistem pendidikan di Kepulauan Tanimbar.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
+                        <a href="#works" class="inline-flex items-center justify-center gap-2 font-mono font-bold text-sm sm:text-base px-4 sm:px-6 py-3 sm:py-4 bg-brutal-pink text-white border-3 border-brutal-black shadow-brutal hover:shadow-brutal-hover hover:-translate-y-0.5 transition-all wiggle">
+                            LIHAT PROJECT
+                            <i data-lucide="arrow-right" class="w-4 h-4 sm:w-5 sm:h-5"></i>
+                        </a>
+                        <a href="https://wa.me/6282238128216" class="inline-flex items-center justify-center gap-2 font-mono font-bold text-sm sm:text-base px-4 sm:px-6 py-3 sm:py-4 bg-brutal-cyan border-3 border-brutal-black shadow-brutal hover:shadow-brutal-hover hover:-translate-y-0.5 transition-all wiggle">
+                            <i data-lucide="message-circle" class="w-4 h-4 sm:w-5 sm:h-5"></i>
+                            CHAT
+                        </a>
+                    </div>
+                </div>
+
+                <div class="order-1 lg:order-2 flex justify-center">
+                    <div class="relative max-w-[280px] sm:max-w-[320px] md:max-w-[380px]">
+                        <div class="tape w-20 sm:w-24 h-5 sm:h-6 -top-2 sm:-top-3 left-1/2 -translate-x-1/2"></div>
+                        
+                        <div class="relative bg-brutal-white border-3 border-brutal-black p-2 sm:p-3 shadow-brutal transform rotate-2 hover:rotate-0 transition-transform duration-300">
+                            <div class="bg-brutal-gray border-3 border-brutal-black overflow-hidden">
+                                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhcgX_ACgXPCUAXU8VnYkern3AmVP500MT7r7YUKzF2qR3Tb28_lpFsqTrj_MIQl4GzikDse4jM1D7f55p0_vs-uPwKCib4zHziZC8jEYzMXV4jLsvRax5ERjZwNGiX5ZCpKdV5dy-ftNYwGWitVnKjwY_L7r5yn81b2ovGGVA9C0dzMSWjQv6IeGn9_fT7/s250/IMG-20251212-WA0016.jpg" 
+                                     alt="Edward" 
+                                     class="w-full aspect-square object-cover">
+                            </div>
+                            
+                            <div class="mt-2 sm:mt-3 bg-brutal-yellow border-3 border-brutal-black p-1.5 sm:p-2 font-mono text-[10px] sm:text-xs font-bold text-center transform -rotate-1">
+                                EDWARD DOMAKUBUN // FULLSTACK DEV
+                            </div>
+                        </div>
+
+                        <div class="absolute -bottom-4 -right-4 sm:-bottom-6 sm:-right-6 w-16 h-16 sm:w-20 sm:h-20 bg-brutal-orange border-3 border-brutal-black rounded-full flex items-center justify-center shadow-brutal-sm z-10">
+                            <span class="font-display text-white text-center text-[10px] sm:text-xs leading-tight">10+<br>PROJECTS</span>
+                        </div>
+
+                        <div class="absolute -top-2 -left-2 sm:-top-4 sm:-left-4 w-10 h-10 sm:w-14 sm:h-14 bg-brutal-purple border-3 border-brutal-black flex items-center justify-center shadow-brutal-sm z-10 rotate-12">
+                            <i data-lucide="star" class="w-5 h-5 sm:w-7 sm:h-7 text-white fill-white"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <!-- Running Text (Marquee) -->
-    <div class="marquee-container">
-        <div class="marquee-content">
-            <span class="marquee-item"><i class="fa-solid fa-code text-accentPrimary"></i> WEB DEVELOPMENT</span>
-            <span class="marquee-item"><i class="fa-brands fa-android text-accentSecondary"></i> MOBILE APPS</span>
-            <span class="marquee-item"><i class="fa-solid fa-qrcode text-accentPink"></i> QR SYSTEMS</span>
-            <span class="marquee-item"><i class="fa-solid fa-database text-accentPrimary"></i> SIAKAD</span>
-            <span class="marquee-item"><i class="fa-solid fa-laptop text-accentSecondary"></i> UI/UX DESIGN</span>
-            <!-- Duplicate -->
-            <span class="marquee-item"><i class="fa-solid fa-code text-accentPrimary"></i> WEB DEVELOPMENT</span>
-            <span class="marquee-item"><i class="fa-brands fa-android text-accentSecondary"></i> MOBILE APPS</span>
-            <span class="marquee-item"><i class="fa-solid fa-qrcode text-accentPink"></i> QR SYSTEMS</span>
-            <span class="marquee-item"><i class="fa-solid fa-database text-accentPrimary"></i> SIAKAD</span>
-            <span class="marquee-item"><i class="fa-solid fa-laptop text-accentSecondary"></i> UI/UX DESIGN</span>
+    <!-- Marquee Section -->
+    <div class="w-full bg-brutal-black text-brutal-yellow py-3 sm:py-4 border-y-3 border-brutal-black overflow-hidden">
+        <div class="marquee-container">
+            <div class="marquee-content font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
+                <span class="mx-4 sm:mx-8">WEB DEVELOPMENT</span>
+                <span class="text-brutal-pink mx-2 sm:mx-4">★</span>
+                <span class="mx-4 sm:mx-8">MOBILE APPS</span>
+                <span class="text-brutal-cyan mx-2 sm:mx-4">★</span>
+                <span class="mx-4 sm:mx-8">QR SYSTEMS</span>
+                <span class="text-brutal-orange mx-2 sm:mx-4">★</span>
+                <span class="mx-4 sm:mx-8">SIAKAD</span>
+                <span class="text-brutal-purple mx-2 sm:mx-4">★</span>
+                <span class="mx-4 sm:mx-8">UI/UX DESIGN</span>
+                <span class="text-brutal-pink mx-2 sm:mx-4">★</span>
+                <span class="mx-4 sm:mx-8">WEB DEVELOPMENT</span>
+                <span class="text-brutal-pink mx-2 sm:mx-4">★</span>
+                <span class="mx-4 sm:mx-8">MOBILE APPS</span>
+                <span class="text-brutal-cyan mx-2 sm:mx-4">★</span>
+                <span class="mx-4 sm:mx-8">QR SYSTEMS</span>
+                <span class="text-brutal-orange mx-2 sm:mx-4">★</span>
+                <span class="mx-4 sm:mx-8">SIAKAD</span>
+                <span class="text-brutal-purple mx-2 sm:mx-4">★</span>
+                <span class="mx-4 sm:mx-8">UI/UX DESIGN</span>
+                <span class="text-brutal-pink mx-2 sm:mx-4">★</span>
+            </div>
         </div>
     </div>
 
     <!-- About Section -->
-    <section id="about" class="py-20 md:py-32 relative z-10">
-        <div class="container mx-auto px-6 max-w-6xl">
-            <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-                <div data-aos="fade-right" class="order-2 lg:order-1">
-                    <h2 class="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">Mendigitalkan <br><span class="text-accentSecondary">Pendidikan.</span></h2>
-                    <p class="text-zinc-400 text-base sm:text-lg leading-relaxed mb-6 font-light">
-                        Halo! Saya adalah seorang <strong class="text-white font-medium">Developer</strong> yang antusias merancang ekosistem digital untuk sekolah. Sebagai mahasiswa Pendidikan Bahasa Inggris di Univ. Lelemuku, saya memadukan kemampuan komunikasi dan keahlian koding.
+    <section id="about" class="w-full py-16 sm:py-20 md:py-24 px-4 bg-brutal-white relative">
+        <div class="absolute top-0 left-0 w-full h-3 bg-brutal-black"></div>
+        
+        <div class="w-full max-w-6xl mx-auto">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 sm:mb-16 gap-4">
+                <div class="text-center md:text-left">
+                    <div class="inline-block bg-brutal-cyan border-3 border-brutal-black px-3 py-1 sm:px-4 sm:py-1.5 font-mono font-bold text-xs sm:text-sm mb-3 sm:mb-4 shadow-brutal-sm transform -rotate-2">
+                        01 // ABOUT
+                    </div>
+                    <h2 class="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-tight">
+                        SIAPA <span class="bg-brutal-pink text-white px-2 inline-block transform rotate-1">SAYA?</span>
+                    </h2>
+                </div>
+                <div class="hidden md:block">
+                    <div class="w-20 h-20 lg:w-24 lg:h-24 bg-brutal-yellow border-3 border-brutal-black rounded-full flex items-center justify-center shadow-brutal-sm">
+                        <i data-lucide="zap" class="w-10 h-10 lg:w-12 lg:h-12"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6 sm:gap-8">
+                <div class="bg-brutal-yellow border-3 border-brutal-black p-5 sm:p-6 md:p-8 shadow-brutal doodle-border relative">
+                    <div class="tape w-16 sm:w-20 h-4 sm:h-5 -top-2 sm:-top-3 left-4 sm:left-8"></div>
+                    <h3 class="font-display text-xl sm:text-2xl md:text-3xl mb-3 sm:mb-4">Mendigitalkan Pendidikan</h3>
+                    <p class="font-body text-sm sm:text-base leading-relaxed mb-4 sm:mb-6">
+                        Mahasiswa Pendidikan Bahasa Inggris di Univ. Lelemuku yang memadukan kemampuan komunikasi dan keahlian koding untuk menciptakan solusi teknologi berdampak.
                     </p>
-                    <p class="text-zinc-400 text-base sm:text-lg leading-relaxed mb-8 font-light">
-                        Misi saya sederhana: Membuat teknologi pendidikan yang canggih menjadi mudah diakses, cepat, dan terjangkau untuk institusi di Tanimbar.
-                    </p>
-                    
-                    <div class="flex items-center gap-4 sm:gap-6 group">
-                        <div class="text-4xl sm:text-5xl font-display font-bold text-accentPrimary group-hover:scale-110 transition-transform">10+</div>
-                        <div class="text-xs sm:text-sm text-zinc-400 leading-snug font-medium">Project Inovatif<br>Telah Diselesaikan</div>
+                    <div class="flex gap-3 sm:gap-4">
+                        <div class="flex-1 bg-brutal-white border-3 border-brutal-black p-2 sm:p-3 text-center shadow-brutal-sm">
+                            <div class="font-display text-2xl sm:text-3xl text-brutal-pink">10+</div>
+                            <div class="font-mono text-[10px] sm:text-xs">Projects</div>
+                        </div>
+                        <div class="flex-1 bg-brutal-white border-3 border-brutal-black p-2 sm:p-3 text-center shadow-brutal-sm">
+                            <div class="font-display text-2xl sm:text-3xl text-brutal-cyan">5+</div>
+                            <div class="font-mono text-[10px] sm:text-xs">Schools</div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="order-1 lg:order-2 glass-card p-6 sm:p-8 md:p-12 relative" data-aos="fade-left">
-                    <div class="absolute -top-6 -right-6 w-24 h-24 sm:w-32 sm:h-32 bg-accentPink/30 rounded-full blur-3xl animate-blob"></div>
-                    <i class="fa-solid fa-quote-left text-4xl sm:text-6xl text-white/10 mb-4 sm:mb-6 block transform sm:-translate-x-4 sm:-translate-y-4"></i>
-                    <h3 class="font-display text-xl sm:text-2xl md:text-3xl text-white font-bold leading-snug mb-8 relative z-10">
+                <div class="bg-brutal-black text-brutal-yellow border-3 border-brutal-black p-5 sm:p-6 md:p-8 shadow-brutal doodle-border-2 relative scanlines">
+                    <div class="absolute -top-3 -right-3 sm:-top-4 sm:-right-4 w-10 h-10 sm:w-12 sm:h-12 bg-brutal-orange border-3 border-brutal-black flex items-center justify-center shadow-brutal-sm">
+                        <i data-lucide="quote" class="w-5 h-5 sm:w-6 sm:h-6 text-white"></i>
+                    </div>
+                    <p class="font-mono text-base sm:text-lg md:text-xl leading-relaxed mb-4 sm:mb-6">
                         "Teknologi terbaik adalah yang tidak menyulitkan, melainkan mempermudah pekerjaan guru dan siswa setiap harinya."
-                    </h3>
-                    <div class="flex items-center gap-4 relative z-10">
-                        <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-full overflow-hidden border-2 border-accentPrimary p-0.5 flex-shrink-0">
-                            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhcgX_ACgXPCUAXU8VnYkern3AmVP500MT7r7YUKzF2qR3Tb28_lpFsqTrj_MIQl4GzikDse4jM1D7f55p0_vs-uPwKCib4zHziZC8jEYzMXV4jLsvRax5ERjZwNGiX5ZCpKdV5dy-ftNYwGWitVnKjwY_L7r5yn81b2ovGGVA9C0dzMSWjQv6IeGn9_fT7/s250/IMG-20251212-WA0016.jpg" alt="Edward" class="rounded-full w-full h-full object-cover">
+                    </p>
+                    <div class="flex items-center gap-3 sm:gap-4">
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 bg-brutal-yellow border-3 border-brutal-white rounded-full overflow-hidden shrink-0">
+                            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhcgX_ACgXPCUAXU8VnYkern3AmVP500MT7r7YUKzF2qR3Tb28_lpFsqTrj_MIQl4GzikDse4jM1D7f55p0_vs-uPwKCib4zHziZC8jEYzMXV4jLsvRax5ERjZwNGiX5ZCpKdV5dy-ftNYwGWitVnKjwY_L7r5yn81b2ovGGVA9C0dzMSWjQv6IeGn9_fT7/s250/IMG-20251212-WA0016.jpg" 
+                                 class="w-full h-full object-cover">
                         </div>
-                        <div>
-                            <p class="text-white font-bold font-display text-base sm:text-lg">Edward D.</p>
-                            <p class="text-accentSecondary text-xs sm:text-sm font-medium">Fullstack Developer</p>
+                        <div class="min-w-0">
+                            <div class="font-display text-base sm:text-lg truncate">Edward D.</div>
+                            <div class="font-mono text-[10px] sm:text-xs text-brutal-cyan">Fullstack Developer</div>
                         </div>
                     </div>
                 </div>
@@ -299,334 +651,563 @@
     </section>
 
     <!-- Services Section -->
-    <section id="expertise" class="py-20 relative z-10">
-        <div class="container mx-auto px-6 max-w-7xl">
-            <div class="text-center mb-12 sm:mb-16" data-aos="fade-up">
-                <h2 class="font-display text-3xl sm:text-4xl md:text-6xl font-bold text-white mb-4">Layanan <span class="text-accentPink">Unggulan.</span></h2>
-                <p class="text-zinc-400 text-base sm:text-lg">Apa yang bisa saya bangun untuk sekolah Anda?</p>
+    <section id="services" class="w-full py-16 sm:py-20 md:py-24 px-4 bg-brutal-cyan relative overflow-hidden">
+        <div class="absolute inset-0 bg-grid-small opacity-20 pointer-events-none"></div>
+        
+        <div class="w-full max-w-7xl mx-auto relative z-10">
+            <div class="text-center mb-10 sm:mb-16">
+                <div class="inline-block bg-brutal-black text-brutal-yellow border-3 border-brutal-black px-4 py-1.5 sm:px-6 sm:py-2 font-mono font-bold text-xs sm:text-sm mb-3 sm:mb-4 shadow-brutal transform rotate-1">
+                    02 // SERVICES
+                </div>
+                <h2 class="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-tight">
+                    LAYANAN <span class="bg-brutal-white px-2 inline-block transform -rotate-2 shadow-brutal-sm">UNGGULAN</span>
+                </h2>
             </div>
-            
-            <div class="grid md:grid-cols-2 gap-6 lg:gap-8">
-                <!-- Service Card 1 -->
-                <div class="glass-card p-6 sm:p-8 md:p-10 group hover:border-accentPrimary/50" data-aos="zoom-in" data-aos-delay="0">
-                    <div class="flex justify-between items-start mb-6 sm:mb-8">
-                        <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-[1.2rem] sm:rounded-[1.5rem] bg-accentPrimary/10 border border-accentPrimary/20 flex items-center justify-center text-accentPrimary text-2xl sm:text-3xl group-hover:bg-accentPrimary group-hover:text-white group-hover:shadow-[0_0_20px_rgba(192,132,252,0.5)] transition-all duration-500 animate-float-icon">
-                            <i class="fa-solid fa-laptop-code"></i>
+
+            <div class="grid sm:grid-cols-2 gap-4 sm:gap-6">
+                <div class="group bg-brutal-white border-3 border-brutal-black p-4 sm:p-6 shadow-brutal hover:shadow-brutal-hover hover:-translate-y-1 transition-all cursor-pointer">
+                    <div class="flex justify-between items-start mb-3 sm:mb-4">
+                        <div class="w-12 h-12 sm:w-14 sm:h-14 bg-brutal-pink border-3 border-brutal-black flex items-center justify-center group-hover:rotate-6 transition-transform shrink-0">
+                            <i data-lucide="globe" class="w-6 h-6 sm:w-7 sm:h-7 text-white"></i>
                         </div>
-                        <span class="text-4xl sm:text-6xl font-display font-bold text-white/5 group-hover:text-accentPrimary/10 transition-colors duration-500">01</span>
+                        <span class="font-display text-4xl sm:text-5xl text-brutal-black/10 group-hover:text-brutal-pink transition-colors">01</span>
                     </div>
-                    <h3 class="font-display text-xl sm:text-2xl font-bold text-white mb-3 sm:mb-4 group-hover:text-accentPrimary transition-colors">Website & PPDB</h3>
-                    <p class="text-zinc-400 text-sm sm:text-base leading-relaxed font-light">Merancang website profil sekolah resmi, portal informasi publik, dan sistem PPDB online yang cepat, responsif, serta terintegrasi.</p>
+                    <h3 class="font-display text-lg sm:text-xl md:text-2xl mb-1 sm:mb-2 group-hover:text-brutal-pink transition-colors">Website & PPDB</h3>
+                    <p class="font-mono text-xs sm:text-sm leading-relaxed">
+                        Website profil sekolah resmi, portal informasi publik, dan sistem PPDB online yang cepat dan responsif.
+                    </p>
                 </div>
 
-                <!-- Service Card 2 -->
-                <div class="glass-card p-6 sm:p-8 md:p-10 group hover:border-accentSecondary/50" data-aos="zoom-in" data-aos-delay="150">
-                    <div class="flex justify-between items-start mb-6 sm:mb-8">
-                        <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-[1.2rem] sm:rounded-[1.5rem] bg-accentSecondary/10 border border-accentSecondary/20 flex items-center justify-center text-accentSecondary text-2xl sm:text-3xl group-hover:bg-accentSecondary group-hover:text-white group-hover:shadow-[0_0_20px_rgba(56,189,248,0.5)] transition-all duration-500 animate-float-icon" style="animation-delay: 0.5s;">
-                            <i class="fa-brands fa-android"></i>
+                <div class="group bg-brutal-white border-3 border-brutal-black p-4 sm:p-6 shadow-brutal hover:shadow-brutal-hover hover:-translate-y-1 transition-all cursor-pointer">
+                    <div class="flex justify-between items-start mb-3 sm:mb-4">
+                        <div class="w-12 h-12 sm:w-14 sm:h-14 bg-brutal-purple border-3 border-brutal-black flex items-center justify-center group-hover:-rotate-6 transition-transform shrink-0">
+                            <i data-lucide="smartphone" class="w-6 h-6 sm:w-7 sm:h-7 text-white"></i>
                         </div>
-                        <span class="text-4xl sm:text-6xl font-display font-bold text-white/5 group-hover:text-accentSecondary/10 transition-colors duration-500">02</span>
+                        <span class="font-display text-4xl sm:text-5xl text-brutal-black/10 group-hover:text-brutal-purple transition-colors">02</span>
                     </div>
-                    <h3 class="font-display text-xl sm:text-2xl font-bold text-white mb-3 sm:mb-4 group-hover:text-accentSecondary transition-colors">Aplikasi Android</h3>
-                    <p class="text-zinc-400 text-sm sm:text-base leading-relaxed font-light">Pengembangan aplikasi mobile kustom untuk mempermudah akses e-learning, portal siswa, maupun sistem perpustakaan di genggaman.</p>
+                    <h3 class="font-display text-lg sm:text-xl md:text-2xl mb-1 sm:mb-2 group-hover:text-brutal-purple transition-colors">Aplikasi Android</h3>
+                    <p class="font-mono text-xs sm:text-sm leading-relaxed">
+                        Aplikasi mobile kustom untuk e-learning, portal siswa, dan sistem perpustakaan digital.
+                    </p>
                 </div>
 
-                <!-- Service Card 3 -->
-                <div class="glass-card p-6 sm:p-8 md:p-10 group hover:border-accentPink/50" data-aos="zoom-in" data-aos-delay="300">
-                    <div class="flex justify-between items-start mb-6 sm:mb-8">
-                        <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-[1.2rem] sm:rounded-[1.5rem] bg-accentPink/10 border border-accentPink/20 flex items-center justify-center text-accentPink text-2xl sm:text-3xl group-hover:bg-accentPink group-hover:text-white group-hover:shadow-[0_0_20px_rgba(244,114,182,0.5)] transition-all duration-500 animate-float-icon" style="animation-delay: 1s;">
-                            <i class="fa-solid fa-qrcode"></i>
+                <div class="group bg-brutal-white border-3 border-brutal-black p-4 sm:p-6 shadow-brutal hover:shadow-brutal-hover hover:-translate-y-1 transition-all cursor-pointer">
+                    <div class="flex justify-between items-start mb-3 sm:mb-4">
+                        <div class="w-12 h-12 sm:w-14 sm:h-14 bg-brutal-orange border-3 border-brutal-black flex items-center justify-center group-hover:rotate-6 transition-transform shrink-0">
+                            <i data-lucide="scan-line" class="w-6 h-6 sm:w-7 sm:h-7 text-white"></i>
                         </div>
-                        <span class="text-4xl sm:text-6xl font-display font-bold text-white/5 group-hover:text-accentPink/10 transition-colors duration-500">03</span>
+                        <span class="font-display text-4xl sm:text-5xl text-brutal-black/10 group-hover:text-brutal-orange transition-colors">03</span>
                     </div>
-                    <h3 class="font-display text-xl sm:text-2xl font-bold text-white mb-3 sm:mb-4 group-hover:text-accentPink transition-colors">Sistem Presensi QR</h3>
-                    <p class="text-zinc-400 text-sm sm:text-base leading-relaxed font-light">Sistem absensi digital modern menggunakan pemindaian QR Code. Ekstra cepat, akurat, dan terhubung ke laporan database sekolah.</p>
+                    <h3 class="font-display text-lg sm:text-xl md:text-2xl mb-1 sm:mb-2 group-hover:text-brutal-orange transition-colors">Sistem Presensi QR</h3>
+                    <p class="font-mono text-xs sm:text-sm leading-relaxed">
+                        Sistem absensi digital modern menggunakan pemindaian QR Code. Cepat, akurat, dan terhubung database.
+                    </p>
                 </div>
 
-                <!-- Service Card 4 -->
-                <div class="glass-card p-6 sm:p-8 md:p-10 group hover:border-orange-400/50" data-aos="zoom-in" data-aos-delay="450">
-                    <div class="flex justify-between items-start mb-6 sm:mb-8">
-                        <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-[1.2rem] sm:rounded-[1.5rem] bg-orange-400/10 border border-orange-400/20 flex items-center justify-center text-orange-400 text-2xl sm:text-3xl group-hover:bg-orange-400 group-hover:text-white group-hover:shadow-[0_0_20px_rgba(251,146,60,0.5)] transition-all duration-500 animate-float-icon" style="animation-delay: 1.5s;">
-                            <i class="fa-solid fa-database"></i>
+                <div class="group bg-brutal-white border-3 border-brutal-black p-4 sm:p-6 shadow-brutal hover:shadow-brutal-hover hover:-translate-y-1 transition-all cursor-pointer">
+                    <div class="flex justify-between items-start mb-3 sm:mb-4">
+                        <div class="w-12 h-12 sm:w-14 sm:h-14 bg-brutal-black border-3 border-brutal-black flex items-center justify-center group-hover:-rotate-6 transition-transform shrink-0">
+                            <i data-lucide="database" class="w-6 h-6 sm:w-7 sm:h-7 text-brutal-yellow"></i>
                         </div>
-                        <span class="text-4xl sm:text-6xl font-display font-bold text-white/5 group-hover:text-orange-400/10 transition-colors duration-500">04</span>
+                        <span class="font-display text-4xl sm:text-5xl text-brutal-black/10 group-hover:text-brutal-black transition-colors">04</span>
                     </div>
-                    <h3 class="font-display text-xl sm:text-2xl font-bold text-white mb-3 sm:mb-4 group-hover:text-orange-400 transition-colors">SIAKAD & Arsip</h3>
-                    <p class="text-zinc-400 text-sm sm:text-base leading-relaxed font-light">Sistem Informasi Akademik Terpadu (SIAKAD) dan repositori awan untuk mendigitalkan manajemen dokumen serta nilai secara aman.</p>
+                    <h3 class="font-display text-lg sm:text-xl md:text-2xl mb-1 sm:mb-2">SIAKAD & Arsip</h3>
+                    <p class="font-mono text-xs sm:text-sm leading-relaxed">
+                        Sistem Informasi Akademik Terpadu dan repositori awan untuk manajemen dokumen dan nilai.
+                    </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- RICH CONTINUOUS ANIMATED PORTFOLIO CAROUSEL -->
-    <section id="works" class="py-20 md:py-24 relative z-10 overflow-hidden">
-        <div class="px-6 md:px-12 mb-10 md:mb-12 flex flex-col md:flex-row md:items-end justify-between gap-4 max-w-[1600px] mx-auto">
-            <div data-aos="fade-right">
-                <div class="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-white/5 border border-white/10 mb-4">
-                    <span class="w-2 h-2 rounded-full bg-accentSecondary animate-ping"></span>
-                    <span class="text-[10px] sm:text-xs font-bold tracking-widest text-accentSecondary uppercase">Showcase</span>
+    <!-- Works Section with Live Preview -->
+    <section id="works" class="w-full py-16 sm:py-20 md:py-24 px-4 bg-brutal-pink relative overflow-hidden">
+        <div class="w-full max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-12 gap-4">
+                <div class="text-center md:text-left">
+                    <div class="inline-block bg-brutal-yellow border-3 border-brutal-black px-3 py-1 sm:px-4 sm:py-1.5 font-mono font-bold text-xs sm:text-sm mb-3 sm:mb-4 shadow-brutal-sm transform rotate-2">
+                        03 // PORTFOLIO
+                    </div>
+                    <h2 class="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white leading-tight">
+                        KARYA <span class="bg-brutal-black text-brutal-yellow px-2 inline-block transform -rotate-1">TERBARU</span>
+                    </h2>
                 </div>
-                <h2 class="font-display text-3xl sm:text-4xl md:text-6xl font-bold text-white tracking-tight">Karya <span class="text-accentPrimary">Terbaru.</span></h2>
+                <div class="hidden md:block font-mono text-white text-xs sm:text-sm bg-brutal-black border-3 border-brutal-white px-3 py-1.5 sm:px-4 sm:py-2 shadow-brutal-sm">
+                    ← SCROLL TO EXPLORE →
+                </div>
             </div>
-            <div class="hidden md:flex items-center gap-3 text-zinc-400 bg-white/5 px-6 py-3 rounded-full border border-white/5" data-aos="fade-left">
-                <i class="fa-solid fa-arrows-left-right animate-pulse text-accentPrimary"></i>
-                <span class="text-sm font-bold tracking-widest uppercase">Auto Scrolling</span>
-            </div>
-        </div>
 
-        <!-- 3D Carousel Wrapper -->
-        <!-- Menambahkan padding kanan yang besar agar kartu terakhir dapat ditengahkan di layar kecil -->
-        <div class="w-full pb-16">
-            <div class="scrolling-wrapper px-6 md:px-[10vw] pr-[20vw] md:pr-[25vw] snap-x snap-mandatory" id="portfolio-carousel">
+            <!-- Horizontal Scroll Container -->
+            <div class="flex gap-4 sm:gap-6 overflow-x-auto pb-6 sm:pb-8 snap-x snap-mandatory hide-scrollbar -mx-4 px-4 sm:-mx-6 sm:px-6 md:-mx-8 md:px-8">
                 
-                <!-- Portfolio Card 1 -->
-                <!-- Diubah menjadi min-h-[500px] agar text tidak terpotong di mobile -->
-                <div class="carousel-card w-[85vw] sm:w-[400px] lg:w-[450px] group" data-tilt data-tilt-max="8" data-tilt-speed="400" data-tilt-perspective="1000">
-                    <div class="glass-card h-auto min-h-[500px] p-3 flex flex-col relative overflow-hidden border-white/10 group-hover:border-accentSecondary/50 shadow-2xl transition-all duration-500">
-                        <div class="shine-layer" style="animation-delay: 0s;"></div> <!-- Permanent Shimmer -->
-                        
-                        <div class="h-[45%] min-h-[200px] w-full rounded-[2rem] bg-gradient-to-br from-[#0f172a] to-[#020617] flex items-center justify-center relative overflow-hidden shrink-0">
-                            <!-- Continuously Pulsing Glow -->
-                            <div class="absolute top-1/2 left-1/2 w-32 h-32 bg-accentSecondary/40 rounded-full blur-2xl animate-pulse-glow"></div>
-                            
-                            <!-- Continuously Floating Icon -->
-                            <i class="fa-solid fa-school text-6xl sm:text-7xl text-accentSecondary animate-float-icon drop-shadow-[0_0_15px_rgba(56,189,248,0.5)] z-10"></i>
-                        </div>
-                        
-                        <div class="p-5 sm:p-6 flex flex-col flex-grow justify-between z-10 bg-gradient-to-t from-[rgba(255,255,255,0.03)] to-transparent rounded-b-[2rem]">
-                            <div>
-                                <span class="inline-block px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-accentSecondary bg-accentSecondary/10 border border-accentSecondary/20 rounded-full mb-4">Website Platform</span>
-                                <h3 class="font-display text-xl sm:text-2xl font-bold text-white mb-2">SD Inpres Lelingluan</h3>
-                                <p class="text-xs sm:text-sm text-zinc-400 font-light leading-relaxed">Website Profil Resmi interaktif dengan fitur manajemen konten berita & galeri edukasi.</p>
+                <!-- Project 1 - SD Inpres Lelingluan -->
+                <div class="flex-shrink-0 w-[300px] sm:w-[340px] md:w-[400px] snap-center">
+                    <div class="bg-brutal-white border-3 border-brutal-black shadow-brutal group hover:-translate-y-1 hover:shadow-brutal-hover transition-all h-full flex flex-col">
+                        <!-- Live Preview Thumbnail -->
+                        <div class="card-preview border-b-3 border-brutal-black relative bg-brutal-cyan">
+                            <iframe src="https://www.sdinpreslelingluan.com" 
+                                    title="Preview SD Inpres Lelingluan"
+                                    loading="lazy"
+                                    sandbox="allow-same-origin allow-scripts"
+                                    onerror="this.style.display='none'; this.nextElementSibling.classList.add('active');"></iframe>
+                            <div class="preview-fallback bg-gradient-to-br from-blue-500 to-cyan-500">
+                                <i data-lucide="school" class="w-12 h-12 text-white"></i>
+                                <span class="text-sm font-bold mt-2">SD Inpres Lelingluan</span>
                             </div>
-                            <a href="https://www.sdinpreslelingluan.com" target="_blank" class="w-full py-3.5 sm:py-4 mt-6 rounded-2xl bg-accentSecondary text-bgDark font-bold text-center text-sm shadow-[0_10px_20px_rgba(56,189,248,0.3)] hover:scale-105 transition-transform duration-300">
-                                Kunjungi Website <i class="fa-solid fa-arrow-right ml-2"></i>
-                            </a>
+                            <div class="preview-overlay">
+                                <button onclick="openPreview('https://www.sdinpreslelingluan.com', 'SD Inpres Lelingluan')" class="preview-btn">
+                                    <i data-lucide="maximize-2" class="w-4 h-4 inline mr-1"></i>
+                                    PREVIEW
+                                </button>
+                            </div>
+                            <div class="absolute top-3 right-3 bg-brutal-black text-brutal-cyan font-mono text-[10px] sm:text-xs px-2 py-1 border-2 border-brutal-black z-10">
+                                WEBSITE
+                            </div>
+                        </div>
+                        <div class="p-4 sm:p-5 flex flex-col flex-grow">
+                            <h3 class="font-display text-lg sm:text-xl md:text-2xl mb-1 sm:mb-2">SD Inpres Lelingluan</h3>
+                            <p class="font-mono text-xs sm:text-sm mb-3 sm:mb-4 flex-grow">Website profil resmi dengan manajemen konten berita & galeri.</p>
+                            <div class="flex gap-2">
+                                <button onclick="openPreview('https://www.sdinpreslelingluan.com', 'SD Inpres Lelingluan')" class="flex-1 inline-flex items-center justify-center gap-1 font-mono font-bold text-xs sm:text-sm bg-brutal-cyan text-brutal-black px-2 py-2 sm:px-3 sm:py-3 border-2 border-brutal-black hover:bg-brutal-black hover:text-brutal-cyan transition-colors">
+                                    <i data-lucide="eye" class="w-3 h-3 sm:w-4 sm:h-4"></i>
+                                    PREVIEW
+                                </button>
+                                <a href="https://www.sdinpreslelingluan.com" target="_blank" class="flex-1 inline-flex items-center justify-center gap-1 font-mono font-bold text-xs sm:text-sm bg-brutal-black text-brutal-cyan px-2 py-2 sm:px-3 sm:py-3 border-2 border-brutal-black hover:bg-brutal-cyan hover:text-brutal-black transition-colors">
+                                    <i data-lucide="external-link" class="w-3 h-3 sm:w-4 sm:h-4"></i>
+                                    VISIT
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Portfolio Card 2 -->
-                <div class="carousel-card w-[85vw] sm:w-[400px] lg:w-[450px] group" data-tilt data-tilt-max="8" data-tilt-speed="400" data-tilt-perspective="1000">
-                    <div class="glass-card h-auto min-h-[500px] p-3 flex flex-col relative overflow-hidden border-white/10 group-hover:border-accentPrimary/50 shadow-2xl transition-all duration-500">
-                        <div class="shine-layer" style="animation-delay: 0.5s;"></div>
-                        
-                        <div class="h-[45%] min-h-[200px] w-full rounded-[2rem] bg-gradient-to-br from-[#2e1065] to-[#020617] flex items-center justify-center relative overflow-hidden shrink-0">
-                            <div class="absolute top-1/2 left-1/2 w-32 h-32 bg-accentPrimary/40 rounded-full blur-2xl animate-pulse-glow" style="animation-delay: 0.5s;"></div>
-                            <i class="fa-solid fa-user-graduate text-6xl sm:text-7xl text-accentPrimary animate-float-icon drop-shadow-[0_0_15px_rgba(192,132,252,0.5)] z-10" style="animation-delay: 0.5s;"></i>
-                        </div>
-                        
-                        <div class="p-5 sm:p-6 flex flex-col flex-grow justify-between z-10 bg-gradient-to-t from-[rgba(255,255,255,0.03)] to-transparent rounded-b-[2rem]">
-                            <div>
-                                <span class="inline-block px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-accentPrimary bg-accentPrimary/10 border border-accentPrimary/20 rounded-full mb-4">Web App</span>
-                                <h3 class="font-display text-xl sm:text-2xl font-bold text-white mb-2">PPDB Online</h3>
-                                <p class="text-xs sm:text-sm text-zinc-400 font-light leading-relaxed">Sistem Penerimaan Peserta Didik Baru (SPMB) digital yang canggih, mudah & transparan.</p>
+                <!-- Project 2 - PPDB Online -->
+                <div class="flex-shrink-0 w-[300px] sm:w-[340px] md:w-[400px] snap-center">
+                    <div class="bg-brutal-white border-3 border-brutal-black shadow-brutal group hover:-translate-y-1 hover:shadow-brutal-hover transition-all h-full flex flex-col">
+                        <div class="card-preview border-b-3 border-brutal-black relative bg-brutal-purple">
+                            <iframe src="https://sdinpreslelingluan-ppdb.pages.dev" 
+                                    title="Preview PPDB Online"
+                                    loading="lazy"
+                                    sandbox="allow-same-origin allow-scripts"
+                                    onerror="this.style.display='none'; this.nextElementSibling.classList.add('active');"></iframe>
+                            <div class="preview-fallback bg-gradient-to-br from-purple-600 to-pink-600">
+                                <i data-lucide="user-plus" class="w-12 h-12 text-white"></i>
+                                <span class="text-sm font-bold mt-2">PPDB Online</span>
                             </div>
-                            <a href="https://sdinpreslelingluan-ppdb.pages.dev" target="_blank" class="w-full py-3.5 sm:py-4 mt-6 rounded-2xl bg-accentPrimary text-white font-bold text-center text-sm shadow-[0_10px_20px_rgba(192,132,252,0.3)] hover:scale-105 transition-transform duration-300">
-                                Kunjungi Aplikasi <i class="fa-solid fa-arrow-right ml-2"></i>
-                            </a>
+                            <div class="preview-overlay">
+                                <button onclick="openPreview('https://sdinpreslelingluan-ppdb.pages.dev', 'PPDB Online')" class="preview-btn">
+                                    <i data-lucide="maximize-2" class="w-4 h-4 inline mr-1"></i>
+                                    PREVIEW
+                                </button>
+                            </div>
+                            <div class="absolute top-3 right-3 bg-brutal-black text-brutal-purple font-mono text-[10px] sm:text-xs px-2 py-1 border-2 border-brutal-black z-10">
+                                WEB APP
+                            </div>
+                        </div>
+                        <div class="p-4 sm:p-5 flex flex-col flex-grow">
+                            <h3 class="font-display text-lg sm:text-xl md:text-2xl mb-1 sm:mb-2">PPDB Online</h3>
+                            <p class="font-mono text-xs sm:text-sm mb-3 sm:mb-4 flex-grow">Sistem Penerimaan Peserta Didik Baru digital yang transparan.</p>
+                            <div class="flex gap-2">
+                                <button onclick="openPreview('https://sdinpreslelingluan-ppdb.pages.dev', 'PPDB Online')" class="flex-1 inline-flex items-center justify-center gap-1 font-mono font-bold text-xs sm:text-sm bg-brutal-purple text-white px-2 py-2 sm:px-3 sm:py-3 border-2 border-brutal-black hover:bg-brutal-black hover:text-brutal-purple transition-colors">
+                                    <i data-lucide="eye" class="w-3 h-3 sm:w-4 sm:h-4"></i>
+                                    PREVIEW
+                                </button>
+                                <a href="https://sdinpreslelingluan-ppdb.pages.dev" target="_blank" class="flex-1 inline-flex items-center justify-center gap-1 font-mono font-bold text-xs sm:text-sm bg-brutal-black text-brutal-purple px-2 py-2 sm:px-3 sm:py-3 border-2 border-brutal-black hover:bg-brutal-purple hover:text-white transition-colors">
+                                    <i data-lucide="external-link" class="w-3 h-3 sm:w-4 sm:h-4"></i>
+                                    VISIT
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Portfolio Card 3 -->
-                <div class="carousel-card w-[85vw] sm:w-[400px] lg:w-[450px] group" data-tilt data-tilt-max="8" data-tilt-speed="400" data-tilt-perspective="1000">
-                    <div class="glass-card h-auto min-h-[500px] p-3 flex flex-col relative overflow-hidden border-white/10 group-hover:border-accentPink/50 shadow-2xl transition-all duration-500">
-                        <div class="shine-layer" style="animation-delay: 1s;"></div>
-                        
-                        <div class="h-[45%] min-h-[200px] w-full rounded-[2rem] bg-gradient-to-br from-[#831843] to-[#020617] flex items-center justify-center relative overflow-hidden shrink-0">
-                            <div class="absolute top-1/2 left-1/2 w-32 h-32 bg-accentPink/40 rounded-full blur-2xl animate-pulse-glow" style="animation-delay: 1s;"></div>
-                            <i class="fa-solid fa-mobile-screen-button text-6xl sm:text-7xl text-accentPink animate-float-icon drop-shadow-[0_0_15px_rgba(244,114,182,0.5)] z-10" style="animation-delay: 1s;"></i>
-                        </div>
-                        
-                        <div class="p-5 sm:p-6 flex flex-col flex-grow justify-between z-10 bg-gradient-to-t from-[rgba(255,255,255,0.03)] to-transparent rounded-b-[2rem]">
-                            <div>
-                                <span class="inline-block px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-accentPink bg-accentPink/10 border border-accentPink/20 rounded-full mb-4">Mobile App</span>
-                                <h3 class="font-display text-xl sm:text-2xl font-bold text-white mb-2">PresensiSaya</h3>
-                                <p class="text-xs sm:text-sm text-zinc-400 font-light leading-relaxed">Aplikasi absensi mobile untuk Guru & Siswa, terintegrasi real-time via QR Code scanner.</p>
+                <!-- Project 3 - PresensiSaya -->
+                <div class="flex-shrink-0 w-[300px] sm:w-[340px] md:w-[400px] snap-center">
+                    <div class="bg-brutal-white border-3 border-brutal-black shadow-brutal group hover:-translate-y-1 hover:shadow-brutal-hover transition-all h-full flex flex-col">
+                        <div class="card-preview border-b-3 border-brutal-black relative bg-brutal-orange">
+                            <iframe src="https://www.sdinpreslelingluan.com/2026/01/rilis-aplikasi-presensi-digital-v52.html" 
+                                    title="Preview PresensiSaya"
+                                    loading="lazy"
+                                    sandbox="allow-same-origin allow-scripts"
+                                    onerror="this.style.display='none'; this.nextElementSibling.classList.add('active');"></iframe>
+                            <div class="preview-fallback bg-gradient-to-br from-orange-500 to-red-500">
+                                <i data-lucide="qr-code" class="w-12 h-12 text-white"></i>
+                                <span class="text-sm font-bold mt-2">PresensiSaya</span>
                             </div>
-                            <a href="https://www.sdinpreslelingluan.com/2026/01/rilis-aplikasi-presensi-digital-v52.html" target="_blank" class="w-full py-3.5 sm:py-4 mt-6 rounded-2xl bg-accentPink text-white font-bold text-center text-sm shadow-[0_10px_20px_rgba(244,114,182,0.3)] hover:scale-105 transition-transform duration-300">
-                                Detail Rilis <i class="fa-solid fa-arrow-right ml-2"></i>
-                            </a>
+                            <div class="preview-overlay">
+                                <button onclick="openPreview('https://www.sdinpreslelingluan.com/2026/01/rilis-aplikasi-presensi-digital-v52.html', 'PresensiSaya')" class="preview-btn">
+                                    <i data-lucide="maximize-2" class="w-4 h-4 inline mr-1"></i>
+                                    PREVIEW
+                                </button>
+                            </div>
+                            <div class="absolute top-3 right-3 bg-brutal-black text-brutal-orange font-mono text-[10px] sm:text-xs px-2 py-1 border-2 border-brutal-black z-10">
+                                MOBILE
+                            </div>
+                        </div>
+                        <div class="p-4 sm:p-5 flex flex-col flex-grow">
+                            <h3 class="font-display text-lg sm:text-xl md:text-2xl mb-1 sm:mb-2">PresensiSaya</h3>
+                            <p class="font-mono text-xs sm:text-sm mb-3 sm:mb-4 flex-grow">Aplikasi absensi mobile dengan QR Code scanner real-time.</p>
+                            <div class="flex gap-2">
+                                <button onclick="openPreview('https://www.sdinpreslelingluan.com/2026/01/rilis-aplikasi-presensi-digital-v52.html', 'PresensiSaya')" class="flex-1 inline-flex items-center justify-center gap-1 font-mono font-bold text-xs sm:text-sm bg-brutal-orange text-white px-2 py-2 sm:px-3 sm:py-3 border-2 border-brutal-black hover:bg-brutal-black hover:text-brutal-orange transition-colors">
+                                    <i data-lucide="eye" class="w-3 h-3 sm:w-4 sm:h-4"></i>
+                                    PREVIEW
+                                </button>
+                                <a href="https://www.sdinpreslelingluan.com/2026/01/rilis-aplikasi-presensi-digital-v52.html" target="_blank" class="flex-1 inline-flex items-center justify-center gap-1 font-mono font-bold text-xs sm:text-sm bg-brutal-black text-brutal-orange px-2 py-2 sm:px-3 sm:py-3 border-2 border-brutal-black hover:bg-brutal-orange hover:text-white transition-colors">
+                                    <i data-lucide="external-link" class="w-3 h-3 sm:w-4 sm:h-4"></i>
+                                    VISIT
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Portfolio Card 4 -->
-                <div class="carousel-card w-[85vw] sm:w-[400px] lg:w-[450px] group" data-tilt data-tilt-max="8" data-tilt-speed="400" data-tilt-perspective="1000">
-                    <div class="glass-card h-auto min-h-[500px] p-3 flex flex-col relative overflow-hidden border-white/10 group-hover:border-yellow-400/50 shadow-2xl transition-all duration-500">
-                        <div class="shine-layer" style="animation-delay: 1.5s;"></div>
-                        
-                        <div class="h-[45%] min-h-[200px] w-full rounded-[2rem] bg-gradient-to-br from-[#422006] to-[#020617] flex items-center justify-center relative overflow-hidden shrink-0">
-                            <div class="absolute top-1/2 left-1/2 w-32 h-32 bg-yellow-400/30 rounded-full blur-2xl animate-pulse-glow" style="animation-delay: 1.5s;"></div>
-                            <i class="fa-solid fa-chalkboard-user text-6xl sm:text-7xl text-yellow-400 animate-float-icon drop-shadow-[0_0_15px_rgba(250,204,21,0.5)] z-10" style="animation-delay: 1.5s;"></i>
-                        </div>
-                        
-                        <div class="p-5 sm:p-6 flex flex-col flex-grow justify-between z-10 bg-gradient-to-t from-[rgba(255,255,255,0.03)] to-transparent rounded-b-[2rem]">
-                            <div>
-                                <span class="inline-block px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-yellow-400 bg-yellow-400/10 border border-yellow-400/20 rounded-full mb-4">Smart System</span>
-                                <h3 class="font-display text-xl sm:text-2xl font-bold text-white mb-2">Simple 6JA</h3>
-                                <p class="text-xs sm:text-sm text-zinc-400 font-light leading-relaxed">Sistem Data Siswa Digital (DAKSIS) & aplikasi cerdas untuk interaksi visual ruang kelas.</p>
+                <!-- Project 4 - Simple 6JA -->
+                <div class="flex-shrink-0 w-[300px] sm:w-[340px] md:w-[400px] snap-center">
+                    <div class="bg-brutal-white border-3 border-brutal-black shadow-brutal group hover:-translate-y-1 hover:shadow-brutal-hover transition-all h-full flex flex-col">
+                        <div class="card-preview border-b-3 border-brutal-black relative bg-brutal-yellow">
+                            <iframe src="https://simple-6ja.pages.dev/" 
+                                    title="Preview Simple 6JA"
+                                    loading="lazy"
+                                    sandbox="allow-same-origin allow-scripts"
+                                    onerror="this.style.display='none'; this.nextElementSibling.classList.add('active');"></iframe>
+                            <div class="preview-fallback bg-gradient-to-br from-yellow-400 to-orange-500">
+                                <i data-lucide="layout-dashboard" class="w-12 h-12 text-white"></i>
+                                <span class="text-sm font-bold mt-2">Simple 6JA</span>
                             </div>
-                            <a href="https://simple-6ja.pages.dev/" target="_blank" class="w-full py-3.5 sm:py-4 mt-6 rounded-2xl bg-yellow-400 text-bgDark font-bold text-center text-sm shadow-[0_10px_20px_rgba(250,204,21,0.3)] hover:scale-105 transition-transform duration-300">
-                                Kunjungi Aplikasi <i class="fa-solid fa-arrow-right ml-2"></i>
-                            </a>
+                            <div class="preview-overlay">
+                                <button onclick="openPreview('https://simple-6ja.pages.dev/', 'Simple 6JA')" class="preview-btn">
+                                    <i data-lucide="maximize-2" class="w-4 h-4 inline mr-1"></i>
+                                    PREVIEW
+                                </button>
+                            </div>
+                            <div class="absolute top-3 right-3 bg-brutal-black text-brutal-yellow font-mono text-[10px] sm:text-xs px-2 py-1 border-2 border-brutal-black z-10">
+                                SMART
+                            </div>
+                        </div>
+                        <div class="p-4 sm:p-5 flex flex-col flex-grow">
+                            <h3 class="font-display text-lg sm:text-xl md:text-2xl mb-1 sm:mb-2">Simple 6JA</h3>
+                            <p class="font-mono text-xs sm:text-sm mb-3 sm:mb-4 flex-grow">Sistem Data Siswa Digital & aplikasi interaksi visual kelas.</p>
+                            <div class="flex gap-2">
+                                <button onclick="openPreview('https://simple-6ja.pages.dev/', 'Simple 6JA')" class="flex-1 inline-flex items-center justify-center gap-1 font-mono font-bold text-xs sm:text-sm bg-brutal-yellow text-brutal-black px-2 py-2 sm:px-3 sm:py-3 border-2 border-brutal-black hover:bg-brutal-black hover:text-brutal-yellow transition-colors">
+                                    <i data-lucide="eye" class="w-3 h-3 sm:w-4 sm:h-4"></i>
+                                    PREVIEW
+                                </button>
+                                <a href="https://simple-6ja.pages.dev/" target="_blank" class="flex-1 inline-flex items-center justify-center gap-1 font-mono font-bold text-xs sm:text-sm bg-brutal-black text-brutal-yellow px-2 py-2 sm:px-3 sm:py-3 border-2 border-brutal-black hover:bg-brutal-yellow hover:text-brutal-black transition-colors">
+                                    <i data-lucide="external-link" class="w-3 h-3 sm:w-4 sm:h-4"></i>
+                                    VISIT
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Portfolio Card 5 -->
-                <div class="carousel-card w-[85vw] sm:w-[400px] lg:w-[450px] group" data-tilt data-tilt-max="8" data-tilt-speed="400" data-tilt-perspective="1000">
-                    <div class="glass-card h-auto min-h-[500px] p-3 flex flex-col relative overflow-hidden border-white/10 group-hover:border-orange-500/50 shadow-2xl transition-all duration-500">
-                        <div class="shine-layer" style="animation-delay: 2s;"></div>
-                        
-                        <div class="h-[45%] min-h-[200px] w-full rounded-[2rem] bg-gradient-to-br from-[#7c2d12] to-[#020617] flex items-center justify-center relative overflow-hidden shrink-0">
-                            <div class="absolute top-1/2 left-1/2 w-32 h-32 bg-orange-500/30 rounded-full blur-2xl animate-pulse-glow" style="animation-delay: 2s;"></div>
-                            <i class="fa-solid fa-box-archive text-6xl sm:text-7xl text-orange-500 animate-float-icon drop-shadow-[0_0_15px_rgba(249,115,22,0.5)] z-10" style="animation-delay: 2s;"></i>
-                        </div>
-                        
-                        <div class="p-5 sm:p-6 flex flex-col flex-grow justify-between z-10 bg-gradient-to-t from-[rgba(255,255,255,0.03)] to-transparent rounded-b-[2rem]">
-                            <div>
-                                <span class="inline-block px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-orange-400 bg-orange-500/10 border border-orange-500/20 rounded-full mb-4">Cloud Drive</span>
-                                <h3 class="font-display text-xl sm:text-2xl font-bold text-white mb-2">Arsip Digital</h3>
-                                <p class="text-xs sm:text-sm text-zinc-400 font-light leading-relaxed">Repositori awan modern & manajemen sistem pengarsipan dokumen krusial sekolah.</p>
+                <!-- Project 5 - Arsip Digital -->
+                <div class="flex-shrink-0 w-[300px] sm:w-[340px] md:w-[400px] snap-center">
+                    <div class="bg-brutal-white border-3 border-brutal-black shadow-brutal group hover:-translate-y-1 hover:shadow-brutal-hover transition-all h-full flex flex-col">
+                        <div class="card-preview border-b-3 border-brutal-black relative bg-brutal-black">
+                            <iframe src="https://archive-sdinleling.blogspot.com/" 
+                                    title="Preview Arsip Digital"
+                                    loading="lazy"
+                                    sandbox="allow-same-origin allow-scripts"
+                                    onerror="this.style.display='none'; this.nextElementSibling.classList.add('active');"></iframe>
+                            <div class="preview-fallback bg-gradient-to-br from-gray-700 to-gray-900">
+                                <i data-lucide="archive" class="w-12 h-12 text-brutal-cyan"></i>
+                                <span class="text-sm font-bold mt-2 text-white">Arsip Digital</span>
                             </div>
-                            <a href="https://archive-sdinleling.blogspot.com/" target="_blank" class="w-full py-3.5 sm:py-4 mt-6 rounded-2xl bg-orange-500 text-white font-bold text-center text-sm shadow-[0_10px_20px_rgba(249,115,22,0.3)] hover:scale-105 transition-transform duration-300">
-                                Kunjungi Sistem <i class="fa-solid fa-arrow-right ml-2"></i>
-                            </a>
+                            <div class="preview-overlay">
+                                <button onclick="openPreview('https://archive-sdinleling.blogspot.com/', 'Arsip Digital')" class="preview-btn">
+                                    <i data-lucide="maximize-2" class="w-4 h-4 inline mr-1"></i>
+                                    PREVIEW
+                                </button>
+                            </div>
+                            <div class="absolute top-3 right-3 bg-brutal-cyan text-brutal-black font-mono text-[10px] sm:text-xs px-2 py-1 border-2 border-brutal-black z-10">
+                                CLOUD
+                            </div>
+                        </div>
+                        <div class="p-4 sm:p-5 flex flex-col flex-grow">
+                            <h3 class="font-display text-lg sm:text-xl md:text-2xl mb-1 sm:mb-2">Arsip Digital</h3>
+                            <p class="font-mono text-xs sm:text-sm mb-3 sm:mb-4 flex-grow">Repositori awan modern untuk pengarsipan dokumen sekolah.</p>
+                            <div class="flex gap-2">
+                                <button onclick="openPreview('https://archive-sdinleling.blogspot.com/', 'Arsip Digital')" class="flex-1 inline-flex items-center justify-center gap-1 font-mono font-bold text-xs sm:text-sm bg-brutal-cyan text-brutal-black px-2 py-2 sm:px-3 sm:py-3 border-2 border-brutal-black hover:bg-brutal-black hover:text-brutal-cyan transition-colors">
+                                    <i data-lucide="eye" class="w-3 h-3 sm:w-4 sm:h-4"></i>
+                                    PREVIEW
+                                </button>
+                                <a href="https://archive-sdinleling.blogspot.com/" target="_blank" class="flex-1 inline-flex items-center justify-center gap-1 font-mono font-bold text-xs sm:text-sm bg-brutal-black text-brutal-cyan px-2 py-2 sm:px-3 sm:py-3 border-2 border-brutal-black hover:bg-brutal-cyan hover:text-brutal-black transition-colors">
+                                    <i data-lucide="external-link" class="w-3 h-3 sm:w-4 sm:h-4"></i>
+                                    VISIT
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Portfolio Card 6 -->
-                <div class="carousel-card w-[85vw] sm:w-[400px] lg:w-[450px] group" data-tilt data-tilt-max="8" data-tilt-speed="400" data-tilt-perspective="1000">
-                    <div class="glass-card h-auto min-h-[500px] p-3 flex flex-col relative overflow-hidden border-white/10 group-hover:border-emerald-400/50 shadow-2xl transition-all duration-500">
-                        <div class="shine-layer" style="animation-delay: 2.5s;"></div>
-                        
-                        <div class="h-[45%] min-h-[200px] w-full rounded-[2rem] bg-gradient-to-br from-[#064e3b] to-[#020617] flex items-center justify-center relative overflow-hidden shrink-0">
-                            <div class="absolute top-1/2 left-1/2 w-32 h-32 bg-emerald-400/30 rounded-full blur-2xl animate-pulse-glow" style="animation-delay: 2.5s;"></div>
-                            <i class="fa-solid fa-laptop-file text-6xl sm:text-7xl text-emerald-400 animate-float-icon drop-shadow-[0_0_15px_rgba(52,211,153,0.5)] z-10" style="animation-delay: 2.5s;"></i>
-                        </div>
-                        
-                        <div class="p-5 sm:p-6 flex flex-col flex-grow justify-between z-10 bg-gradient-to-t from-[rgba(255,255,255,0.03)] to-transparent rounded-b-[2rem]">
-                            <div>
-                                <span class="inline-block px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-emerald-400 bg-emerald-400/10 border border-emerald-400/20 rounded-full mb-4">Enterprise</span>
-                                <h3 class="font-display text-xl sm:text-2xl font-bold text-white mb-2">SIAKAD Terpadu</h3>
-                                <p class="text-xs sm:text-sm text-zinc-400 font-light leading-relaxed">Sistem Informasi Akademik sentralisasi data untuk kemudahan alur kerja staf pendidik.</p>
+                <!-- Project 6 - SIAKAD Terpadu -->
+                <div class="flex-shrink-0 w-[300px] sm:w-[340px] md:w-[400px] snap-center">
+                    <div class="bg-brutal-white border-3 border-brutal-black shadow-brutal group hover:-translate-y-1 hover:shadow-brutal-hover transition-all h-full flex flex-col">
+                        <div class="card-preview border-b-3 border-brutal-black relative bg-brutal-gray">
+                            <iframe src="https://siakadterpadu.pages.dev/" 
+                                    title="Preview SIAKAD Terpadu"
+                                    loading="lazy"
+                                    sandbox="allow-same-origin allow-scripts"
+                                    onerror="this.style.display='none'; this.nextElementSibling.classList.add('active');"></iframe>
+                            <div class="preview-fallback bg-gradient-to-br from-emerald-500 to-teal-600">
+                                <i data-lucide="graduation-cap" class="w-12 h-12 text-white"></i>
+                                <span class="text-sm font-bold mt-2">SIAKAD</span>
                             </div>
-                            <a href="https://siakadterpadu.pages.dev/" target="_blank" class="w-full py-3.5 sm:py-4 mt-6 rounded-2xl bg-emerald-400 text-bgDark font-bold text-center text-sm shadow-[0_10px_20px_rgba(52,211,153,0.3)] hover:scale-105 transition-transform duration-300">
-                                Kunjungi Sistem <i class="fa-solid fa-arrow-right ml-2"></i>
-                            </a>
+                            <div class="preview-overlay">
+                                <button onclick="openPreview('https://siakadterpadu.pages.dev/', 'SIAKAD Terpadu')" class="preview-btn">
+                                    <i data-lucide="maximize-2" class="w-4 h-4 inline mr-1"></i>
+                                    PREVIEW
+                                </button>
+                            </div>
+                            <div class="absolute top-3 right-3 bg-brutal-black text-white font-mono text-[10px] sm:text-xs px-2 py-1 border-2 border-brutal-black z-10">
+                                ENTERPRISE
+                            </div>
+                        </div>
+                        <div class="p-4 sm:p-5 flex flex-col flex-grow">
+                            <h3 class="font-display text-lg sm:text-xl md:text-2xl mb-1 sm:mb-2">SIAKAD Terpadu</h3>
+                            <p class="font-mono text-xs sm:text-sm mb-3 sm:mb-4 flex-grow">Sistem Informasi Akademik sentralisasi data untuk staf pendidik.</p>
+                            <div class="flex gap-2">
+                                <button onclick="openPreview('https://siakadterpadu.pages.dev/', 'SIAKAD Terpadu')" class="flex-1 inline-flex items-center justify-center gap-1 font-mono font-bold text-xs sm:text-sm bg-brutal-black text-white px-2 py-2 sm:px-3 sm:py-3 border-2 border-brutal-black hover:bg-white hover:text-brutal-black transition-colors">
+                                    <i data-lucide="eye" class="w-3 h-3 sm:w-4 sm:h-4"></i>
+                                    PREVIEW
+                                </button>
+                                <a href="https://siakadterpadu.pages.dev/" target="_blank" class="flex-1 inline-flex items-center justify-center gap-1 font-mono font-bold text-xs sm:text-sm bg-brutal-black text-white px-2 py-2 sm:px-3 sm:py-3 border-2 border-brutal-black hover:bg-white hover:text-brutal-black transition-colors">
+                                    <i data-lucide="external-link" class="w-3 h-3 sm:w-4 sm:h-4"></i>
+                                    VISIT
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
 
             </div>
             
-            <div class="md:hidden flex justify-center mt-6 gap-3 text-zinc-500 text-[10px] font-bold uppercase tracking-widest">
-                <i class="fa-solid fa-chevron-left animate-pulse"></i> Auto Scroll <i class="fa-solid fa-chevron-right animate-pulse"></i>
+            <div class="flex justify-center mt-4 gap-1 md:hidden">
+                <div class="w-1.5 h-1.5 rounded-full bg-white/50 animate-pulse"></div>
+                <div class="w-1.5 h-1.5 rounded-full bg-white/50 animate-pulse delay-75"></div>
+                <div class="w-1.5 h-1.5 rounded-full bg-white/50 animate-pulse delay-150"></div>
             </div>
         </div>
     </section>
 
-    <!-- Connect Section -->
-    <section class="py-24 md:py-32 relative z-10">
-        <div class="container mx-auto px-6 text-center">
-            <div class="inline-flex items-center justify-center p-4 bg-white/5 border border-white/10 rounded-full mb-6 sm:mb-8" data-aos="zoom-in">
-                <i class="fa-solid fa-handshake text-2xl sm:text-3xl text-accentPrimary"></i>
+    <!-- Contact Section -->
+    <section class="w-full py-16 sm:py-20 md:py-24 px-4 bg-brutal-black relative overflow-hidden">
+        <div class="absolute top-10 left-10 w-24 h-24 sm:w-32 sm:h-32 bg-brutal-pink rounded-full opacity-20 blur-3xl"></div>
+        <div class="absolute bottom-10 right-10 w-32 h-32 sm:w-48 sm:h-48 bg-brutal-cyan rounded-full opacity-20 blur-3xl"></div>
+        
+        <div class="w-full max-w-4xl mx-auto text-center relative z-10">
+            <div class="inline-block bg-brutal-yellow border-3 border-brutal-black px-4 py-1.5 sm:px-6 sm:py-2 font-mono font-bold text-xs sm:text-sm mb-6 sm:mb-8 shadow-brutal transform -rotate-2">
+                04 // CONTACT
             </div>
-            <h2 class="font-display text-4xl sm:text-5xl md:text-7xl font-bold text-white mb-4 sm:mb-6" data-aos="fade-up" data-aos-delay="100">Mulai Berkolaborasi.</h2>
-            <p class="text-zinc-400 text-base sm:text-lg md:text-xl mb-10 sm:mb-12 max-w-2xl mx-auto font-light px-2" data-aos="fade-up" data-aos-delay="200">
-                Punya visi untuk mendigitalkan sekolah Anda? Mari ngobrol santai dan wujudkan sistem yang tepat guna.
-            </p>
             
-            <a href="https://wa.me/6282238128216" data-aos="zoom-in" data-aos-delay="300"
-               class="group relative inline-flex items-center justify-center px-8 py-4 sm:px-10 sm:py-5 rounded-full bg-white text-bgDark font-bold text-base sm:text-lg overflow-hidden transition-all hover:scale-105 hover:shadow-[0_0_40px_rgba(255,255,255,0.3)]">
-                <div class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white to-transparent opacity-50 transform -skew-x-12 -translate-x-full group-hover:animate-shimmer z-0"></div>
-                <i class="fa-brands fa-whatsapp text-xl sm:text-2xl mr-3 text-green-500 relative z-10"></i> 
-                <span class="relative z-10">Chat via WhatsApp</span>
-            </a>
+            <h2 class="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white mb-4 sm:mb-6 leading-tight">
+                AYO <span class="bg-brutal-pink text-white px-2 inline-block transform rotate-1">KOLABORASI!</span>
+            </h2>
+            
+            <p class="font-mono text-brutal-gray text-sm sm:text-base md:text-lg mb-8 sm:mb-12 max-w-2xl mx-auto px-2">
+                Punya visi untuk mendigitalkan sekolah Anda? Mari ngobrol dan wujudkan sistem yang tepat guna.
+            </p>
 
-            <div class="mt-16 sm:mt-20 flex items-center justify-center gap-6 sm:gap-8" data-aos="fade-up" data-aos-delay="400">
-                <a href="https://www.instagram.com/dmkbn.e" class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-accentPink hover:border-accentPink hover:-translate-y-2 transition-all shadow-lg hover:shadow-[0_10px_20px_rgba(244,114,182,0.4)]">
-                    <i class="fa-brands fa-instagram text-lg sm:text-xl"></i>
+            <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-10 sm:mb-12 px-2">
+                <a href="https://wa.me/6282238128216" class="inline-flex items-center justify-center gap-2 font-mono font-bold text-sm sm:text-base px-6 py-3 sm:py-4 bg-brutal-yellow border-3 border-brutal-black text-brutal-black shadow-brutal hover:shadow-brutal-hover hover:-translate-y-0.5 transition-all">
+                    <i data-lucide="message-circle" class="w-5 h-5 sm:w-6 sm:h-6"></i>
+                    CHAT WHATSAPP
                 </a>
-                <a href="https://www.facebook.com/dmkbn.e" class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-accentSecondary hover:border-accentSecondary hover:-translate-y-2 transition-all shadow-lg hover:shadow-[0_10px_20px_rgba(56,189,248,0.4)]">
-                    <i class="fa-brands fa-facebook-f text-lg sm:text-xl"></i>
+                <a href="mailto:edo.domakubun@gmail.com" class="inline-flex items-center justify-center gap-2 font-mono font-bold text-sm sm:text-base px-6 py-3 sm:py-4 bg-brutal-white border-3 border-brutal-black text-brutal-black shadow-brutal hover:shadow-brutal-hover hover:-translate-y-0.5 transition-all">
+                    <i data-lucide="mail" class="w-5 h-5 sm:w-6 sm:h-6"></i>
+                    SEND EMAIL
                 </a>
-                <a href="mailto:edo.domakubun@gmail.com" class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-white hover:text-bgDark hover:-translate-y-2 transition-all shadow-lg">
-                    <i class="fa-solid fa-envelope text-lg sm:text-xl"></i>
+            </div>
+
+            <div class="flex justify-center gap-3 sm:gap-4">
+                <a href="https://www.instagram.com/dmkbn.e" class="w-12 h-12 sm:w-14 sm:h-14 bg-brutal-pink border-3 border-brutal-white flex items-center justify-center text-white hover:scale-110 hover:rotate-6 transition-transform">
+                    <i data-lucide="instagram" class="w-5 h-5 sm:w-6 sm:h-6"></i>
+                </a>
+                <a href="https://www.facebook.com/dmkbn.e" class="w-12 h-12 sm:w-14 sm:h-14 bg-brutal-cyan border-3 border-brutal-white flex items-center justify-center text-brutal-black hover:scale-110 hover:-rotate-6 transition-transform">
+                    <i data-lucide="facebook" class="w-5 h-5 sm:w-6 sm:h-6"></i>
+                </a>
+                <a href="#" class="w-12 h-12 sm:w-14 sm:h-14 bg-brutal-yellow border-3 border-brutal-white flex items-center justify-center text-brutal-black hover:scale-110 hover:rotate-6 transition-transform">
+                    <i data-lucide="github" class="w-5 h-5 sm:w-6 sm:h-6"></i>
                 </a>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="border-t border-white/10 py-8 sm:py-10 pb-28 md:pb-10 relative z-10 bg-bgDark/80 backdrop-blur-md">
-        <div class="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
-            <a href="#" class="font-display font-bold text-xl sm:text-2xl text-white tracking-tighter flex items-center gap-2">
-                Edward<span class="text-accentPrimary">.</span>
+    <footer class="w-full bg-brutal-yellow border-t-3 border-brutal-black py-6 sm:py-8 px-4">
+        <div class="w-full max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-3 sm:gap-4">
+            <a href="#" class="font-display text-xl sm:text-2xl tracking-tighter">
+                EDWARD<span class="text-brutal-pink">.</span>
             </a>
-            <p class="text-zinc-500 text-xs sm:text-sm font-medium">
-                &copy; 2026 Edward Domakubun. All Rights Reserved.
+            
+            <p class="font-mono text-xs sm:text-sm font-bold bg-brutal-white border-2 border-brutal-black px-3 py-1.5 sm:px-4 sm:py-2 text-center">
+                © 2026 ALL RIGHTS RESERVED
             </p>
-            <p class="text-zinc-500 text-xs sm:text-sm font-medium flex items-center gap-2 justify-center">
-                Made in Tanimbar <span class="w-2 h-2 bg-accentSecondary rounded-full animate-ping"></span>
-            </p>
+            
+            <div class="flex items-center gap-2 font-mono text-xs sm:text-sm">
+                <span>MADE IN</span>
+                <span class="bg-brutal-black text-brutal-yellow px-1.5 py-0.5 sm:px-2 sm:py-1 font-bold">TANIMBAR</span>
+                <span class="w-2 h-2 sm:w-3 sm:h-3 bg-brutal-pink rounded-full animate-pulse"></span>
+            </div>
         </div>
     </footer>
 
-    <!-- Scripts -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
     <script>
-        // 1. Initialize AOS (Fade Animations)
-        AOS.init({ once: true, offset: 50, duration: 1000, easing: 'ease-out-expo' });
+        // Initialize Lucide Icons
+        lucide.createIcons();
 
-        // 2. Interactive Carousel Logic (Focus & Scale Effect + NON-STOP AUTO SCROLL)
-        document.addEventListener("DOMContentLoaded", function() {
-            const wrapper = document.getElementById('portfolio-carousel');
-            const cards = wrapper.querySelectorAll('.carousel-card');
-
-            // --- A. Logika Focus Kartu Tengah ---
-            const checkCenterCard = () => {
-                const wrapperCenter = wrapper.scrollLeft + (wrapper.clientWidth / 2);
-                
-                cards.forEach(card => {
-                    const cardCenter = card.offsetLeft + (card.clientWidth / 2);
-                    
-                    // Highlight card if it's near the center
-                    if (Math.abs(wrapperCenter - cardCenter) < 150) {
-                        card.classList.add('active');
-                    } else {
-                        card.classList.remove('active');
-                    }
-                });
-            };
-
-            wrapper.addEventListener('scroll', checkCenterCard);
-            setTimeout(checkCenterCard, 100);
-            window.addEventListener('resize', checkCenterCard);
-
-            // --- B. Logika Auto-Scroll Abadi (Tidak akan berhenti) ---
-            setInterval(() => {
-                if (!wrapper || cards.length === 0) return;
-                
-                // Lebar wrapper scroll maksimal yang bisa dicapai
-                const maxScrollLeft = wrapper.scrollWidth - wrapper.clientWidth;
-                
-                // Jarak satu kartu + gap (sekitar 1.5rem/24px)
-                const cardWidth = cards[0].offsetWidth + 24;
-
-                // Jika sudah mentok di kanan (dikurangi toleransi), balik ke paling kiri (awal)
-                if (wrapper.scrollLeft >= maxScrollLeft - 20) {
-                    wrapper.scrollTo({ left: 0, behavior: 'smooth' });
-                } else {
-                    // Geser ke kartu berikutnya
-                    wrapper.scrollBy({ left: cardWidth, behavior: 'smooth' });
-                }
-            }, 2500); // Trigger otomatis setiap 2,5 detik
+        // Preview Modal Functions
+        function openPreview(url, title) {
+            const modal = document.getElementById('previewModal');
+            const frame = document.getElementById('previewFrame');
+            const titleEl = document.getElementById('previewTitle');
+            const linkEl = document.getElementById('previewLink');
             
+            frame.src = url;
+            titleEl.textContent = title;
+            linkEl.href = url;
+            
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            
+            // Re-render icons in modal
+            setTimeout(() => lucide.createIcons(), 100);
+        }
+
+        function closePreview() {
+            const modal = document.getElementById('previewModal');
+            const frame = document.getElementById('previewFrame');
+            
+            modal.classList.remove('active');
+            frame.src = '';
+            document.body.style.overflow = '';
+        }
+
+        // Close modal on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closePreview();
+            }
+        });
+
+        // Close modal on background click
+        document.getElementById('previewModal').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) {
+                closePreview();
+            }
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        let isMenuOpen = false;
+
+        mobileMenuBtn.addEventListener('click', () => {
+            isMenuOpen = !isMenuOpen;
+            mobileMenu.classList.toggle('hidden');
+            
+            const icon = mobileMenuBtn.querySelector('i');
+            if (icon) icon.remove();
+            
+            const newIcon = document.createElement('i');
+            newIcon.setAttribute('data-lucide', isMenuOpen ? 'x' : 'menu');
+            newIcon.className = 'w-5 h-5';
+            mobileMenuBtn.appendChild(newIcon);
+            lucide.createIcons();
+        });
+
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                isMenuOpen = false;
+                const icon = mobileMenuBtn.querySelector('i');
+                if (icon) icon.remove();
+                const newIcon = document.createElement('i');
+                newIcon.setAttribute('data-lucide', 'menu');
+                newIcon.className = 'w-5 h-5';
+                mobileMenuBtn.appendChild(newIcon);
+                lucide.createIcons();
+            });
+        });
+
+        // Auto-scroll Portfolio
+        const portfolioScroll = document.querySelector('#works .flex');
+        let scrollAmount = 0;
+        const cardWidth = 320;
+
+        setInterval(() => {
+            if (portfolioScroll && !portfolioScroll.matches(':hover')) {
+                scrollAmount += cardWidth;
+                const maxScroll = portfolioScroll.scrollWidth - portfolioScroll.clientWidth;
+                if (scrollAmount > maxScroll) {
+                    scrollAmount = 0;
+                }
+                portfolioScroll.scrollTo({
+                    left: scrollAmount,
+                    behavior: 'smooth'
+                });
+            }
+        }, 4000);
+
+        // Smooth Scroll (Fixed Syntax Error)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const target = document.querySelector(targetId);
+                if (target) {
+                    const offsetTop = target.offsetTop - 80;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Scroll Reveal Animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section > div').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'all 0.5s ease-out';
+            observer.observe(el);
+        });
+
+        // Handle iframe errors - show fallback if iframe fails to load
+        document.querySelectorAll('.card-preview iframe').forEach(iframe => {
+            iframe.addEventListener('error', function() {
+                this.style.display = 'none';
+                this.nextElementSibling.classList.add('active');
+            });
+            
+            // Timeout fallback if iframe takes too long (Fixed Cross-Origin issue)
+            setTimeout(() => {
+                try {
+                    if (!iframe.contentWindow || (iframe.contentDocument && iframe.contentDocument.body.innerHTML === '')) {
+                        iframe.style.display = 'none';
+                        iframe.nextElementSibling.classList.add('active');
+                    }
+                } catch(e) {
+                    // Ignore DOMException for cross-origin frames
+                }
+            }, 5000);
         });
     </script>
 </body>
