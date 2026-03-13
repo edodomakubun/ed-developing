@@ -127,6 +127,24 @@
             background: rgba(255,255,255,0.1); border-color: transparent;
             backdrop-filter: blur(2px);
         }
+
+        /* Dynamic Floating Navbar for Mobile */
+        #mobile-nav {
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                        background-color 0.4s ease,
+                        padding 0.4s ease,
+                        border-radius 0.4s ease;
+        }
+        
+        #mobile-nav.scrolled {
+            transform: translateY(10px) scale(0.95);
+            background: rgba(15, 15, 17, 0.85);
+            backdrop-filter: blur(12px);
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+            border-radius: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
     </style>
 </head>
 
@@ -161,35 +179,15 @@
         </nav>
     </div>
 
-    <!-- Mobile Logo (Top Left) -->
-    <div class="md:hidden fixed top-6 left-6 z-50" data-aos="fade-down">
-        <a href="#" class="font-display font-bold text-2xl text-white tracking-tighter drop-shadow-[0_0_10px_rgba(0,0,0,0.8)]">
-            ED<span class="text-accentPurple">.</span>
-        </a>
-    </div>
-
-    <!-- Mobile Floating Individual Navbar (Bottom Dock) -->
-    <div class="md:hidden fixed bottom-6 left-0 w-full z-50 flex justify-center gap-3 px-4 pointer-events-none" data-aos="fade-up" data-aos-delay="500">
-        <!-- Home -->
-        <a href="#home" class="pointer-events-auto w-12 h-12 rounded-full glass-panel flex items-center justify-center text-gray-300 hover:text-accentBlue hover:bg-white/10 transition-all duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.8)] border border-white/10 active:scale-90">
-            <i class="fas fa-home text-lg"></i>
-        </a>
-        <!-- Profile -->
-        <a href="#about" class="pointer-events-auto w-12 h-12 rounded-full glass-panel flex items-center justify-center text-gray-300 hover:text-accentPurple hover:bg-white/10 transition-all duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.8)] border border-white/10 active:scale-90">
-            <i class="fas fa-user text-lg"></i>
-        </a>
-        <!-- Expertise -->
-        <a href="#bento-services" class="pointer-events-auto w-12 h-12 rounded-full glass-panel flex items-center justify-center text-gray-300 hover:text-accentPink hover:bg-white/10 transition-all duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.8)] border border-white/10 active:scale-90">
-            <i class="fas fa-laptop-code text-lg"></i>
-        </a>
-        <!-- Works -->
-        <a href="#gallery" class="pointer-events-auto w-12 h-12 rounded-full glass-panel flex items-center justify-center text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.8)] border border-white/10 active:scale-90">
-            <i class="fas fa-layer-group text-lg"></i>
-        </a>
-        <!-- WhatsApp -->
-        <a href="https://wa.me/6282238128216" class="pointer-events-auto w-12 h-12 rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center text-white transition-all duration-300 shadow-[0_10px_30px_rgba(34,197,94,0.4)] border border-green-400/30 active:scale-90">
-            <i class="fab fa-whatsapp text-xl"></i>
-        </a>
+    <!-- Mobile Dynamic Floating Navbar -->
+    <div class="md:hidden fixed top-4 left-0 w-full z-50 flex justify-center px-4 pointer-events-none">
+        <nav id="mobile-nav" class="pointer-events-auto flex items-center justify-between gap-4 px-5 py-3 w-full max-w-sm mx-auto shadow-2xl shadow-black/50">
+            <a href="#home" class="text-xs font-display font-bold text-gray-300 hover:text-accentBlue transition-colors active:scale-95">HOME</a>
+            <a href="#about" class="text-xs font-display font-bold text-gray-300 hover:text-accentPurple transition-colors active:scale-95">PROFILE</a>
+            <a href="#bento-services" class="text-xs font-display font-bold text-gray-300 hover:text-accentPink transition-colors active:scale-95">SKILLS</a>
+            <a href="#gallery" class="text-xs font-display font-bold text-gray-300 hover:text-white transition-colors active:scale-95">WORKS</a>
+            <a href="https://wa.me/6282238128216" class="text-xs font-display font-bold text-green-400 hover:text-green-300 transition-colors active:scale-95">CHAT</a>
+        </nav>
     </div>
 
     <!-- Hero Section -->
@@ -540,6 +538,33 @@
                 target.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
             });
         }
+
+        // 3. Mobile Dynamic Navbar Logic
+        const mobileNav = document.getElementById('mobile-nav');
+        let lastScrollY = window.scrollY;
+        let ticking = false;
+
+        function updateNav() {
+            const currentScrollY = window.scrollY;
+            
+            if (currentScrollY > 50) {
+                // Scrolled down: add glassmorphism effect and scale down
+                mobileNav.classList.add('scrolled');
+            } else {
+                // Top of page: transparent and full scale
+                mobileNav.classList.remove('scrolled');
+            }
+            
+            lastScrollY = currentScrollY;
+            ticking = false;
+        }
+
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(updateNav);
+                ticking = true;
+            }
+        });
     </script>
 </body>
 </html>
