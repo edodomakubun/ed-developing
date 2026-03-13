@@ -37,6 +37,7 @@
                     animation: {
                         'gradient-x': 'gradient-x 15s ease infinite',
                         'float-slow': 'float 8s ease-in-out infinite',
+                        'float-sm': 'float-sm 4s ease-in-out infinite',
                         'pulse-glow': 'pulse-glow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
                     },
                     keyframes: {
@@ -53,6 +54,10 @@
                         float: {
                             '0%, 100%': { transform: 'translateY(0)' },
                             '50%': { transform: 'translateY(-20px)' },
+                        },
+                        'float-sm': {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-8px)' },
                         },
                         'pulse-glow': {
                             '0%, 100%': { opacity: 0.5, transform: 'scale(1)' },
@@ -127,24 +132,6 @@
             background: rgba(255,255,255,0.1); border-color: transparent;
             backdrop-filter: blur(2px);
         }
-
-        /* Dynamic Floating Navbar for Mobile */
-        #mobile-nav {
-            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
-                        background-color 0.4s ease,
-                        padding 0.4s ease,
-                        border-radius 0.4s ease;
-        }
-        
-        #mobile-nav.scrolled {
-            transform: translateY(10px) scale(0.95);
-            background: rgba(15, 15, 17, 0.85);
-            backdrop-filter: blur(12px);
-            padding-top: 0.5rem;
-            padding-bottom: 0.5rem;
-            border-radius: 2rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
     </style>
 </head>
 
@@ -179,15 +166,13 @@
         </nav>
     </div>
 
-    <!-- Mobile Dynamic Floating Navbar -->
-    <div class="md:hidden fixed top-4 left-0 w-full z-50 flex justify-center px-4 pointer-events-none">
-        <nav id="mobile-nav" class="pointer-events-auto flex items-center justify-between gap-4 px-5 py-3 w-full max-w-sm mx-auto shadow-2xl shadow-black/50">
-            <a href="#home" class="text-xs font-display font-bold text-gray-300 hover:text-accentBlue transition-colors active:scale-95">HOME</a>
-            <a href="#about" class="text-xs font-display font-bold text-gray-300 hover:text-accentPurple transition-colors active:scale-95">PROFILE</a>
-            <a href="#bento-services" class="text-xs font-display font-bold text-gray-300 hover:text-accentPink transition-colors active:scale-95">SKILLS</a>
-            <a href="#gallery" class="text-xs font-display font-bold text-gray-300 hover:text-white transition-colors active:scale-95">WORKS</a>
-            <a href="https://wa.me/6282238128216" class="text-xs font-display font-bold text-green-400 hover:text-green-300 transition-colors active:scale-95">CHAT</a>
-        </nav>
+    <!-- Mobile Floating Individual Text Links (Random Animation) -->
+    <div class="md:hidden fixed bottom-6 left-0 w-full z-50 flex justify-center flex-wrap gap-2.5 px-4 pointer-events-none">
+        <a href="#home" class="pointer-events-auto px-4 py-2 bg-white/5 backdrop-blur-xl border border-white/10 rounded-full text-xs font-display font-bold text-gray-300 hover:text-accentBlue hover:border-accentBlue/50 transition-colors shadow-[0_4px_15px_rgba(0,0,0,0.5)]" style="animation: float-sm 3s ease-in-out infinite;">HOME</a>
+        <a href="#about" class="pointer-events-auto px-4 py-2 bg-white/5 backdrop-blur-xl border border-white/10 rounded-full text-xs font-display font-bold text-gray-300 hover:text-accentPurple hover:border-accentPurple/50 transition-colors shadow-[0_4px_15px_rgba(0,0,0,0.5)]" style="animation: float-sm 4s ease-in-out infinite 0.7s;">PROFILE</a>
+        <a href="#bento-services" class="pointer-events-auto px-4 py-2 bg-white/5 backdrop-blur-xl border border-white/10 rounded-full text-xs font-display font-bold text-gray-300 hover:text-accentPink hover:border-accentPink/50 transition-colors shadow-[0_4px_15px_rgba(0,0,0,0.5)]" style="animation: float-sm 3.5s ease-in-out infinite 0.3s;">SKILLS</a>
+        <a href="#gallery" class="pointer-events-auto px-4 py-2 bg-white/5 backdrop-blur-xl border border-white/10 rounded-full text-xs font-display font-bold text-gray-300 hover:text-white hover:border-white/50 transition-colors shadow-[0_4px_15px_rgba(0,0,0,0.5)]" style="animation: float-sm 4.2s ease-in-out infinite 1s;">WORKS</a>
+        <a href="https://wa.me/6282238128216" class="pointer-events-auto px-4 py-2 bg-green-500/10 backdrop-blur-xl border border-green-500/30 rounded-full text-xs font-display font-bold text-green-400 hover:text-green-300 hover:bg-green-500/20 transition-colors shadow-[0_4px_15px_rgba(34,197,94,0.2)]" style="animation: float-sm 3.8s ease-in-out infinite 0.5s;">CHAT</a>
     </div>
 
     <!-- Hero Section -->
@@ -538,33 +523,6 @@
                 target.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
             });
         }
-
-        // 3. Mobile Dynamic Navbar Logic
-        const mobileNav = document.getElementById('mobile-nav');
-        let lastScrollY = window.scrollY;
-        let ticking = false;
-
-        function updateNav() {
-            const currentScrollY = window.scrollY;
-            
-            if (currentScrollY > 50) {
-                // Scrolled down: add glassmorphism effect and scale down
-                mobileNav.classList.add('scrolled');
-            } else {
-                // Top of page: transparent and full scale
-                mobileNav.classList.remove('scrolled');
-            }
-            
-            lastScrollY = currentScrollY;
-            ticking = false;
-        }
-
-        window.addEventListener('scroll', () => {
-            if (!ticking) {
-                window.requestAnimationFrame(updateNav);
-                ticking = true;
-            }
-        });
     </script>
 </body>
 </html>
