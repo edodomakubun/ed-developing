@@ -142,38 +142,53 @@
     <div class="fixed top-[-10%] left-[-10%] w-[40vw] h-[40vw] rounded-full bg-accentPurple/20 blur-[120px] animate-pulse-glow -z-10"></div>
     <div class="fixed bottom-[-10%] right-[-10%] w-[50vw] h-[50vw] rounded-full bg-accentBlue/10 blur-[150px] animate-pulse-glow -z-10" style="animation-delay: 2s;"></div>
 
-    <!-- Pill-shaped Floating Navbar -->
-    <div class="fixed w-full top-6 z-50 flex justify-center px-4" data-aos="fade-down">
-        <nav class="glass-panel px-6 py-3 rounded-full flex justify-between items-center gap-8 md:gap-16 shadow-2xl shadow-black/50 border-white/10">
+    <!-- Desktop Pill-shaped Floating Navbar -->
+    <div class="hidden md:flex fixed w-full top-6 z-50 justify-center px-4" data-aos="fade-down">
+        <nav class="glass-panel px-6 py-3 rounded-full flex justify-between items-center gap-16 shadow-2xl shadow-black/50 border-white/10">
             <a href="#" class="font-display font-bold text-xl text-white tracking-tighter hover-target">
                 ED<span class="text-accentPurple">.</span>
             </a>
 
-            <div class="hidden md:flex space-x-8 items-center">
+            <div class="flex space-x-8 items-center">
                 <a href="#about" class="text-sm text-gray-300 hover:text-white transition-colors hover-target">Profile</a>
                 <a href="#bento-services" class="text-sm text-gray-300 hover:text-white transition-colors hover-target">Expertise</a>
                 <a href="#gallery" class="text-sm text-gray-300 hover:text-white transition-colors hover-target">Works</a>
             </div>
 
-            <a href="https://wa.me/6282238128216" class="hidden md:block px-5 py-2 rounded-full bg-white text-black text-sm font-semibold hover:scale-105 transition-transform hover-target">
+            <a href="https://wa.me/6282238128216" class="px-5 py-2 rounded-full bg-white text-black text-sm font-semibold hover:scale-105 transition-transform hover-target">
                 Let's Talk
             </a>
-
-            <!-- Mobile Menu Icon -->
-            <button class="md:hidden text-white hover-target focus:outline-none" id="menu-btn">
-                <i class="fas fa-bars text-xl"></i>
-            </button>
         </nav>
     </div>
 
-    <!-- Mobile Dropdown -->
-    <div id="mobile-menu" class="fixed inset-0 bg-bgDark/95 backdrop-blur-xl z-40 hidden flex flex-col items-center justify-center space-y-8 opacity-0 transition-opacity duration-300">
-        <a href="#home" class="mobile-link text-3xl font-display font-bold text-white">Home.</a>
-        <a href="#about" class="mobile-link text-3xl font-display font-bold text-white">Profile.</a>
-        <a href="#bento-services" class="mobile-link text-3xl font-display font-bold text-white">Expertise.</a>
-        <a href="#gallery" class="mobile-link text-3xl font-display font-bold text-white">Works.</a>
-        <a href="https://wa.me/6282238128216" class="px-8 py-3 rounded-full bg-gradient-to-r from-accentBlue to-accentPurple text-white font-bold mt-4">
-            WhatsApp Me
+    <!-- Mobile Logo (Top Left) -->
+    <div class="md:hidden fixed top-6 left-6 z-50" data-aos="fade-down">
+        <a href="#" class="font-display font-bold text-2xl text-white tracking-tighter drop-shadow-[0_0_10px_rgba(0,0,0,0.8)]">
+            ED<span class="text-accentPurple">.</span>
+        </a>
+    </div>
+
+    <!-- Mobile Floating Individual Navbar (Bottom Dock) -->
+    <div class="md:hidden fixed bottom-6 left-0 w-full z-50 flex justify-center gap-3 px-4 pointer-events-none" data-aos="fade-up" data-aos-delay="500">
+        <!-- Home -->
+        <a href="#home" class="pointer-events-auto w-12 h-12 rounded-full glass-panel flex items-center justify-center text-gray-300 hover:text-accentBlue hover:bg-white/10 transition-all duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.8)] border border-white/10 active:scale-90">
+            <i class="fas fa-home text-lg"></i>
+        </a>
+        <!-- Profile -->
+        <a href="#about" class="pointer-events-auto w-12 h-12 rounded-full glass-panel flex items-center justify-center text-gray-300 hover:text-accentPurple hover:bg-white/10 transition-all duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.8)] border border-white/10 active:scale-90">
+            <i class="fas fa-user text-lg"></i>
+        </a>
+        <!-- Expertise -->
+        <a href="#bento-services" class="pointer-events-auto w-12 h-12 rounded-full glass-panel flex items-center justify-center text-gray-300 hover:text-accentPink hover:bg-white/10 transition-all duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.8)] border border-white/10 active:scale-90">
+            <i class="fas fa-laptop-code text-lg"></i>
+        </a>
+        <!-- Works -->
+        <a href="#gallery" class="pointer-events-auto w-12 h-12 rounded-full glass-panel flex items-center justify-center text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.8)] border border-white/10 active:scale-90">
+            <i class="fas fa-layer-group text-lg"></i>
+        </a>
+        <!-- WhatsApp -->
+        <a href="https://wa.me/6282238128216" class="pointer-events-auto w-12 h-12 rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center text-white transition-all duration-300 shadow-[0_10px_30px_rgba(34,197,94,0.4)] border border-green-400/30 active:scale-90">
+            <i class="fab fa-whatsapp text-xl"></i>
         </a>
     </div>
 
@@ -469,7 +484,7 @@
     </section>
 
     <!-- Footer -->
-    <footer class="border-t border-white/10 py-10 relative z-10 bg-black/50">
+    <footer class="border-t border-white/10 pt-10 pb-28 md:pb-10 relative z-10 bg-black/50">
         <div class="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
             <a href="#" class="font-display font-bold text-xl text-white tracking-tighter">
                 ED<span class="text-accentPurple">.</span>
@@ -525,44 +540,6 @@
                 target.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
             });
         }
-
-        // 3. Mobile Menu Toggle with Smooth Fade
-        const btn = document.getElementById('menu-btn');
-        const menu = document.getElementById('mobile-menu');
-        const icon = btn.querySelector('i');
-        const mobileLinks = document.querySelectorAll('.mobile-link');
-
-        btn.addEventListener('click', () => {
-            if (menu.classList.contains('hidden')) {
-                menu.classList.remove('hidden');
-                // Small delay to allow display:block to apply before changing opacity
-                setTimeout(() => {
-                    menu.classList.remove('opacity-0');
-                    menu.classList.add('opacity-100');
-                }, 10);
-                icon.classList.replace('fa-bars', 'fa-times');
-            } else {
-                menu.classList.remove('opacity-100');
-                menu.classList.add('opacity-0');
-                setTimeout(() => {
-                    menu.classList.add('hidden');
-                }, 300); // match transition duration
-                icon.classList.replace('fa-times', 'fa-bars');
-            }
-        });
-
-        // Close menu when clicking a link
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                menu.classList.remove('opacity-100');
-                menu.classList.add('opacity-0');
-                setTimeout(() => {
-                    menu.classList.add('hidden');
-                }, 300);
-                icon.classList.replace('fa-times', 'fa-bars');
-            });
-        });
-
     </script>
 </body>
 </html>
