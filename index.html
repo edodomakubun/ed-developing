@@ -4,11 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="Jasa Pembuatan Website Sekolah dan Aplikasi Penunjang Manajemen Sekolah">
-    <title>Edward Domakubun | Digital Solution for Schools</title>
-
-    <link rel="icon" type="image/svg+xml"
-        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%2306b6d4%22/><text x=%2250%22 y=%2275%22 font-family=%22Arial, sans-serif%22 font-size=%2270%22 font-weight=%22bold%22 fill=%22%230f172a%22 text-anchor=%22middle%22>E</text></svg>">
+    <meta content="Developer Sekolah & Aplikasi Manajemen">
+    <title>Edward Domakubun | Creative Developer</title>
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -19,42 +16,47 @@
     <!-- AOS Animation CSS -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Google Fonts: Space Grotesk & Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        primary: '#0a0f1c', // Super dark slate/blue
-                        secondary: '#111827', // Slate 900
-                        accent: '#00f6ff', // Bright Neon Cyan
-                        light: '#f8fafc',
+                        bgDark: '#050505',
+                        cardDark: '#0f0f11',
+                        accentBlue: '#3b82f6',
+                        accentPurple: '#8b5cf6',
+                        accentPink: '#ec4899',
                     },
                     fontFamily: {
-                        sans: ['Outfit', 'sans-serif'],
+                        display: ['"Space Grotesk"', 'sans-serif'],
+                        body: ['Inter', 'sans-serif'],
                     },
                     animation: {
-                        'float': 'float 6s ease-in-out infinite',
-                        'blob': 'blob 7s infinite',
-                        'spin-slow': 'spin 12s linear infinite',
-                        'shimmer': 'shimmer 2.5s infinite',
+                        'gradient-x': 'gradient-x 15s ease infinite',
+                        'float-slow': 'float 8s ease-in-out infinite',
+                        'pulse-glow': 'pulse-glow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
                     },
                     keyframes: {
+                        'gradient-x': {
+                            '0%, 100%': {
+                                'background-size': '200% 200%',
+                                'background-position': 'left center'
+                            },
+                            '50%': {
+                                'background-size': '200% 200%',
+                                'background-position': 'right center'
+                            }
+                        },
                         float: {
                             '0%, 100%': { transform: 'translateY(0)' },
                             '50%': { transform: 'translateY(-20px)' },
                         },
-                        blob: {
-                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
-                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
-                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
-                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
-                        },
-                        shimmer: {
-                            '0%': { transform: 'translateX(-100%)' },
-                            '100%': { transform: 'translateX(100%)' }
+                        'pulse-glow': {
+                            '0%, 100%': { opacity: 0.5, transform: 'scale(1)' },
+                            '50%': { opacity: 0.8, transform: 'scale(1.05)' },
                         }
                     }
                 }
@@ -64,550 +66,503 @@
 
     <style>
         body {
-            font-family: 'Outfit', sans-serif;
-            background-color: #0a0f1c;
+            background-color: #050505;
+            color: #e5e7eb;
+            overflow-x: hidden;
         }
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 8px; height: 8px; }
-        ::-webkit-scrollbar-track { background: #0a0f1c; }
-        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 5px; }
-        ::-webkit-scrollbar-thumb:hover { background: #00f6ff; }
-
-        /* Hide Scrollbar for Horizontal Carousel on Mobile */
-        .hide-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-        .hide-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
+        /* Noise Overlay for Texture */
+        .noise-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none; z-index: 50; opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
         }
 
-        /* Glassmorphism & Borders */
-        .glass-card {
+        /* Glassmorphism Panels */
+        .glass-panel {
             background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(12px);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
         }
 
-        /* Grid Background Pattern */
-        .bg-grid-pattern {
-            background-image: 
-                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-            background-size: 40px 40px;
+        /* Hide Scrollbar entirely but keep functionality */
+        ::-webkit-scrollbar { display: none; }
+        * { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Horizontal Scroll Snap */
+        .scrolling-wrapper {
+            display: flex;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            padding-bottom: 2rem;
+        }
+        .scrolling-card {
+            flex: 0 0 auto;
+            scroll-snap-align: center;
         }
 
-        /* Selection Color */
-        ::selection { background: #00f6ff; color: #0a0f1c; }
-
-        /* --- MOUSE FOLLOWER STYLES --- */
-        /* Hide default cursor on desktop */
+        /* Custom Cursor */
         @media (hover: hover) and (pointer: fine) {
             body, a, button { cursor: none; }
         }
-
-        .cursor-dot,
-        .cursor-outline {
-            position: fixed;
-            top: 0; left: 0;
-            transform: translate(-50%, -50%);
-            border-radius: 50%;
-            z-index: 9999;
-            pointer-events: none;
-        }
-
         .cursor-dot {
-            width: 8px; height: 8px;
-            background-color: #00f6ff;
-            transition: width 0.2s, height 0.2s;
-        }
-
-        .cursor-outline {
-            width: 40px; height: 40px;
-            border: 2px solid rgba(0, 246, 255, 0.5);
+            position: fixed; top: 0; left: 0; width: 10px; height: 10px;
+            background: white; border-radius: 50%; z-index: 9999;
+            pointer-events: none; transform: translate(-50%, -50%);
             transition: width 0.2s, height 0.2s, background-color 0.2s;
         }
-
-        /* Hover effect for cursor */
-        .cursor-hover .cursor-dot { width: 12px; height: 12px; }
-        .cursor-hover .cursor-outline {
-            width: 60px; height: 60px;
-            background-color: rgba(0, 246, 255, 0.1);
-            border-color: transparent;
+        .cursor-ring {
+            position: fixed; top: 0; left: 0; width: 40px; height: 40px;
+            border: 1px solid rgba(255,255,255,0.3); border-radius: 50%; z-index: 9998;
+            pointer-events: none; transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s, border-color 0.3s;
         }
-
-        /* Mouse Follower Glow Layer */
-        #glow-bg {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            pointer-events: none; z-index: 0;
-            background: radial-gradient(circle 600px at var(--x, 50vw) var(--y, 50vh), rgba(0, 246, 255, 0.08), transparent 80%);
+        .cursor-hover .cursor-dot { width: 0; height: 0; }
+        .cursor-hover .cursor-ring {
+            width: 80px; height: 80px;
+            background: rgba(255,255,255,0.1); border-color: transparent;
+            backdrop-filter: blur(2px);
         }
     </style>
 </head>
 
-<body class="text-light overflow-x-hidden">
+<body class="font-body selection:bg-accentPurple selection:text-white">
 
-    <!-- Mouse Follower Elements -->
-    <div class="cursor-dot hidden md:block" data-cursor></div>
-    <div class="cursor-outline hidden md:block" data-cursor></div>
-    <div id="glow-bg"></div>
+    <div class="noise-bg"></div>
 
-    <div class="fixed inset-0 bg-grid-pattern -z-10 pointer-events-none"></div>
+    <!-- Custom Cursor -->
+    <div class="cursor-dot hidden md:block"></div>
+    <div class="cursor-ring hidden md:block"></div>
 
-    <!-- Navbar -->
-    <nav class="fixed w-full z-50 bg-primary/60 backdrop-blur-xl border-b border-white/5 transition-all duration-300"
-        data-aos="fade-down" data-aos-duration="800">
-        <div class="container mx-auto px-4 md:px-8 py-4 flex justify-between items-center">
-            <a href="#" class="text-xl md:text-2xl font-extrabold text-accent tracking-wider hover:text-white transition-colors cursor-hover-target">
-                EDWARD<span class="text-white">DEV</span>.
+    <!-- Ambient Glowing Orbs -->
+    <div class="fixed top-[-10%] left-[-10%] w-[40vw] h-[40vw] rounded-full bg-accentPurple/20 blur-[120px] animate-pulse-glow -z-10"></div>
+    <div class="fixed bottom-[-10%] right-[-10%] w-[50vw] h-[50vw] rounded-full bg-accentBlue/10 blur-[150px] animate-pulse-glow -z-10" style="animation-delay: 2s;"></div>
+
+    <!-- Pill-shaped Floating Navbar -->
+    <div class="fixed w-full top-6 z-50 flex justify-center px-4" data-aos="fade-down">
+        <nav class="glass-panel px-6 py-3 rounded-full flex justify-between items-center gap-8 md:gap-16 shadow-2xl shadow-black/50 border-white/10">
+            <a href="#" class="font-display font-bold text-xl text-white tracking-tighter hover-target">
+                ED<span class="text-accentPurple">.</span>
             </a>
 
-            <div class="hidden md:flex space-x-10">
-                <a href="#home" class="text-sm font-medium hover:text-accent transition duration-300 relative group cursor-hover-target">Beranda <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full"></span></a>
-                <a href="#about" class="text-sm font-medium hover:text-accent transition duration-300 relative group cursor-hover-target">Tentang <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full"></span></a>
-                <a href="#services" class="text-sm font-medium hover:text-accent transition duration-300 relative group cursor-hover-target">Layanan <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full"></span></a>
-                <a href="#portfolio" class="text-sm font-medium hover:text-accent transition duration-300 relative group cursor-hover-target">Portofolio <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full"></span></a>
+            <div class="hidden md:flex space-x-8 items-center">
+                <a href="#about" class="text-sm text-gray-300 hover:text-white transition-colors hover-target">Profile</a>
+                <a href="#bento-services" class="text-sm text-gray-300 hover:text-white transition-colors hover-target">Expertise</a>
+                <a href="#gallery" class="text-sm text-gray-300 hover:text-white transition-colors hover-target">Works</a>
             </div>
 
-            <!-- Shimmering Button -->
-            <a href="https://wa.me/6282238128216?text=Halo%20Kak%20Edward..."
-                class="hidden md:block relative overflow-hidden px-7 py-2.5 bg-accent/10 border border-accent text-accent font-bold rounded-full hover:bg-accent hover:text-primary hover:scale-105 transition-all duration-300 shadow-[0_0_15px_rgba(0,246,255,0.3)] cursor-hover-target group">
-                <span class="relative z-10">Hubungi Saya</span>
-                <div class="absolute top-0 -inset-full h-full w-1/2 z-5 block transform -skew-x-12 bg-gradient-to-r from-transparent to-white opacity-20 group-hover:animate-shimmer"></div>
+            <a href="https://wa.me/6282238128216" class="hidden md:block px-5 py-2 rounded-full bg-white text-black text-sm font-semibold hover:scale-105 transition-transform hover-target">
+                Let's Talk
             </a>
 
-            <button class="md:hidden text-2xl text-accent p-2 focus:outline-none" id="mobile-menu-btn">
-                <i class="fas fa-bars"></i>
+            <!-- Mobile Menu Icon -->
+            <button class="md:hidden text-white hover-target focus:outline-none" id="menu-btn">
+                <i class="fas fa-bars text-xl"></i>
             </button>
-        </div>
+        </nav>
+    </div>
 
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-secondary/95 backdrop-blur-xl border-t border-white/10 p-4 absolute w-full shadow-2xl">
-            <a href="#home" class="block py-3 px-4 hover:bg-white/5 rounded-lg text-accent border-b border-white/5">Beranda</a>
-            <a href="#about" class="block py-3 px-4 hover:bg-white/5 rounded-lg text-accent border-b border-white/5">Tentang</a>
-            <a href="#services" class="block py-3 px-4 hover:bg-white/5 rounded-lg text-accent border-b border-white/5">Layanan</a>
-            <a href="#portfolio" class="block py-3 px-4 hover:bg-white/5 rounded-lg text-accent mb-4">Portofolio</a>
-            <a href="https://wa.me/6282238128216" class="block w-full text-center py-3 bg-accent text-primary font-bold rounded-lg shadow-lg">
-                Chat WhatsApp
-            </a>
-        </div>
-    </nav>
+    <!-- Mobile Dropdown -->
+    <div id="mobile-menu" class="fixed inset-0 bg-bgDark/95 backdrop-blur-xl z-40 hidden flex flex-col items-center justify-center space-y-8 opacity-0 transition-opacity duration-300">
+        <a href="#home" class="mobile-link text-3xl font-display font-bold text-white">Home.</a>
+        <a href="#about" class="mobile-link text-3xl font-display font-bold text-white">Profile.</a>
+        <a href="#bento-services" class="mobile-link text-3xl font-display font-bold text-white">Expertise.</a>
+        <a href="#gallery" class="mobile-link text-3xl font-display font-bold text-white">Works.</a>
+        <a href="https://wa.me/6282238128216" class="px-8 py-3 rounded-full bg-gradient-to-r from-accentBlue to-accentPurple text-white font-bold mt-4">
+            WhatsApp Me
+        </a>
+    </div>
 
-    <!-- Home/Hero Section -->
-    <section id="home" class="min-h-screen flex items-center pt-24 pb-12 relative overflow-hidden z-10">
-        <div class="absolute top-20 right-0 w-64 h-64 md:w-96 md:h-96 bg-accent/10 rounded-full blur-[100px] -z-10 animate-blob mix-blend-screen"></div>
-        <div class="absolute top-40 left-10 w-48 h-48 md:w-72 md:h-72 bg-purple-500/10 rounded-full blur-[80px] -z-10 animate-blob animation-delay-2000 mix-blend-screen"></div>
-        
-        <div class="container mx-auto px-6 grid md:grid-cols-2 gap-8 md:gap-12 items-center">
-            <div class="z-10 order-1">
-                <div data-aos="fade-down" data-aos-delay="200"
-                    class="inline-block py-1.5 px-4 rounded-full bg-accent/5 border border-accent/30 text-accent font-medium text-xs md:text-sm tracking-widest uppercase mb-6 backdrop-blur-sm">
-                    <i class="fas fa-terminal mr-2"></i> <span id="typed-role"></span>
-                </div>
-
-                <h1 data-aos="fade-right" data-aos-delay="400" class="text-4xl sm:text-5xl md:text-7xl font-extrabold leading-[1.1] mb-6">
-                    Membangun <br>
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-accent via-cyan-300 to-blue-500 drop-shadow-[0_0_10px_rgba(0,246,255,0.4)]">
-                        Masa Depan Digital
-                    </span>
-                    <br>Sekolah Anda.
-                </h1>
-
-                <p data-aos="fade-up" data-aos-delay="600" class="text-gray-400 text-base md:text-lg mb-8 md:mb-10 leading-relaxed max-w-lg font-light">
-                    Jasa pembuatan website sekolah profesional dan aplikasi manajemen berbasis modern. Solusi terjangkau, cepat, dan mudah digunakan.
-                </p>
-
-                <div data-aos="fade-up" data-aos-delay="800" class="flex flex-col sm:flex-row gap-5">
-                    <a href="#portfolio"
-                        class="px-8 py-3.5 border border-accent text-accent rounded-full hover:bg-accent hover:text-primary transition-all duration-300 text-center font-semibold cursor-hover-target shadow-[0_0_15px_rgba(0,246,255,0.15)] hover:shadow-[0_0_25px_rgba(0,246,255,0.4)]">
-                        Lihat Karya Saya
-                    </a>
-                    <a href="https://wa.me/6282238128216"
-                        class="px-8 py-3.5 bg-white text-primary rounded-full hover:bg-gray-200 transition-all duration-300 text-center font-bold shadow-lg shadow-white/10 group cursor-hover-target">
-                        <i class="fab fa-whatsapp mr-2 group-hover:rotate-12 transition-transform text-lg text-green-500"></i> Konsultasi Gratis
-                    </a>
-                </div>
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+        <div class="container mx-auto px-6 flex flex-col items-center text-center relative z-10">
+            
+            <div data-aos="zoom-in" data-aos-duration="1000" class="mb-8 relative group hover-target">
+                <div class="absolute -inset-1 bg-gradient-to-r from-accentBlue via-accentPurple to-accentPink rounded-full blur opacity-70 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-gradient-x"></div>
+                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhcgX_ACgXPCUAXU8VnYkern3AmVP500MT7r7YUKzF2qR3Tb28_lpFsqTrj_MIQl4GzikDse4jM1D7f55p0_vs-uPwKCib4zHziZC8jEYzMXV4jLsvRax5ERjZwNGiX5ZCpKdV5dy-ftNYwGWitVnKjwY_L7r5yn81b2ovGGVA9C0dzMSWjQv6IeGn9_fT7/s250/IMG-20251212-WA0016.jpg" 
+                     alt="Edward" class="relative w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-2 border-black filter grayscale hover:grayscale-0 transition-all duration-500">
+                <div class="absolute bottom-0 right-0 bg-black text-white text-xs font-bold px-3 py-1 rounded-full border border-white/20">DEV</div>
             </div>
 
-            <!-- Profile Image with 3D Tilt -->
-            <div class="relative flex justify-center order-2 md:mt-0 mt-12" data-aos="zoom-in-left" data-aos-duration="1200">
-                <div class="w-full max-w-[280px] md:max-w-[380px] relative animate-float cursor-hover-target" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2">
-                    <div class="absolute -inset-1 bg-gradient-to-tr from-accent to-purple-600 rounded-3xl blur-xl opacity-40 group-hover:opacity-60 transition duration-1000"></div>
+            <h1 data-aos="fade-up" data-aos-delay="200" class="font-display text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter mb-4 leading-tight">
+                Crafting <span class="text-transparent bg-clip-text bg-gradient-to-r from-accentBlue via-accentPurple to-accentPink animate-gradient-x">Digital</span><br>
+                Experiences.
+            </h1>
 
-                    <div class="w-full aspect-[4/5] bg-secondary/80 backdrop-blur-md rounded-3xl border border-white/10 flex items-center justify-center relative shadow-2xl overflow-hidden group z-10">
-                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiD5bcivyEYbAhwQvq1U263DjdZLzqBZSKvl7kNYdDf_Ok3gsxk7WKMriN7WySQOiuNIAIZiMjwd8vTfS9JSpbwUlRkpRlZBxu7Vm0LlgxPT0_NKzrSsQtwgfnUt_WV2yw8oYa0SG80FhZDr1yMwozXS_dNWlJHzexAwjHcuZojKYcGOioE_3BgqSM-W_lX/s764/Screenshot%202025-10-09%20003227.png"
-                            alt="Edward Domakubun"
-                            class="object-cover w-full h-full opacity-90 group-hover:scale-110 transition duration-700 ease-in-out filter grayscale hover:grayscale-0">
+            <p data-aos="fade-up" data-aos-delay="400" class="text-gray-400 text-lg md:text-xl max-w-2xl font-light mb-10">
+                Halo, saya Edward. Membantu sekolah di Tanimbar bertransformasi melalui website modern & aplikasi sistem informasi cerdas.
+            </p>
 
-                        <div class="absolute bottom-6 right-6 bg-primary/80 backdrop-blur-md p-3 md:p-4 rounded-xl border border-accent/30 shadow-[0_0_15px_rgba(0,246,255,0.2)]">
-                            <p class="text-xs md:text-sm font-bold text-accent flex items-center">
-                                Verified Dev <i class="fas fa-check-circle ml-2 text-green-400 drop-shadow-[0_0_5px_rgba(74,222,128,0.5)]"></i>
-                            </p>
-                        </div>
-                    </div>
-                </div>
+            <div data-aos="fade-up" data-aos-delay="600" class="flex items-center gap-6">
+                <a href="#gallery" class="hover-target group flex items-center justify-center w-16 h-16 rounded-full border border-white/20 hover:border-white/60 transition-colors">
+                    <i class="fas fa-arrow-down text-white group-hover:translate-y-1 transition-transform"></i>
+                </a>
+                <span class="text-sm text-gray-500 font-display tracking-widest uppercase">Explore Works</span>
             </div>
-        </div>
-
-        <div class="hidden md:block absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce text-gray-600 hover:text-accent transition-colors cursor-hover-target">
-            <a href="#about"><i class="fas fa-chevron-down text-2xl"></i></a>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="py-20 md:py-32 relative overflow-hidden z-10">
-        <i class="fas fa-code absolute top-20 right-10 text-6xl md:text-9xl text-white/[0.02] -z-10 -rotate-12" data-aos="fade-left"></i>
-
-        <div class="container mx-auto px-6">
-            <div class="max-w-3xl mx-auto text-center mb-12 md:mb-20" data-aos="zoom-in">
-                <h2 class="text-3xl md:text-5xl font-bold mb-4">Tentang <span class="text-accent drop-shadow-[0_0_8px_rgba(0,246,255,0.5)]">Saya</span></h2>
-                <div class="w-20 md:w-32 h-1 bg-gradient-to-r from-transparent via-accent to-transparent mx-auto rounded-full"></div>
+    <!-- About Terminal / Code Style -->
+    <section id="about" class="py-20 relative">
+        <div class="container mx-auto px-4 md:px-6 max-w-5xl">
+            <div class="glass-panel rounded-2xl overflow-hidden shadow-2xl" data-aos="fade-up">
+                <!-- Mac/Terminal Header -->
+                <div class="bg-white/5 px-4 py-3 border-b border-white/5 flex items-center gap-2">
+                    <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                    <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                    <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                    <span class="ml-4 text-xs text-gray-500 font-mono">edward_profile.json</span>
+                </div>
+                <!-- Content -->
+                <div class="p-6 md:p-10 bg-black/40 font-mono text-sm md:text-base leading-relaxed text-gray-300">
+                    <p><span class="text-accentPink">const</span> <span class="text-accentBlue">developer</span> = {</p>
+                    <p class="ml-4 md:ml-8 mt-2">name: <span class="text-green-400">"Edward Domakubun"</span>,</p>
+                    <p class="ml-4 md:ml-8 mt-2">role: <span class="text-green-400">"Fullstack Developer"</span>,</p>
+                    <p class="ml-4 md:ml-8 mt-2">location: <span class="text-green-400">"Kepulauan Tanimbar"</span>,</p>
+                    <p class="ml-4 md:ml-8 mt-2">education: <span class="text-green-400">"Univ. Lelemuku Saumlaki"</span>,</p>
+                    <p class="ml-4 md:ml-8 mt-2">passion: <span class="text-accentPurple">function</span>() {</p>
+                    <p class="ml-8 md:ml-16 mt-2 text-gray-400">// Menggabungkan komunikasi & logika pemrograman</p>
+                    <p class="ml-8 md:ml-16 mt-1 text-gray-400">// untuk mendigitalkan ekosistem sekolah.</p>
+                    <p class="ml-8 md:ml-16 mt-1"><span class="text-accentPink">return</span> <span class="text-green-400">"Membangun ekosistem digital pendidikan yang efisien."</span>;</p>
+                    <p class="ml-4 md:ml-8 mt-2">}</p>
+                    <p class="mt-2">};</p>
+                </div>
             </div>
+        </div>
+    </section>
 
-            <div class="glass-card p-8 md:p-14 rounded-[2rem] relative overflow-hidden" data-aos="fade-up" data-aos-duration="1000">
-                <!-- Decoration -->
-                <div class="absolute top-0 right-0 w-32 h-32 bg-accent/10 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2"></div>
+    <!-- Bento Grid Services -->
+    <section id="bento-services" class="py-20 relative">
+        <div class="container mx-auto px-4 md:px-6 max-w-6xl">
+            <h2 class="font-display text-3xl md:text-5xl font-bold mb-12 text-center" data-aos="fade-up">Keahlian <span class="text-accentPurple">Teknis.</span></h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 auto-rows-[200px]">
                 
-                <div class="flex flex-col md:flex-row items-center gap-10 md:gap-16 relative z-10">
-                    <div class="md:w-1/3 text-center relative cursor-hover-target" data-tilt data-tilt-scale="1.05">
-                        <div class="w-36 h-36 md:w-48 md:h-48 mx-auto bg-gray-800 rounded-full overflow-hidden mb-6 border-[3px] border-accent shadow-[0_0_30px_rgba(0,246,255,0.3)] relative z-10 p-1">
-                            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhcgX_ACgXPCUAXU8VnYkern3AmVP500MT7r7YUKzF2qR3Tb28_lpFsqTrj_MIQl4GzikDse4jM1D7f55p0_vs-uPwKCib4zHziZC8jEYzMXV4jLsvRax5ERjZwNGiX5ZCpKdV5dy-ftNYwGWitVnKjwY_L7r5yn81b2ovGGVA9C0dzMSWjQv6IeGn9_fT7/s250/IMG-20251212-WA0016.jpg"
-                                alt="Profile" class="w-full h-full object-cover rounded-full filter hover:contrast-125 transition-all">
+                <!-- Web Dev (Large, spans 2 cols, 2 rows) -->
+                <div class="md:col-span-2 md:row-span-2 glass-panel rounded-3xl p-8 relative overflow-hidden group hover-target" data-aos="zoom-in" data-aos-delay="0">
+                    <div class="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity"><i class="fas fa-laptop-code text-9xl text-white"></i></div>
+                    <div class="h-full flex flex-col justify-end relative z-10">
+                        <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center mb-6 backdrop-blur-md border border-white/20">
+                            <i class="fas fa-code text-white"></i>
                         </div>
-                        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-56 h-56 border border-dashed border-accent/30 rounded-full animate-spin-slow -z-0 hidden md:block"></div>
-
-                        <h3 class="text-2xl md:text-3xl font-bold tracking-wide">Edward Domakubun</h3>
-                        <p class="text-accent text-sm md:text-base font-medium mt-1">Fullstack Developer</p>
+                        <h3 class="font-display text-2xl md:text-3xl font-bold text-white mb-2">Web Development</h3>
+                        <p class="text-gray-400 text-sm md:text-base font-light">Merancang website sekolah dan portal informasi publik yang responsif, modern, dan mudah dikelola.</p>
                     </div>
+                </div>
 
-                    <div class="md:w-2/3 border-t md:border-t-0 md:border-l border-white/10 pt-8 md:pt-0 md:pl-12">
-                        <p class="text-gray-300 mb-6 text-base md:text-lg leading-relaxed text-center md:text-left font-light" data-aos="fade-left">
-                            Halo! Saya adalah seorang <strong class="text-white font-semibold">Developer</strong> yang berfokus pada perancangan dan pengembangan solusi teknologi inovatif untuk sektor pendidikan.
-                        </p>
-                        <p class="text-gray-400 mb-8 leading-relaxed text-center md:text-left text-sm md:text-base font-light" data-aos="fade-left" data-aos-delay="200">
-                            Berbekal keahlian teknis yang solid, saya memiliki dedikasi tinggi untuk membangun ekosistem digital yang efisien. Saya mengembangkan berbagai sistem informasi dan aplikasi terpadu untuk membantu institusi sekolah di Tanimbar bertransformasi secara penuh ke era digital.
-                        </p>
-
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-gray-300">
-                            <div class="flex items-center p-4 rounded-xl bg-white/5 border border-white/5 hover:border-accent/30 hover:bg-white/10 transition-all cursor-hover-target" data-aos="zoom-in" data-aos-delay="300">
-                                <div class="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center mr-4">
-                                    <i class="fas fa-code text-accent text-lg"></i>
-                                </div>
-                                <span class="font-medium">Web Development</span>
-                            </div>
-                            <div class="flex items-center p-4 rounded-xl bg-white/5 border border-white/5 hover:border-accent/30 hover:bg-white/10 transition-all cursor-hover-target" data-aos="zoom-in" data-aos-delay="400">
-                                <div class="w-10 h-10 rounded-full bg-blue-500/10 flex items-center justify-center mr-4">
-                                    <i class="fas fa-mobile-alt text-blue-400 text-lg"></i>
-                                </div>
-                                <span class="font-medium">Mobile Apps</span>
-                            </div>
-                            <div class="flex items-center p-4 rounded-xl bg-white/5 border border-white/5 hover:border-accent/30 hover:bg-white/10 transition-all cursor-hover-target" data-aos="zoom-in" data-aos-delay="500">
-                                <div class="w-10 h-10 rounded-full bg-purple-500/10 flex items-center justify-center mr-4">
-                                    <i class="fas fa-graduation-cap text-purple-400 text-lg"></i>
-                                </div>
-                                <span class="font-medium">Educational Tech</span>
-                            </div>
-                            <div class="flex items-center p-4 rounded-xl bg-white/5 border border-white/5 hover:border-accent/30 hover:bg-white/10 transition-all cursor-hover-target" data-aos="zoom-in" data-aos-delay="600">
-                                <div class="w-10 h-10 rounded-full bg-green-500/10 flex items-center justify-center mr-4">
-                                    <i class="fas fa-qrcode text-green-400 text-lg"></i>
-                                </div>
-                                <span class="font-medium">QR Code System</span>
-                            </div>
-                        </div>
+                <!-- Apps (Spans 1 col, 2 rows) -->
+                <div class="md:col-span-1 lg:col-span-1 md:row-span-2 glass-panel rounded-3xl p-6 relative overflow-hidden group hover-target bg-gradient-to-b from-transparent to-accentBlue/10 border-accentBlue/20" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="h-full flex flex-col items-center justify-center text-center">
+                        <i class="fab fa-android text-5xl text-accentBlue mb-6 group-hover:scale-125 group-hover:-rotate-12 transition-transform duration-500"></i>
+                        <h3 class="font-display text-xl font-bold text-white mb-2">Mobile Apps</h3>
+                        <p class="text-gray-400 text-xs font-light">Aplikasi Android interaktif untuk siswa dan manajemen internal.</p>
                     </div>
+                </div>
+
+                <!-- QR Systems (Spans 1 col, 1 row) -->
+                <div class="md:col-span-1 lg:col-span-1 md:row-span-1 glass-panel rounded-3xl p-6 relative group hover-target border-accentPink/20" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="flex items-start justify-between">
+                        <h3 class="font-display text-lg font-bold text-white w-1/2">Sistem QR Code</h3>
+                        <i class="fas fa-qrcode text-3xl text-accentPink group-hover:animate-pulse"></i>
+                    </div>
+                    <p class="text-gray-500 text-xs mt-4">Absensi digital super cepat & akurat.</p>
+                </div>
+
+                <!-- Data System (Spans 1 col, 1 row) -->
+                <div class="md:col-span-1 lg:col-span-1 md:row-span-1 glass-panel rounded-3xl p-6 relative group hover-target border-accentPurple/20" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="flex items-start justify-between">
+                        <h3 class="font-display text-lg font-bold text-white w-1/2">Data & SIAKAD</h3>
+                        <i class="fas fa-database text-3xl text-accentPurple group-hover:rotate-180 transition-transform duration-700"></i>
+                    </div>
+                    <p class="text-gray-500 text-xs mt-4">Pengarsipan dan manajemen data sekolah terpadu.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Services Section -->
-    <section id="services" class="py-20 md:py-32 relative z-10">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-12 md:mb-20">
-                <h2 class="text-3xl md:text-5xl font-bold mb-4" data-aos="fade-down">Layanan <span class="text-accent drop-shadow-[0_0_8px_rgba(0,246,255,0.5)]">Unggulan</span></h2>
-                <p class="text-gray-400 text-base md:text-lg font-light" data-aos="fade-up" data-aos-delay="100">Apa yang bisa saya bangun untuk sekolah Anda?</p>
+    <!-- Horizontal Scroll Portfolio (App Gallery Style) -->
+    <section id="gallery" class="py-24 relative">
+        <div class="px-4 md:px-10 mb-10 flex flex-col md:flex-row md:items-end justify-between gap-4">
+            <div data-aos="fade-right">
+                <h2 class="font-display text-4xl md:text-6xl font-bold text-white tracking-tight">Karya <br><span class="text-gray-600">Digital.</span></h2>
             </div>
-
-            <div class="grid md:grid-cols-3 gap-6 md:gap-8">
-                <!-- Service 1 -->
-                <div class="glass-card p-8 rounded-[2rem] hover:bg-white/[0.04] transition-all duration-500 group border-t-4 border-white/5 hover:border-accent cursor-hover-target"
-                    data-aos="flip-left" data-aos-delay="0" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.1">
-                    <div class="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-accent/20 to-blue-500/10 rounded-2xl flex items-center justify-center mb-8 text-accent group-hover:scale-110 group-hover:rotate-6 transition-transform duration-500 border border-accent/20 group-hover:border-accent/50 shadow-[0_0_15px_rgba(0,246,255,0)] group-hover:shadow-[0_0_20px_rgba(0,246,255,0.2)]">
-                        <i class="fas fa-laptop-code text-2xl md:text-3xl"></i>
-                    </div>
-                    <h3 class="text-xl md:text-2xl font-bold mb-4 group-hover:text-accent transition-colors">Website Sekolah</h3>
-                    <p class="text-gray-400 text-sm md:text-base leading-relaxed font-light">Pembuatan website profil sekolah, informasi publik, berita, PPDB Online, hingga integrasi database akademik.</p>
-                </div>
-
-                <!-- Service 2 -->
-                <div class="glass-card p-8 rounded-[2rem] hover:bg-white/[0.04] transition-all duration-500 group border-t-4 border-white/5 hover:border-blue-500 cursor-hover-target"
-                    data-aos="flip-left" data-aos-delay="200" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.1">
-                    <div class="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-blue-500/20 to-purple-500/10 rounded-2xl flex items-center justify-center mb-8 text-blue-400 group-hover:scale-110 group-hover:rotate-6 transition-transform duration-500 border border-blue-500/20 group-hover:border-blue-500/50 shadow-[0_0_15px_rgba(59,130,246,0)] group-hover:shadow-[0_0_20px_rgba(59,130,246,0.2)]">
-                        <i class="fab fa-android text-2xl md:text-3xl"></i>
-                    </div>
-                    <h3 class="text-xl md:text-2xl font-bold mb-4 group-hover:text-blue-400 transition-colors">Aplikasi Android</h3>
-                    <p class="text-gray-400 text-sm md:text-base leading-relaxed font-light">Pengembangan aplikasi mobile kustom untuk kebutuhan internal, perpustakaan digital, atau portal pembelajaran siswa.</p>
-                </div>
-
-                <!-- Service 3 -->
-                <div class="glass-card p-8 rounded-[2rem] hover:bg-white/[0.04] transition-all duration-500 group border-t-4 border-white/5 hover:border-green-400 cursor-hover-target"
-                    data-aos="flip-left" data-aos-delay="400" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.1">
-                    <div class="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-green-400/20 to-accent/10 rounded-2xl flex items-center justify-center mb-8 text-green-400 group-hover:scale-110 group-hover:rotate-6 transition-transform duration-500 border border-green-400/20 group-hover:border-green-400/50 shadow-[0_0_15px_rgba(74,222,128,0)] group-hover:shadow-[0_0_20px_rgba(74,222,128,0.2)]">
-                        <i class="fas fa-id-card text-2xl md:text-3xl"></i>
-                    </div>
-                    <h3 class="text-xl md:text-2xl font-bold mb-4 group-hover:text-green-400 transition-colors">Sistem QR Code</h3>
-                    <p class="text-gray-400 text-sm md:text-base leading-relaxed font-light">Sistem presensi dan validasi dokumen modern menggunakan teknologi QR Code yang terenkripsi, cepat, dan akurat.</p>
-                </div>
+            <div class="flex items-center gap-3 text-gray-500 hidden sm:flex" data-aos="fade-left">
+                <span class="text-sm font-display tracking-widest uppercase">Geser untuk melihat</span>
+                <i class="fas fa-arrow-right-long animate-pulse"></i>
             </div>
         </div>
-    </section>
 
-    <!-- Portfolio Section -->
-    <section id="portfolio" class="py-20 md:py-32 bg-secondary/20 relative overflow-hidden z-10 border-y border-white/5">
-        <div class="container mx-auto px-6 relative z-10">
-            <div class="text-center mb-12 md:mb-20">
-                <h2 class="text-3xl md:text-5xl font-bold mb-4" data-aos="zoom-in-up">Hasil <span class="text-accent drop-shadow-[0_0_8px_rgba(0,246,255,0.5)]">Karya</span></h2>
-                <p class="text-gray-400 text-base md:text-lg font-light" data-aos="zoom-in-up" data-aos-delay="100">Kumpulan sistem dan aplikasi terbaru yang telah saya luncurkan.</p>
-            </div>
-
-            <!-- Horizontal Scroll on Mobile, Grid on Desktop -->
-            <div class="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-10 md:overflow-visible md:pb-0 hide-scrollbar">
+        <!-- The Horizontal Wrapper -->
+        <div class="w-full pl-4 md:pl-10 pb-8">
+            <div class="scrolling-wrapper gap-6 md:gap-8 pr-10">
                 
-                <!-- SD Inpres Lelingluan -->
-                <div class="flex-shrink-0 w-[85vw] sm:w-[350px] md:w-auto snap-center group relative rounded-3xl shadow-2xl overflow-hidden bg-secondary border border-white/5 cursor-hover-target" data-aos="fade-up" data-aos-delay="0" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.15">
-                    <div class="h-60 bg-[#0f172a] flex items-center justify-center overflow-hidden relative">
-                        <div class="absolute inset-0 bg-accent/0 group-hover:bg-accent/10 transition-colors duration-500 z-10"></div>
-                        <i class="fas fa-school text-7xl text-gray-700 group-hover:text-accent group-hover:scale-125 transition-all duration-700 transform drop-shadow-xl"></i>
-                        <!-- Gradient Overlay -->
-                        <div class="absolute bottom-0 left-0 w-full h-2/3 bg-gradient-to-t from-secondary to-transparent z-10"></div>
-                    </div>
-                    <div class="p-8 relative z-20 bg-secondary">
-                        <div class="absolute -top-6 right-6 bg-accent/20 border border-accent/30 text-accent text-xs font-bold px-3 py-1 rounded-full backdrop-blur-md">Website</div>
-                        <h3 class="text-2xl font-bold text-white mb-3">SD Inpres Lelingluan</h3>
-                        <p class="text-gray-400 mb-6 text-sm font-light leading-relaxed">Platform Website Profil Sekolah Resmi, dilengkapi dengan integrasi fitur berita terkini dan galeri kegiatan edukasi.</p>
-                        <a href="https://www.sdinpreslelingluan.com" target="_blank"
-                            class="inline-flex items-center px-5 py-2.5 text-sm bg-white/5 border border-white/10 text-white font-medium rounded-xl hover:bg-accent hover:border-accent hover:text-primary transition-all duration-300">
-                            Kunjungi Website <i class="fas fa-arrow-right ml-2 -rotate-45 group-hover:rotate-0 transition-transform"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- PPDB Online -->
-                <div class="flex-shrink-0 w-[85vw] sm:w-[350px] md:w-auto snap-center group relative rounded-3xl shadow-2xl overflow-hidden bg-secondary border border-white/5 cursor-hover-target" data-aos="fade-up" data-aos-delay="150" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.15">
-                    <div class="h-60 bg-[#0f172a] flex items-center justify-center overflow-hidden relative">
-                        <div class="absolute inset-0 bg-blue-500/0 group-hover:bg-blue-500/10 transition-colors duration-500 z-10"></div>
-                        <i class="fas fa-user-graduate text-7xl text-gray-700 group-hover:text-blue-400 group-hover:scale-125 transition-all duration-700 transform drop-shadow-xl"></i>
-                        <div class="absolute bottom-0 left-0 w-full h-2/3 bg-gradient-to-t from-secondary to-transparent z-10"></div>
-                    </div>
-                    <div class="p-8 relative z-20 bg-secondary">
-                        <div class="absolute -top-6 right-6 bg-blue-500/20 border border-blue-500/30 text-blue-400 text-xs font-bold px-3 py-1 rounded-full backdrop-blur-md">Web App</div>
-                        <h3 class="text-2xl font-bold text-white mb-3">PPDB Online</h3>
-                        <p class="text-gray-400 mb-6 text-sm font-light leading-relaxed">Aplikasi web SPMB/PPDB terpadu untuk kemudahan registrasi dan seleksi siswa baru di SD Inpres Lelingluan.</p>
-                        <a href="https://sdinpreslelingluan-ppdb.pages.dev" target="_blank"
-                            class="inline-flex items-center px-5 py-2.5 text-sm bg-white/5 border border-white/10 text-white font-medium rounded-xl hover:bg-blue-500 hover:border-blue-500 hover:text-white transition-all duration-300">
-                            Kunjungi Website <i class="fas fa-arrow-right ml-2 -rotate-45 group-hover:rotate-0 transition-transform"></i>
-                        </a>
+                <!-- Card 1 -->
+                <div class="scrolling-card w-[85vw] sm:w-[400px] md:w-[450px] group hover-target">
+                    <div class="glass-panel p-2 rounded-[2rem] h-[450px] flex flex-col relative overflow-hidden border-white/10 group-hover:border-white/30 transition-colors duration-500">
+                        <div class="h-3/5 w-full rounded-t-[1.5rem] rounded-b-xl bg-[#0a0a0a] flex items-center justify-center overflow-hidden relative">
+                            <div class="absolute inset-0 bg-accentBlue/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            <i class="fas fa-school text-7xl text-gray-800 group-hover:text-accentBlue group-hover:scale-110 transition-all duration-700"></i>
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow justify-between">
+                            <div>
+                                <div class="flex justify-between items-start mb-2">
+                                    <h3 class="font-display text-2xl font-bold text-white">SD Inpres Lelingluan</h3>
+                                    <span class="px-2 py-1 text-[10px] font-bold uppercase tracking-wider bg-white/10 text-white rounded-md">Web</span>
+                                </div>
+                                <p class="text-sm text-gray-400 font-light line-clamp-2">Website Profil Sekolah Resmi dengan integrasi berita & galeri edukasi.</p>
+                            </div>
+                            <a href="https://www.sdinpreslelingluan.com" target="_blank" class="w-full py-3 mt-4 rounded-xl bg-white text-black font-semibold text-center text-sm hover:bg-accentBlue hover:text-white transition-colors">
+                                Kunjungi Website
+                            </a>
+                        </div>
                     </div>
                 </div>
 
-                <!-- PresensiSaya -->
-                <div class="flex-shrink-0 w-[85vw] sm:w-[350px] md:w-auto snap-center group relative rounded-3xl shadow-2xl overflow-hidden bg-secondary border border-white/5 cursor-hover-target" data-aos="fade-up" data-aos-delay="300" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.15">
-                    <div class="h-60 bg-[#0f172a] flex items-center justify-center overflow-hidden relative">
-                        <div class="absolute inset-0 bg-green-500/0 group-hover:bg-green-500/10 transition-colors duration-500 z-10"></div>
-                        <i class="fas fa-mobile-screen-button text-7xl text-gray-700 group-hover:text-green-400 group-hover:scale-125 transition-all duration-700 transform drop-shadow-xl"></i>
-                        <div class="absolute bottom-0 left-0 w-full h-2/3 bg-gradient-to-t from-secondary to-transparent z-10"></div>
-                    </div>
-                    <div class="p-8 relative z-20 bg-secondary">
-                        <div class="absolute -top-6 right-6 bg-green-500/20 border border-green-500/30 text-green-400 text-xs font-bold px-3 py-1 rounded-full backdrop-blur-md">Mobile App</div>
-                        <h3 class="text-2xl font-bold text-white mb-3">PresensiSaya</h3>
-                        <p class="text-gray-400 mb-6 text-sm font-light leading-relaxed">Sistem Aplikasi Absensi digital untuk Siswa & Guru yang terintegrasi secara *real-time* dengan QR Code.</p>
-                        <a href="https://www.sdinpreslelingluan.com/2026/01/rilis-aplikasi-presensi-digital-v52.html" target="_blank"
-                            class="inline-flex items-center px-5 py-2.5 text-sm bg-white/5 border border-white/10 text-white font-medium rounded-xl hover:bg-green-500 hover:border-green-500 hover:text-white transition-all duration-300">
-                            Detail Rilis <i class="fas fa-arrow-right ml-2 -rotate-45 group-hover:rotate-0 transition-transform"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Simple 6JA -->
-                <div class="flex-shrink-0 w-[85vw] sm:w-[350px] md:w-auto snap-center group relative rounded-3xl shadow-2xl overflow-hidden bg-secondary border border-white/5 cursor-hover-target" data-aos="fade-up" data-aos-delay="0" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.15">
-                    <div class="h-60 bg-[#0f172a] flex items-center justify-center overflow-hidden relative">
-                        <div class="absolute inset-0 bg-yellow-400/0 group-hover:bg-yellow-400/10 transition-colors duration-500 z-10"></div>
-                        <i class="fas fa-chalkboard-teacher text-7xl text-gray-700 group-hover:text-yellow-400 group-hover:scale-125 transition-all duration-700 transform drop-shadow-xl"></i>
-                        <div class="absolute bottom-0 left-0 w-full h-2/3 bg-gradient-to-t from-secondary to-transparent z-10"></div>
-                    </div>
-                    <div class="p-8 relative z-20 bg-secondary">
-                        <div class="absolute -top-6 right-6 bg-yellow-400/20 border border-yellow-400/30 text-yellow-400 text-xs font-bold px-3 py-1 rounded-full backdrop-blur-md">Web App</div>
-                        <h3 class="text-2xl font-bold text-white mb-3">Simple 6JA (DAKSIS)</h3>
-                        <p class="text-gray-400 mb-6 text-sm font-light leading-relaxed">Sistem Data Siswa Digital dan aplikasi web penunjang pembelajaran serta interaksi aktif di dalam ruang kelas.</p>
-                        <a href="https://simple-6ja.pages.dev/" target="_blank"
-                            class="inline-flex items-center px-5 py-2.5 text-sm bg-white/5 border border-white/10 text-white font-medium rounded-xl hover:bg-yellow-400 hover:border-yellow-400 hover:text-primary transition-all duration-300">
-                            Kunjungi Website <i class="fas fa-arrow-right ml-2 -rotate-45 group-hover:rotate-0 transition-transform"></i>
-                        </a>
+                <!-- Card 2 -->
+                <div class="scrolling-card w-[85vw] sm:w-[400px] md:w-[450px] group hover-target">
+                    <div class="glass-panel p-2 rounded-[2rem] h-[450px] flex flex-col relative overflow-hidden border-white/10 group-hover:border-white/30 transition-colors duration-500">
+                        <div class="h-3/5 w-full rounded-t-[1.5rem] rounded-b-xl bg-[#0a0a0a] flex items-center justify-center overflow-hidden relative">
+                            <div class="absolute inset-0 bg-accentPurple/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            <i class="fas fa-user-graduate text-7xl text-gray-800 group-hover:text-accentPurple group-hover:scale-110 transition-all duration-700"></i>
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow justify-between">
+                            <div>
+                                <div class="flex justify-between items-start mb-2">
+                                    <h3 class="font-display text-2xl font-bold text-white">PPDB Online</h3>
+                                    <span class="px-2 py-1 text-[10px] font-bold uppercase tracking-wider bg-white/10 text-white rounded-md">App</span>
+                                </div>
+                                <p class="text-sm text-gray-400 font-light line-clamp-2">Aplikasi web SPMB/PPDB terpadu untuk kemudahan registrasi siswa baru.</p>
+                            </div>
+                            <a href="https://sdinpreslelingluan-ppdb.pages.dev" target="_blank" class="w-full py-3 mt-4 rounded-xl bg-white text-black font-semibold text-center text-sm hover:bg-accentPurple hover:text-white transition-colors">
+                                Kunjungi Aplikasi
+                            </a>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Arsip Digital -->
-                <div class="flex-shrink-0 w-[85vw] sm:w-[350px] md:w-auto snap-center group relative rounded-3xl shadow-2xl overflow-hidden bg-secondary border border-white/5 cursor-hover-target" data-aos="fade-up" data-aos-delay="150" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.15">
-                    <div class="h-60 bg-[#0f172a] flex items-center justify-center overflow-hidden relative">
-                        <div class="absolute inset-0 bg-orange-500/0 group-hover:bg-orange-500/10 transition-colors duration-500 z-10"></div>
-                        <i class="fas fa-archive text-7xl text-gray-700 group-hover:text-orange-400 group-hover:scale-125 transition-all duration-700 transform drop-shadow-xl"></i>
-                        <div class="absolute bottom-0 left-0 w-full h-2/3 bg-gradient-to-t from-secondary to-transparent z-10"></div>
-                    </div>
-                    <div class="p-8 relative z-20 bg-secondary">
-                        <div class="absolute -top-6 right-6 bg-orange-500/20 border border-orange-500/30 text-orange-400 text-xs font-bold px-3 py-1 rounded-full backdrop-blur-md">Repository</div>
-                        <h3 class="text-2xl font-bold text-white mb-3">Arsip Digital</h3>
-                        <p class="text-gray-400 mb-6 text-sm font-light leading-relaxed">Sistem repositori modern dan manajemen pengarsipan dokumen data digital khusus keperluan sekolah.</p>
-                        <a href="https://archive-sdinleling.blogspot.com/" target="_blank"
-                            class="inline-flex items-center px-5 py-2.5 text-sm bg-white/5 border border-white/10 text-white font-medium rounded-xl hover:bg-orange-500 hover:border-orange-500 hover:text-white transition-all duration-300">
-                            Kunjungi Website <i class="fas fa-arrow-right ml-2 -rotate-45 group-hover:rotate-0 transition-transform"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- SIAKAD Terpadu -->
-                <div class="flex-shrink-0 w-[85vw] sm:w-[350px] md:w-auto snap-center group relative rounded-3xl shadow-2xl overflow-hidden bg-secondary border border-white/5 cursor-hover-target" data-aos="fade-up" data-aos-delay="300" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.15">
-                    <div class="h-60 bg-[#0f172a] flex items-center justify-center overflow-hidden relative">
-                        <div class="absolute inset-0 bg-pink-500/0 group-hover:bg-pink-500/10 transition-colors duration-500 z-10"></div>
-                        <i class="fas fa-laptop-file text-7xl text-gray-700 group-hover:text-pink-400 group-hover:scale-125 transition-all duration-700 transform drop-shadow-xl"></i>
-                        <div class="absolute bottom-0 left-0 w-full h-2/3 bg-gradient-to-t from-secondary to-transparent z-10"></div>
-                    </div>
-                    <div class="p-8 relative z-20 bg-secondary">
-                        <div class="absolute -top-6 right-6 bg-pink-500/20 border border-pink-500/30 text-pink-400 text-xs font-bold px-3 py-1 rounded-full backdrop-blur-md">Sistem</div>
-                        <h3 class="text-2xl font-bold text-white mb-3">SIAKAD Terpadu</h3>
-                        <p class="text-gray-400 mb-6 text-sm font-light leading-relaxed">Sistem Informasi Akademik Terpadu untuk mengoptimalkan serta mempermudah manajemen administrasi sekolah.</p>
-                        <a href="https://siakadterpadu.pages.dev/" target="_blank"
-                            class="inline-flex items-center px-5 py-2.5 text-sm bg-white/5 border border-white/10 text-white font-medium rounded-xl hover:bg-pink-500 hover:border-pink-500 hover:text-white transition-all duration-300">
-                            Kunjungi Website <i class="fas fa-arrow-right ml-2 -rotate-45 group-hover:rotate-0 transition-transform"></i>
-                        </a>
+                <!-- Card 3 -->
+                <div class="scrolling-card w-[85vw] sm:w-[400px] md:w-[450px] group hover-target">
+                    <div class="glass-panel p-2 rounded-[2rem] h-[450px] flex flex-col relative overflow-hidden border-white/10 group-hover:border-white/30 transition-colors duration-500">
+                        <div class="h-3/5 w-full rounded-t-[1.5rem] rounded-b-xl bg-[#0a0a0a] flex items-center justify-center overflow-hidden relative">
+                            <div class="absolute inset-0 bg-green-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            <i class="fas fa-mobile-screen-button text-7xl text-gray-800 group-hover:text-green-400 group-hover:scale-110 transition-all duration-700"></i>
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow justify-between">
+                            <div>
+                                <div class="flex justify-between items-start mb-2">
+                                    <h3 class="font-display text-2xl font-bold text-white">PresensiSaya</h3>
+                                    <span class="px-2 py-1 text-[10px] font-bold uppercase tracking-wider bg-white/10 text-white rounded-md">Mobile</span>
+                                </div>
+                                <p class="text-sm text-gray-400 font-light line-clamp-2">Aplikasi Absensi digital Siswa & Guru terintegrasi real-time dengan QR Code.</p>
+                            </div>
+                            <a href="https://www.sdinpreslelingluan.com/2026/01/rilis-aplikasi-presensi-digital-v52.html" target="_blank" class="w-full py-3 mt-4 rounded-xl bg-white text-black font-semibold text-center text-sm hover:bg-green-500 hover:text-white transition-colors">
+                                Detail Rilis
+                            </a>
+                        </div>
                     </div>
                 </div>
 
+                <!-- Card 4 -->
+                <div class="scrolling-card w-[85vw] sm:w-[400px] md:w-[450px] group hover-target">
+                    <div class="glass-panel p-2 rounded-[2rem] h-[450px] flex flex-col relative overflow-hidden border-white/10 group-hover:border-white/30 transition-colors duration-500">
+                        <div class="h-3/5 w-full rounded-t-[1.5rem] rounded-b-xl bg-[#0a0a0a] flex items-center justify-center overflow-hidden relative">
+                            <div class="absolute inset-0 bg-yellow-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            <i class="fas fa-chalkboard-teacher text-7xl text-gray-800 group-hover:text-yellow-400 group-hover:scale-110 transition-all duration-700"></i>
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow justify-between">
+                            <div>
+                                <div class="flex justify-between items-start mb-2">
+                                    <h3 class="font-display text-2xl font-bold text-white">Simple 6JA</h3>
+                                    <span class="px-2 py-1 text-[10px] font-bold uppercase tracking-wider bg-white/10 text-white rounded-md">Web App</span>
+                                </div>
+                                <p class="text-sm text-gray-400 font-light line-clamp-2">Sistem Data Siswa Digital (DAKSIS) dan aplikasi penunjang ruang kelas.</p>
+                            </div>
+                            <a href="https://simple-6ja.pages.dev/" target="_blank" class="w-full py-3 mt-4 rounded-xl bg-white text-black font-semibold text-center text-sm hover:bg-yellow-500 hover:text-black transition-colors">
+                                Kunjungi Aplikasi
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="scrolling-card w-[85vw] sm:w-[400px] md:w-[450px] group hover-target">
+                    <div class="glass-panel p-2 rounded-[2rem] h-[450px] flex flex-col relative overflow-hidden border-white/10 group-hover:border-white/30 transition-colors duration-500">
+                        <div class="h-3/5 w-full rounded-t-[1.5rem] rounded-b-xl bg-[#0a0a0a] flex items-center justify-center overflow-hidden relative">
+                            <div class="absolute inset-0 bg-orange-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            <i class="fas fa-archive text-7xl text-gray-800 group-hover:text-orange-400 group-hover:scale-110 transition-all duration-700"></i>
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow justify-between">
+                            <div>
+                                <div class="flex justify-between items-start mb-2">
+                                    <h3 class="font-display text-2xl font-bold text-white">Arsip Digital</h3>
+                                    <span class="px-2 py-1 text-[10px] font-bold uppercase tracking-wider bg-white/10 text-white rounded-md">System</span>
+                                </div>
+                                <p class="text-sm text-gray-400 font-light line-clamp-2">Sistem repositori modern dan manajemen pengarsipan dokumen sekolah.</p>
+                            </div>
+                            <a href="https://archive-sdinleling.blogspot.com/" target="_blank" class="w-full py-3 mt-4 rounded-xl bg-white text-black font-semibold text-center text-sm hover:bg-orange-500 hover:text-white transition-colors">
+                                Kunjungi Sistem
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="scrolling-card w-[85vw] sm:w-[400px] md:w-[450px] group hover-target">
+                    <div class="glass-panel p-2 rounded-[2rem] h-[450px] flex flex-col relative overflow-hidden border-white/10 group-hover:border-white/30 transition-colors duration-500">
+                        <div class="h-3/5 w-full rounded-t-[1.5rem] rounded-b-xl bg-[#0a0a0a] flex items-center justify-center overflow-hidden relative">
+                            <div class="absolute inset-0 bg-accentPink/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            <i class="fas fa-laptop-file text-7xl text-gray-800 group-hover:text-accentPink group-hover:scale-110 transition-all duration-700"></i>
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow justify-between">
+                            <div>
+                                <div class="flex justify-between items-start mb-2">
+                                    <h3 class="font-display text-2xl font-bold text-white">SIAKAD Terpadu</h3>
+                                    <span class="px-2 py-1 text-[10px] font-bold uppercase tracking-wider bg-white/10 text-white rounded-md">System</span>
+                                </div>
+                                <p class="text-sm text-gray-400 font-light line-clamp-2">Sistem Informasi Akademik Terpadu untuk mempermudah manajemen sekolah.</p>
+                            </div>
+                            <a href="https://siakadterpadu.pages.dev/" target="_blank" class="w-full py-3 mt-4 rounded-xl bg-white text-black font-semibold text-center text-sm hover:bg-accentPink hover:text-white transition-colors">
+                                Kunjungi Sistem
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            
+            <!-- Mobile indicator -->
+            <div class="md:hidden flex justify-center gap-2 mt-4 text-gray-600 text-xs font-display uppercase tracking-widest animate-pulse">
+                <i class="fas fa-arrows-alt-h mr-1"></i> Geser
             </div>
         </div>
     </section>
 
-    <!-- Call to Action Section -->
-    <section class="py-20 md:py-32 relative overflow-hidden z-10">
-        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-gradient-to-b from-secondary to-primary -z-10"></div>
-        <div class="absolute bottom-0 right-0 w-64 h-64 md:w-96 md:h-96 bg-accent/10 rounded-full blur-[100px] pointer-events-none"></div>
-
-        <div class="container mx-auto px-6 text-center">
-            <div data-aos="zoom-in">
-                <h2 class="text-3xl md:text-5xl font-bold mb-6 md:mb-8">Siap Mendigitalkan Sekolah Anda?</h2>
-                <p class="text-lg md:text-xl text-gray-400 mb-10 md:mb-12 max-w-2xl mx-auto font-light">
-                    Mulai langkah transformasi digital sekarang. Mari berdiskusi santai tentang kebutuhan teknologi di institusi pendidikan Anda.
-                </p>
-            </div>
-
-            <a href="https://wa.me/6282238128216" data-aos="flip-up" data-aos-delay="200"
-                class="inline-flex items-center justify-center px-10 py-4 bg-white text-primary text-lg font-bold rounded-full hover:bg-accent transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.2)] hover:shadow-[0_0_30px_rgba(0,246,255,0.5)] transform hover:-translate-y-1 cursor-hover-target">
-                <i class="fab fa-whatsapp text-2xl mr-3 text-green-500"></i> Hubungi via WhatsApp
+    <!-- Connect Section -->
+    <section class="py-32 relative overflow-hidden">
+        <div class="container mx-auto px-6 text-center z-10 relative">
+            <h2 class="font-display text-5xl md:text-7xl font-bold text-white mb-6" data-aos="zoom-in">Let's Connect.</h2>
+            <p class="text-gray-400 text-lg mb-12 max-w-xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+                Punya ide inovasi digital untuk sekolah Anda? Mari ngobrol dan wujudkan bersama.
+            </p>
+            
+            <a href="https://wa.me/6282238128216" data-aos="fade-up" data-aos-delay="200"
+               class="hover-target inline-flex items-center justify-center px-10 py-5 rounded-full bg-white text-black font-bold text-lg hover:scale-105 transition-transform">
+                <i class="fab fa-whatsapp text-2xl mr-3 text-green-500"></i> Hubungi WhatsApp
             </a>
 
-            <div class="mt-16 md:mt-20 flex justify-center space-x-8 md:space-x-12">
-                <a href="https://www.instagram.com/dmkbn.e" data-aos="fade-up" data-aos-delay="300"
-                    class="text-gray-500 hover:text-accent text-3xl md:text-4xl transition-all transform hover:scale-125 hover:-translate-y-2 cursor-hover-target">
-                    <i class="fab fa-instagram"></i>
+            <div class="mt-20 flex items-center justify-center gap-8" data-aos="fade-up" data-aos-delay="300">
+                <a href="https://www.instagram.com/dmkbn.e" class="hover-target w-14 h-14 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-black transition-all">
+                    <i class="fab fa-instagram text-xl"></i>
                 </a>
-                <a href="https://www.facebook.com/dmkbn.e" data-aos="fade-up" data-aos-delay="400"
-                    class="text-gray-500 hover:text-accent text-3xl md:text-4xl transition-all transform hover:scale-125 hover:-translate-y-2 cursor-hover-target">
-                    <i class="fab fa-facebook"></i>
+                <a href="https://www.facebook.com/dmkbn.e" class="hover-target w-14 h-14 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-black transition-all">
+                    <i class="fab fa-facebook-f text-xl"></i>
                 </a>
-                <a href="mailto:edo.domakubun@gmail.com" data-aos="fade-up" data-aos-delay="500"
-                    class="text-gray-500 hover:text-accent text-3xl md:text-4xl transition-all transform hover:scale-125 hover:-translate-y-2 cursor-hover-target">
-                    <i class="fas fa-envelope"></i>
+                <a href="mailto:edo.domakubun@gmail.com" class="hover-target w-14 h-14 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-black transition-all">
+                    <i class="fas fa-envelope text-xl"></i>
                 </a>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-[#050811] border-t border-white/5 py-8 relative z-20">
-        <div class="container mx-auto px-6 text-center text-gray-500 text-sm font-light">
-            <p>&copy; 2026 Edward Domakubun. All Rights Reserved.</p>
-            <p class="mt-2 tracking-wide">Made with <span class="text-accent animate-pulse inline-block">💖</span> in Kepulauan Tanimbar</p>
+    <footer class="border-t border-white/10 py-10 relative z-10 bg-black/50">
+        <div class="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
+            <a href="#" class="font-display font-bold text-xl text-white tracking-tighter">
+                ED<span class="text-accentPurple">.</span>
+            </a>
+            <p class="text-gray-500 text-sm font-mono">
+                &copy; 2026 Edward Domakubun
+            </p>
+            <p class="text-gray-500 text-sm">
+                From Tanimbar Islands <i class="fas fa-rocket text-accentBlue ml-1"></i>
+            </p>
         </div>
     </footer>
 
     <!-- Scripts -->
-    <!-- AOS -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <!-- Typed.js for Auto Typing Effect -->
-    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
-    <!-- Vanilla Tilt for 3D Cards -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
-
     <script>
-        // 1. Initialize AOS Animation
+        // 1. Initialize AOS
         AOS.init({
-            once: true, // Animasi jalan sekali saja saat scroll turun
+            once: true,
             offset: 50,
-            duration: 800,
-            easing: 'ease-out-cubic',
+            duration: 1000,
+            easing: 'ease-out-expo',
         });
 
-        // 2. Initialize Typed.js (Typing Effect on Hero)
-        new Typed('#typed-role', {
-            strings: ['Developer Edukasi', 'Web Developer', 'App Creator', 'IT Consultant'],
-            typeSpeed: 60,
-            backSpeed: 40,
-            backDelay: 1500,
-            loop: true,
-            cursorChar: '_'
-        });
-
-        // 3. Mobile Menu Logic
-        const btn = document.getElementById('mobile-menu-btn');
-        const menu = document.getElementById('mobile-menu');
-
-        btn.addEventListener('click', () => {
-            menu.classList.toggle('hidden');
-        });
-
-        document.querySelectorAll('#mobile-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                menu.classList.add('hidden');
-            });
-        });
-
-        // 4. Custom Mouse Follower & Glow Logic
+        // 2. Custom Cursor Logic (Smoother and Bouncy)
         const cursorDot = document.querySelector('.cursor-dot');
-        const cursorOutline = document.querySelector('.cursor-outline');
-        const glowBg = document.getElementById('glow-bg');
-        const hoverTargets = document.querySelectorAll('.cursor-hover-target, a, button');
+        const cursorRing = document.querySelector('.cursor-ring');
+        const hoverTargets = document.querySelectorAll('.hover-target, a, button');
 
-        // Only run mouse logic on non-touch devices
         if (window.matchMedia("(pointer: fine)").matches) {
+            let mouseX = 0, mouseY = 0;
+            let ringX = 0, ringY = 0;
+
             window.addEventListener('mousemove', (e) => {
-                const posX = e.clientX;
-                const posY = e.clientY;
-
-                // Move dot instantly
-                cursorDot.style.transform = `translate(calc(${posX}px - 50%), calc(${posY}px - 50%))`;
-                
-                // Move outline with slight delay using animate
-                cursorOutline.animate({
-                    transform: `translate(calc(${posX}px - 50%), calc(${posY}px - 50%))`
-                }, { duration: 150, fill: "forwards" });
-
-                // Update Glow Background Position
-                glowBg.style.setProperty('--x', `${posX}px`);
-                glowBg.style.setProperty('--y', `${posY}px`);
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                // Instant dot movement
+                cursorDot.style.transform = `translate(calc(${mouseX}px - 50%), calc(${mouseY}px - 50%))`;
             });
 
-            // Hover state for interactive elements
+            // Smooth trailing effect for the ring using RequestAnimationFrame
+            const render = () => {
+                ringX += (mouseX - ringX) * 0.15; // Smooth interpolation
+                ringY += (mouseY - ringY) * 0.15;
+                cursorRing.style.transform = `translate(calc(${ringX}px - 50%), calc(${ringY}px - 50%))`;
+                requestAnimationFrame(render);
+            };
+            requestAnimationFrame(render);
+
+            // Hover effects
             hoverTargets.forEach(target => {
-                target.addEventListener('mouseenter', () => {
-                    document.body.classList.add('cursor-hover');
-                });
-                target.addEventListener('mouseleave', () => {
-                    document.body.classList.remove('cursor-hover');
-                });
+                target.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+                target.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
             });
         }
+
+        // 3. Mobile Menu Toggle with Smooth Fade
+        const btn = document.getElementById('menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        const icon = btn.querySelector('i');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        btn.addEventListener('click', () => {
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+                // Small delay to allow display:block to apply before changing opacity
+                setTimeout(() => {
+                    menu.classList.remove('opacity-0');
+                    menu.classList.add('opacity-100');
+                }, 10);
+                icon.classList.replace('fa-bars', 'fa-times');
+            } else {
+                menu.classList.remove('opacity-100');
+                menu.classList.add('opacity-0');
+                setTimeout(() => {
+                    menu.classList.add('hidden');
+                }, 300); // match transition duration
+                icon.classList.replace('fa-times', 'fa-bars');
+            }
+        });
+
+        // Close menu when clicking a link
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.remove('opacity-100');
+                menu.classList.add('opacity-0');
+                setTimeout(() => {
+                    menu.classList.add('hidden');
+                }, 300);
+                icon.classList.replace('fa-times', 'fa-bars');
+            });
+        });
+
     </script>
 </body>
 </html>
