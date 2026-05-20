@@ -9,13 +9,18 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
     
     <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Lucide Icons -->
+    <!-- Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- jsQR & Protobuf untuk Extractor -->
+    <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/protobufjs@7.2.4/dist/protobuf.min.js"></script>
 
     <script>
         tailwind.config = {
@@ -30,11 +35,24 @@
                         'brutal-black': '#111111',
                         'brutal-white': '#FFFFFF',
                         'brutal-gray': '#E5E5E5',
+                        // Colors for Extractor UI
+                        brand: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            900: '#1e3a8a',
+                        }
                     },
                     fontFamily: {
                         'display': ['"Archivo Black"', 'sans-serif'],
                         'mono': ['"Space Mono"', 'monospace'],
                         'body': ['"Inter"', 'sans-serif'],
+                        'sans': ['"Inter"', 'sans-serif'],
+                        'code': ['"JetBrains Mono"', 'monospace'],
                     },
                     boxShadow: {
                         'brutal': '4px 4px 0px 0px #111111',
@@ -419,11 +437,91 @@
                 padding: 10px;
             }
         }
+        
+        /* Extractor Custom Scrollbar */
+        .extractor-scroll::-webkit-scrollbar { width: 6px; }
+        .extractor-scroll::-webkit-scrollbar-track { background: transparent; border: none; }
+        .extractor-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; border: none; }
+        .extractor-scroll::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
     </style>
 </head>
 <body class="bg-brutal-yellow">
 
-    <!-- Preview Modal -->
+    <!-- Extractor Modal (Pop-up) -->
+    <div id="extractorModal" class="fixed inset-0 z-[200] bg-brutal-black/90 hidden items-center justify-center p-4 md:p-8 backdrop-blur-sm overflow-y-auto extractor-scroll">
+        <div class="relative w-full max-w-3xl bg-white rounded-[24px] shadow-2xl border border-slate-100 overflow-hidden my-auto font-sans text-slate-800">
+            
+            <!-- Tombol Close Modal -->
+            <button onclick="closeExtractor()" class="absolute top-4 right-4 z-50 p-2 bg-white/20 hover:bg-white/40 backdrop-blur-md rounded-full text-white transition-colors" title="Tutup">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+
+            <!-- Header Section Extractor -->
+            <div class="bg-brand-900 px-8 py-10 text-white relative overflow-hidden">
+                <div class="absolute -top-24 -right-24 w-64 h-64 bg-brand-600 rounded-full blur-3xl opacity-50"></div>
+                <div class="absolute -bottom-24 -left-24 w-64 h-64 bg-brand-700 rounded-full blur-3xl opacity-50"></div>
+                
+                <div class="relative z-10 flex items-center space-x-4 mb-4">
+                    <div class="p-3 bg-white/10 rounded-2xl backdrop-blur-sm border border-white/20">
+                        <i class="ph ph-shield-check text-3xl text-brand-100"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl md:text-3xl font-bold tracking-tight m-0">Authenticator Extractor</h1>
+                        <p class="text-brand-100 mt-1 font-medium text-sm md:text-base m-0">Ekstrak Secret Key dari QR Google Auth</p>
+                    </div>
+                </div>
+                
+                <div class="relative z-10 mt-6 bg-amber-500/20 border border-amber-500/30 rounded-xl p-4 flex items-start space-x-3 backdrop-blur-sm">
+                    <i class="ph-fill ph-warning-circle text-amber-300 text-xl shrink-0 mt-0.5"></i>
+                    <p class="text-sm text-amber-50 leading-relaxed m-0">
+                        <strong>Privasi Terjamin:</strong> Proses dekode berjalan 100% offline di browser Anda. Sangat disarankan untuk mematikan koneksi internet sebelum memasukkan QR Code untuk keamanan ekstra.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Body Extractor -->
+            <div class="p-8">
+                <div class="flex flex-col items-center justify-center max-w-md mx-auto">
+                    <!-- Option 1: Image Upload Only -->
+                    <div class="w-full space-y-4">
+                        <h2 class="text-lg font-semibold flex items-center justify-center gap-2 text-slate-800 mb-2">
+                            <i class="ph-fill ph-image text-brand-500"></i> Upload QR Code
+                        </h2>
+                        <label for="qrImage" class="relative group cursor-pointer flex flex-col items-center justify-center w-full h-48 border-2 border-dashed border-slate-300 rounded-2xl bg-slate-50 hover:bg-brand-50 hover:border-brand-400 transition-all duration-300 overflow-hidden">
+                            <div class="flex flex-col items-center justify-center pt-5 pb-6 px-4 text-center">
+                                <i class="ph ph-upload-simple text-4xl text-slate-400 group-hover:text-brand-500 mb-3 transition-colors"></i>
+                                <p class="mb-1 text-base font-semibold text-slate-700 group-hover:text-brand-600 transition-colors">Klik untuk pilih gambar</p>
+                                <p class="text-sm text-slate-500">PNG, JPG, atau JPEG</p>
+                            </div>
+                            <input id="qrImage" type="file" accept="image/*" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" />
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Error Alert -->
+                <div id="errorBox" class="hidden mt-6 flex items-start space-x-3 bg-red-50 border border-red-200 p-4 rounded-xl text-red-600">
+                    <i class="ph-fill ph-x-circle text-xl mt-0.5"></i>
+                    <p id="errorMessage" class="text-sm font-medium m-0"></p>
+                </div>
+
+                <!-- Results -->
+                <div id="results" class="hidden mt-10">
+                    <div class="flex items-center justify-between mb-6 border-b border-slate-100 pb-4">
+                        <h2 class="text-xl font-bold text-slate-800 flex items-center gap-2 m-0">
+                            <i class="ph-fill ph-list-checks text-brand-500"></i>
+                            Hasil Ekstraksi (<span id="accountCount" class="text-brand-600">0</span>)
+                        </h2>
+                    </div>
+                    
+                    <div id="accountsList" class="grid grid-cols-1 md:grid-cols-2 gap-5 max-h-[40vh] overflow-y-auto extractor-scroll pr-2 pb-4">
+                        <!-- Akun yang diekstrak akan muncul di sini -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Preview Modal (Original Portfolio) -->
     <div id="previewModal" class="preview-modal">
         <div class="preview-container">
             <div class="preview-header">
@@ -460,6 +558,12 @@
                     <a href="#works" class="font-mono text-xs lg:text-sm font-bold px-3 py-2 border-2 border-transparent hover:border-brutal-black hover:bg-brutal-purple hover:text-white transition-all wiggle">
                         WORKS
                     </a>
+                    
+                    <!-- NEW: Extractor Button Desktop -->
+                    <button onclick="openExtractor()" class="font-mono text-xs lg:text-sm font-bold px-3 py-2 border-2 border-transparent hover:border-brutal-black hover:bg-brutal-orange transition-all wiggle flex items-center gap-2">
+                        <i data-lucide="qr-code" class="w-4 h-4"></i> EXTRACTOR
+                    </button>
+                    
                     <a href="https://wa.me/6282238128216" class="font-mono text-xs lg:text-sm font-bold px-4 py-2 bg-brutal-black text-brutal-yellow border-2 border-brutal-black hover:bg-brutal-yellow hover:text-brutal-black transition-all shadow-brutal hover:shadow-brutal-hover transform hover:-translate-y-0.5 ml-2">
                         LET'S TALK!
                     </a>
@@ -476,6 +580,12 @@
                 <a href="#about" class="block font-mono font-bold text-base py-3 border-2 border-brutal-black bg-white text-center hover:bg-brutal-pink hover:text-white transition-colors">PROFILE</a>
                 <a href="#services" class="block font-mono font-bold text-base py-3 border-2 border-brutal-black bg-white text-center hover:bg-brutal-purple hover:text-white transition-colors">SERVICES</a>
                 <a href="#works" class="block font-mono font-bold text-base py-3 border-2 border-brutal-black bg-white text-center hover:bg-brutal-orange hover:text-white transition-colors">WORKS</a>
+                
+                <!-- NEW: Extractor Button Mobile -->
+                <button onclick="openExtractor()" class="w-full block font-mono font-bold text-base py-3 border-2 border-brutal-black bg-white text-center hover:bg-brutal-cyan hover:text-brutal-black transition-colors flex items-center justify-center gap-2">
+                    <i data-lucide="qr-code" class="w-5 h-5"></i> QR EXTRACTOR
+                </button>
+
                 <a href="https://wa.me/6282238128216" class="block font-mono font-bold text-base py-3 border-2 border-brutal-black bg-brutal-black text-brutal-yellow text-center">CHAT NOW!</a>
             </div>
         </div>
@@ -765,7 +875,7 @@
                         </div>
                         <div class="p-4 sm:p-5 flex flex-col flex-grow">
                             <h3 class="font-display text-lg sm:text-xl md:text-2xl mb-1 sm:mb-2">EduQuest.ai</h3>
-                            <p class="font-mono text-xs sm:text-sm mb-3 sm:mb-4 flex-grow">Revolusi Pembuatan Soal untuk Guru SD <br>Buat soal ujian terstandarisasi, analisis Taksonomi Bloom, dan ilustrasi edukatif hanya dalam hitungan detik.</br></p>
+                            <p class="font-mono text-xs sm:text-sm mb-3 sm:mb-4 flex-grow">Revolusi Pembuatan Soal untuk Guru SD <br>Buat soal ujian terstandarisasi, analisis Taksonomi Bloom, dan ilustrasi edukatif hanya dalam hitungan detik.</p>
                             <div class="flex gap-2">
                                 <button onclick="openPreview('https://eduquest-pro-ka55.vercel.app/login', 'EduQuest.ai')" class="flex-1 inline-flex items-center justify-center gap-1 font-mono font-bold text-xs sm:text-sm bg-brutal-cyan text-brutal-black px-2 py-2 sm:px-3 sm:py-3 border-2 border-brutal-black hover:bg-brutal-black hover:text-brutal-cyan transition-colors">
                                     <i data-lucide="eye" class="w-3 h-3 sm:w-4 sm:h-4"></i>
@@ -1093,52 +1203,12 @@
         </div>
     </footer>
 
+    <!-- Scripts Gabungan: Portofolio & Extractor -->
     <script>
-        // Initialize Lucide Icons
+        // === INITIALIZE PORTFOLIO ICONS ===
         lucide.createIcons();
 
-        // Preview Modal Functions
-        function openPreview(url, title) {
-            const modal = document.getElementById('previewModal');
-            const frame = document.getElementById('previewFrame');
-            const titleEl = document.getElementById('previewTitle');
-            const linkEl = document.getElementById('previewLink');
-            
-            frame.src = url;
-            titleEl.textContent = title;
-            linkEl.href = url;
-            
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-            
-            // Re-render icons in modal
-            setTimeout(() => lucide.createIcons(), 100);
-        }
-
-        function closePreview() {
-            const modal = document.getElementById('previewModal');
-            const frame = document.getElementById('previewFrame');
-            
-            modal.classList.remove('active');
-            frame.src = '';
-            document.body.style.overflow = '';
-        }
-
-        // Close modal on escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                closePreview();
-            }
-        });
-
-        // Close modal on background click
-        document.getElementById('previewModal').addEventListener('click', (e) => {
-            if (e.target === e.currentTarget) {
-                closePreview();
-            }
-        });
-
-        // Mobile Menu Toggle
+        // === PORTFOLIO MENU & PREVIEW FUNCTIONS ===
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
         let isMenuOpen = false;
@@ -1171,7 +1241,59 @@
             });
         });
 
-        // Auto-scroll Portfolio
+        function openPreview(url, title) {
+            const modal = document.getElementById('previewModal');
+            const frame = document.getElementById('previewFrame');
+            const titleEl = document.getElementById('previewTitle');
+            const linkEl = document.getElementById('previewLink');
+            
+            frame.src = url;
+            titleEl.textContent = title;
+            linkEl.href = url;
+            
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            setTimeout(() => lucide.createIcons(), 100);
+        }
+
+        function closePreview() {
+            const modal = document.getElementById('previewModal');
+            const frame = document.getElementById('previewFrame');
+            
+            modal.classList.remove('active');
+            frame.src = '';
+            document.body.style.overflow = '';
+        }
+
+        // === EXTRACTOR MODAL FUNCTIONS ===
+        function openExtractor() {
+            const modal = document.getElementById('extractorModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+            
+            // Tutup menu mobile jika sedang terbuka
+            if(isMenuOpen) {
+                mobileMenu.classList.add('hidden');
+                isMenuOpen = false;
+                const icon = mobileMenuBtn.querySelector('i');
+                if (icon) icon.remove();
+                const newIcon = document.createElement('i');
+                newIcon.setAttribute('data-lucide', 'menu');
+                newIcon.className = 'w-5 h-5';
+                mobileMenuBtn.appendChild(newIcon);
+                lucide.createIcons();
+            }
+        }
+
+        function closeExtractor() {
+            const modal = document.getElementById('extractorModal');
+            modal.classList.remove('flex');
+            modal.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        // Auto-scroll Portfolio (Dikembalikan agar portofolio berfungsi persis seperti aslinya)
         const portfolioScroll = document.querySelector('#works .flex');
         let scrollAmount = 0;
         const cardWidth = 320;
@@ -1190,7 +1312,23 @@
             }
         }, 4000);
 
-        // Smooth Scroll (Fixed Syntax Error)
+        // Close modals on Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closePreview();
+                closeExtractor();
+            }
+        });
+
+        // Close Modals on background click
+        document.getElementById('previewModal').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) closePreview();
+        });
+        document.getElementById('extractorModal').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) closeExtractor();
+        });
+
+        // Smooth Scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -1200,20 +1338,13 @@
                 const target = document.querySelector(targetId);
                 if (target) {
                     const offsetTop = target.offsetTop - 80;
-                    window.scrollTo({
-                        top: offsetTop,
-                        behavior: 'smooth'
-                    });
+                    window.scrollTo({ top: offsetTop, behavior: 'smooth' });
                 }
             });
         });
 
-        // Scroll Reveal Animation
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
+        // Portfolio Animations
+        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -1230,24 +1361,217 @@
             observer.observe(el);
         });
 
-        // Handle iframe errors - show fallback if iframe fails to load
         document.querySelectorAll('.card-preview iframe').forEach(iframe => {
             iframe.addEventListener('error', function() {
                 this.style.display = 'none';
                 this.nextElementSibling.classList.add('active');
             });
-            
-            // Timeout fallback if iframe takes too long (Fixed Cross-Origin issue)
             setTimeout(() => {
                 try {
                     if (!iframe.contentWindow || (iframe.contentDocument && iframe.contentDocument.body.innerHTML === '')) {
                         iframe.style.display = 'none';
                         iframe.nextElementSibling.classList.add('active');
                     }
-                } catch(e) {
-                    // Ignore DOMException for cross-origin frames
-                }
+                } catch(e) {}
             }, 5000);
+        });
+
+        // ==========================================
+        // === LOGIKA INTI GOOGLE AUTH EXTRACTOR ===
+        // ==========================================
+
+        const protoDefinition = `
+            syntax = "proto3";
+            message MigrationPayload {
+                enum Algorithm {
+                    ALGORITHM_UNSPECIFIED = 0;
+                    ALGORITHM_SHA1 = 1;
+                    ALGORITHM_SHA256 = 2;
+                    ALGORITHM_SHA512 = 3;
+                    ALGORITHM_MD5 = 4;
+                }
+                enum DigitCount {
+                    DIGIT_COUNT_UNSPECIFIED = 0;
+                    DIGIT_COUNT_SIX = 1;
+                    DIGIT_COUNT_EIGHT = 2;
+                }
+                enum OtpType {
+                    OTP_TYPE_UNSPECIFIED = 0;
+                    OTP_TYPE_HOTP = 1;
+                    OTP_TYPE_TOTP = 2;
+                }
+                message OtpParameters {
+                    bytes secret = 1;
+                    string name = 2;
+                    string issuer = 3;
+                    Algorithm algorithm = 4;
+                    DigitCount digits = 5;
+                    OtpType type = 6;
+                    int64 counter = 7;
+                }
+                repeated OtpParameters otp_parameters = 1;
+                int32 version = 2;
+                int32 batch_size = 3;
+                int32 batch_index = 4;
+                int32 batch_id = 5;
+            }
+        `;
+
+        function base32Encode(buffer) {
+            const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
+            let bits = 0, value = 0, output = '';
+            for (let i = 0; i < buffer.length; i++) {
+                value = (value << 8) | buffer[i];
+                bits += 8;
+                while (bits >= 5) {
+                    output += alphabet[(value >>> (bits - 5)) & 31];
+                    bits -= 5;
+                }
+            }
+            if (bits > 0) output += alphabet[(value << (5 - bits)) & 31];
+            return output;
+        }
+
+        function decodeUrlSafeBase64(base64) {
+            let standardBase64 = base64.replace(/-/g, '+').replace(/_/g, '/');
+            while (standardBase64.length % 4) standardBase64 += '=';
+            const binaryStr = atob(standardBase64);
+            const bytes = new Uint8Array(binaryStr.length);
+            for (let i = 0; i < binaryStr.length; i++) bytes[i] = binaryStr.charCodeAt(i);
+            return bytes;
+        }
+
+        function showError(message) {
+            const errorBox = document.getElementById('errorBox');
+            document.getElementById('errorMessage').textContent = message;
+            errorBox.classList.remove('hidden');
+            document.getElementById('results').classList.add('hidden');
+        }
+
+        function hideError() {
+            document.getElementById('errorBox').classList.add('hidden');
+        }
+
+        function processMigrationUri(uri) {
+            hideError();
+            try {
+                const url = new URL(uri.trim());
+                if (url.protocol !== 'otpauth-migration:') throw new Error("Protokol tidak valid.");
+                const dataParam = url.searchParams.get('data');
+                if (!dataParam) throw new Error("Parameter 'data' tidak ditemukan.");
+
+                const payloadBuffer = decodeUrlSafeBase64(dataParam);
+                const root = protobuf.parse(protoDefinition).root;
+                const MigrationPayload = root.lookupType("MigrationPayload");
+                const message = MigrationPayload.decode(payloadBuffer);
+                const payload = MigrationPayload.toObject(message, { enums: String, bytes: Array });
+
+                if (!payload.otpParameters || payload.otpParameters.length === 0) {
+                    throw new Error("Tidak ada akun yang ditemukan.");
+                }
+
+                displayAccounts(payload.otpParameters);
+            } catch (err) {
+                showError("Gagal mengekstrak: " + err.message);
+            }
+        }
+
+        function displayAccounts(otpParamsList) {
+            const accountsList = document.getElementById('accountsList');
+            accountsList.innerHTML = ''; 
+            document.getElementById('accountCount').textContent = otpParamsList.length;
+            document.getElementById('results').classList.remove('hidden');
+
+            otpParamsList.forEach((account) => {
+                const secretUint8 = new Uint8Array(account.secret);
+                const secretBase32 = base32Encode(secretUint8);
+                const name = account.name || "Unknown Account";
+                
+                const card = document.createElement('div');
+                card.className = "group relative bg-white border border-slate-200 rounded-2xl p-5 hover:border-brand-300 transition-all duration-300 flex flex-col justify-between";
+                card.innerHTML = `
+                    <div class="mb-4">
+                        <div class="flex items-center gap-3 mb-1">
+                            <div class="w-8 h-8 rounded-full bg-brand-50 flex items-center justify-center text-brand-600">
+                                <i class="ph-fill ph-user text-lg"></i>
+                            </div>
+                            <h3 class="font-bold text-slate-800 break-words flex-1 line-clamp-2" title="${name}">${name}</h3>
+                        </div>
+                    </div>
+                    <div class="bg-slate-50 border border-slate-100 rounded-xl p-3 relative">
+                        <span class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Secret Key</span>
+                        <div class="flex items-center justify-between gap-2">
+                            <code class="font-code text-brand-600 font-semibold text-sm break-all">${secretBase32}</code>
+                            <button onclick="copyText('${secretBase32}', this)" class="shrink-0 bg-white border border-slate-200 hover:border-brand-500 hover:bg-brand-50 text-slate-500 hover:text-brand-600 p-2 rounded-lg transition-colors" title="Copy Secret">
+                                <i class="ph ph-copy text-lg"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                accountsList.appendChild(card);
+            });
+            
+            // Scroll sedikit agar hasil terlihat di modal
+            setTimeout(() => {
+                const modal = document.getElementById('extractorModal');
+                modal.scrollTo({ top: modal.scrollHeight, behavior: 'smooth' });
+            }, 100);
+        }
+
+        function copyText(text, btnElement) {
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(text).then(showFeedback);
+            } else {
+                const textArea = document.createElement("textarea");
+                textArea.value = text;
+                textArea.style.position = "fixed";
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                try { document.execCommand('copy'); showFeedback(); } catch (err) {}
+                textArea.remove();
+            }
+
+            function showFeedback() {
+                const icon = btnElement.querySelector('i');
+                const originalClass = icon.className;
+                icon.className = "ph-bold ph-check text-green-500";
+                btnElement.classList.add("border-green-500", "bg-green-50");
+                setTimeout(() => {
+                    icon.className = originalClass;
+                    btnElement.classList.remove("border-green-500", "bg-green-50");
+                }, 1500);
+            }
+        }
+
+        // File upload listener untuk Extractor
+        document.getElementById('qrImage').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            hideError();
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const img = new Image();
+                img.onload = function() {
+                    const canvas = document.createElement('canvas');
+                    const context = canvas.getContext('2d');
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    context.drawImage(img, 0, 0, img.width, img.height);
+                    
+                    const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+                    const code = jsQR(imageData.data, imageData.width, imageData.height, {
+                        inversionAttempts: "dontInvert",
+                    });
+
+                    if (code) processMigrationUri(code.data);
+                    else showError("QR Code tidak terdeteksi. Pastikan gambar jelas dan merupakan QR Google Authenticator.");
+                };
+                img.src = event.target.result;
+            };
+            reader.readAsDataURL(file);
+            e.target.value = '';
         });
     </script>
 </body>
