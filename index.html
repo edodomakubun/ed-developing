@@ -1354,19 +1354,12 @@
             observer.observe(el);
         });
 
+        // Hapus blok setTimeout yang mengecek contentDocument agar tidak terkena error CORS dari Chrome
         document.querySelectorAll('.card-preview iframe').forEach(iframe => {
             iframe.addEventListener('error', function() {
                 this.style.display = 'none';
                 this.nextElementSibling.classList.add('active');
             });
-            setTimeout(() => {
-                try {
-                    if (!iframe.contentWindow || (iframe.contentDocument && iframe.contentDocument.body.innerHTML === '')) {
-                        iframe.style.display = 'none';
-                        iframe.nextElementSibling.classList.add('active');
-                    }
-                } catch(e) {}
-            }, 5000);
         });
 
         // ==========================================
