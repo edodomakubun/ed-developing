@@ -470,13 +470,6 @@
                         <p class="text-brand-100 mt-1 font-medium text-sm md:text-base m-0">Ekstrak Secret Key dari QR Google Auth</p>
                     </div>
                 </div>
-                
-                <div class="relative z-10 mt-6 bg-amber-500/20 border border-amber-500/30 rounded-xl p-4 flex items-start space-x-3 backdrop-blur-sm">
-                    <i class="ph-fill ph-warning-circle text-amber-300 text-xl shrink-0 mt-0.5"></i>
-                    <p class="text-sm text-amber-50 leading-relaxed m-0">
-                        <strong>Privasi Terjamin:</strong> Proses dekode berjalan 100% offline di browser Anda. Sangat disarankan untuk mematikan koneksi internet sebelum memasukkan QR Code untuk keamanan ekstra.
-                    </p>
-                </div>
             </div>
 
             <!-- Body Extractor -->
@@ -1316,7 +1309,7 @@
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 closePreview();
-                closeExtractor();
+                // closeExtractor(); // Baris ini dihapus agar Extractor tidak tertutup saat tombol Esc ditekan
             }
         });
 
@@ -1324,9 +1317,9 @@
         document.getElementById('previewModal').addEventListener('click', (e) => {
             if (e.target === e.currentTarget) closePreview();
         });
-        document.getElementById('extractorModal').addEventListener('click', (e) => {
-            if (e.target === e.currentTarget) closeExtractor();
-        });
+        
+        // Event listener klik background untuk extractorModal dihapus 
+        // agar pop-up tidak tertutup saat area luar diklik.
 
         // Smooth Scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
