@@ -1,0 +1,26 @@
+{
+  "name": "ed-developing",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build:css": "tailwindcss -i ./src/input.css -o ./dist/output.css --minify",
+    "watch:css": "tailwindcss -i ./src/input.css -o ./dist/output.css --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/edodomakubun/ed-developing.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/edodomakubun/ed-developing/issues"
+  },
+  "homepage": "https://github.com/edodomakubun/ed-developing#readme",
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
+  }
+}
