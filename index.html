@@ -12,7 +12,16 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
 
-    <!-- Tailwind CSS -->
+    <!-- Tailwind CSS with Console Warning Filter -->
+    <script>
+        (function() {
+            const _origWarn = console.warn;
+            console.warn = function(...args) {
+                if (args[0] && typeof args[0] === 'string' && args[0].includes('cdn.tailwindcss.com')) return;
+                _origWarn.apply(console, args);
+            };
+        })();
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- Three.js for Interactive 3D WebGL Environment -->
@@ -898,7 +907,7 @@
                         <iframe src="https://eduquest-pro-ka55.vercel.app/login" 
                                 class="w-full h-full border-none pointer-events-none transform scale-90 sm:scale-100 origin-top" 
                                 loading="lazy"
-                                sandbox="allow-same-origin allow-scripts"></iframe>
+                                sandbox="allow-scripts"></iframe>
                         
                         <div class="absolute inset-0 bg-gradient-to-t from-cyber-base/95 via-cyber-base/40 to-transparent flex items-end p-5">
                             <div class="flex flex-wrap gap-2">
@@ -1327,7 +1336,7 @@
             <!-- Iframe Viewing Arena -->
             <div class="flex-1 bg-slate-950 flex items-center justify-center p-1 sm:p-2 overflow-hidden relative">
                 <div id="iframeWrapper" class="preview-iframe-wrapper w-full h-full rounded-2xl overflow-hidden border border-white/10 bg-white relative">
-                    <iframe id="previewFrame" class="w-full h-full border-none" src="" sandbox="allow-same-origin allow-scripts allow-forms allow-popups"></iframe>
+                    <iframe id="previewFrame" class="w-full h-full border-none" src="" sandbox="allow-scripts allow-forms allow-popups"></iframe>
                 </div>
             </div>
         </div>
