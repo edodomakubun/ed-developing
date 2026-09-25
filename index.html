@@ -1,63 +1,91 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="scroll-smooth">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Edward Domakubun | Developer</title>
-    
-    <!-- Fonts -->
+    <title>Edward Domakubun — Fullstack Digital Architect & EduTech Innovator</title>
+    <meta name="description" content="Portfolio modern Edward Domakubun. Merancang ekosistem pendidikan digital modern, sistem presensi QR, SIAKAD, dan web app terdepan di Kepulauan Tanimbar.">
+
+    <!-- Fonts: Plus Jakarta Sans, Outfit, Space Grotesk, JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
-    
-    <!-- Tailwind -->
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Icons -->
+
+    <!-- Three.js for Interactive 3D WebGL Environment -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <!-- GSAP & ScrollTrigger for High-End Motion & Smooth Physics -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <!-- Icons: Lucide & Phosphor -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
-    <!-- jsQR & Protobuf untuk Extractor -->
+    <!-- jsQR & Protobuf for Offline Google Auth Extractor Engine -->
     <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/protobufjs@7.2.4/dist/protobuf.min.js"></script>
 
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        display: ['"Outfit"', 'sans-serif'],
+                        heading: ['"Space Grotesk"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    },
                     colors: {
-                        'brutal-yellow': '#FFE600',
-                        'brutal-pink': '#FF006E',
-                        'brutal-cyan': '#00F5FF',
-                        'brutal-orange': '#FF5E00',
-                        'brutal-purple': '#9D00FF',
-                        'brutal-black': '#111111',
-                        'brutal-white': '#FFFFFF',
-                        'brutal-gray': '#E5E5E5',
-                        // Colors for Extractor UI
-                        brand: {
-                            50: '#eff6ff',
-                            100: '#dbeafe',
-                            300: '#93c5fd',
-                            400: '#60a5fa',
-                            500: '#3b82f6',
-                            600: '#2563eb',
-                            700: '#1d4ed8',
-                            900: '#1e3a8a',
+                        cyber: {
+                            base: '#06080F',
+                            surface: '#0B0F19',
+                            card: 'rgba(16, 22, 36, 0.72)',
+                            glass: 'rgba(255, 255, 255, 0.05)',
+                            border: 'rgba(255, 255, 255, 0.12)',
+                            primary: '#6366F1',
+                            primaryGlow: '#818CF8',
+                            cyan: '#06B6D4',
+                            emerald: '#10B981',
+                            amber: '#F59E0B',
+                            fuchsia: '#D946EF',
+                            rose: '#F43F5E'
                         }
                     },
-                    fontFamily: {
-                        'display': ['"Archivo Black"', 'sans-serif'],
-                        'mono': ['"Space Mono"', 'monospace'],
-                        'body': ['"Inter"', 'sans-serif'],
-                        'sans': ['"Inter"', 'sans-serif'],
-                        'code': ['"JetBrains Mono"', 'monospace'],
-                    },
                     boxShadow: {
-                        'brutal': '4px 4px 0px 0px #111111',
-                        'brutal-hover': '6px 6px 0px 0px #111111',
-                        'brutal-sm': '2px 2px 0px 0px #111111',
+                        'glass-sm': '0 4px 20px -2px rgba(0, 0, 0, 0.4), inset 0 1px 1px 0 rgba(255, 255, 255, 0.15)',
+                        'glass-md': '0 12px 36px -4px rgba(0, 0, 0, 0.55), inset 0 1px 2px 0 rgba(255, 255, 255, 0.2)',
+                        'glass-lg': '0 24px 60px -8px rgba(0, 0, 0, 0.7), inset 0 1px 2px 0 rgba(255, 255, 255, 0.25)',
+                        'skeuo-btn': '0 8px 16px -2px rgba(99, 102, 241, 0.4), inset 0 1px 1px 0 rgba(255, 255, 255, 0.4), inset 0 -2px 4px 0 rgba(0, 0, 0, 0.3)',
+                        'skeuo-card': '0 20px 50px -10px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.15), inset 0 -1px 2px rgba(0,0,0,0.5)',
+                        'skeuo-pressed': 'inset 0 4px 8px 0 rgba(0, 0, 0, 0.6), 0 1px 2px rgba(255, 255, 255, 0.05)',
+                        'neon-cyan': '0 0 30px rgba(6, 182, 212, 0.35)',
+                        'neon-purple': '0 0 35px rgba(99, 102, 241, 0.45)',
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'floating 6s ease-in-out infinite',
+                        'shimmer': 'shimmer 2.5s infinite linear',
+                        'scanline': 'scan 3s linear infinite',
+                    },
+                    keyframes: {
+                        floating: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        shimmer: {
+                            '0%': { transform: 'translateX(-100%)' },
+                            '100%': { transform: 'translateX(100%)' },
+                        },
+                        scan: {
+                            '0%': { transform: 'translateY(-100%)' },
+                            '100%': { transform: 'translateY(100%)' },
+                        }
                     }
                 }
             }
@@ -65,6 +93,12 @@
     </script>
 
     <style>
+        /* === BASE CORE & SMOOTH SCROLLING === */
+        :root {
+            --glow-color: rgba(99, 102, 241, 0.18);
+            --border-highlight: rgba(255, 255, 255, 0.16);
+        }
+
         * {
             box-sizing: border-box;
             -webkit-tap-highlight-color: transparent;
@@ -73,1178 +107,1511 @@
         html, body {
             margin: 0;
             padding: 0;
+            background-color: #06080F;
+            color: #F1F5F9;
             overflow-x: hidden;
-            width: 100%;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            scroll-behavior: smooth;
         }
 
-        body {
-            background-color: #FFE600;
-            color: #111111;
-            font-family: 'Inter', sans-serif;
-        }
-
-        section {
-            width: 100%;
-            max-width: 100vw;
-        }
-
-        .bg-grid {
-            background-image: 
-                linear-gradient(#111111 1px, transparent 1px),
-                linear-gradient(90deg, #111111 1px, transparent 1px);
-            background-size: 30px 30px;
-        }
-
-        .bg-grid-small {
-            background-image: 
-                linear-gradient(#111111 1px, transparent 1px),
-                linear-gradient(90deg, #111111 1px, transparent 1px);
-            background-size: 15px 15px;
-        }
-
-        .glitch {
-            position: relative;
-            display: inline-block;
-        }
-
-        .glitch::before,
-        .glitch::after {
-            content: attr(data-text);
-            position: absolute;
+        /* Ambient 3D canvas backdrop */
+        #webgl-canvas {
+            position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
+            width: 100vw;
+            height: 100vh;
             pointer-events: none;
+            z-index: 1;
+            opacity: 0.85;
+            transition: opacity 1s ease;
         }
 
-        .glitch::before {
-            left: 1px;
-            text-shadow: -1px 0 #FF006E;
-            clip: rect(24px, 550px, 90px, 0);
-            animation: glitch-anim-2 3s infinite linear alternate-reverse;
+        /* Ambient Glow Noise overlay */
+        .ambient-noise {
+            position: fixed;
+            inset: 0;
+            background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 0);
+            background-size: 24px 24px;
+            pointer-events: none;
+            z-index: 2;
         }
 
-        .glitch::after {
-            left: -1px;
-            text-shadow: -1px 0 #00F5FF;
-            clip: rect(85px, 550px, 140px, 0);
-            animation: glitch-anim 2.5s infinite linear alternate-reverse;
-        }
-
-        @keyframes glitch-anim {
-            0% { clip: rect(10px, 9999px, 85px, 0); }
-            20% { clip: rect(65px, 9999px, 99px, 0); }
-            40% { clip: rect(25px, 9999px, 145px, 0); }
-            60% { clip: rect(85px, 9999px, 40px, 0); }
-            80% { clip: rect(120px, 9999px, 80px, 0); }
-            100% { clip: rect(45px, 9999px, 60px, 0); }
-        }
-
-        @keyframes glitch-anim-2 {
-            0% { clip: rect(65px, 9999px, 99px, 0); }
-            20% { clip: rect(10px, 9999px, 85px, 0); }
-            40% { clip: rect(85px, 9999px, 40px, 0); }
-            60% { clip: rect(25px, 9999px, 145px, 0); }
-            80% { clip: rect(45px, 9999px, 60px, 0); }
-            100% { clip: rect(120px, 9999px, 80px, 0); }
-        }
-
-        .marquee-container {
-            overflow: hidden;
-            width: 100%;
-        }
-
-        .marquee-content {
-            display: inline-flex;
-            animation: marquee 25s linear infinite;
-            white-space: nowrap;
-        }
-
-        @keyframes marquee {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-
-        .sticker {
-            animation: rotate 15s linear infinite;
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .wiggle:hover {
-            animation: wiggle 0.5s ease-in-out;
-        }
-
-        @keyframes wiggle {
-            0%, 100% { transform: rotate(-2deg); }
-            50% { transform: rotate(2deg); }
-        }
-
-        .scanlines {
+        /* === SKEUOMORPHIC & GLASSMORPHIC HYBRID SYSTEM === */
+        .glass-panel {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 
+                0 20px 40px -15px rgba(0, 0, 0, 0.7),
+                inset 0 1px 1px 0 rgba(255, 255, 255, 0.22),
+                inset 0 -1px 2px 0 rgba(0, 0, 0, 0.6);
+            border-radius: 24px;
             position: relative;
+            overflow: hidden;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease;
         }
 
-        .scanlines::after {
+        .glass-panel:hover {
+            border-color: rgba(99, 102, 241, 0.38);
+            box-shadow: 
+                0 30px 60px -15px rgba(0, 0, 0, 0.85),
+                0 0 35px -5px rgba(99, 102, 241, 0.22),
+                inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.35);
+        }
+
+        /* Tactile Skeuomorphic Button */
+        .skeuo-button {
+            position: relative;
+            background: linear-gradient(180deg, #4f46e5 0%, #3730a3 100%);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 9999px;
+            box-shadow: 
+                0 8px 20px -4px rgba(79, 70, 229, 0.5),
+                inset 0 2px 2px rgba(255, 255, 255, 0.45),
+                inset 0 -3px 4px rgba(0, 0, 0, 0.35);
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .skeuo-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 
+                0 12px 28px -4px rgba(79, 70, 229, 0.7),
+                inset 0 2px 3px rgba(255, 255, 255, 0.6),
+                inset 0 -3px 4px rgba(0, 0, 0, 0.4);
+            filter: brightness(1.08);
+        }
+
+        .skeuo-button:active {
+            transform: translateY(1px);
+            box-shadow: 
+                0 3px 8px -2px rgba(79, 70, 229, 0.4),
+                inset 0 3px 6px rgba(0, 0, 0, 0.6),
+                inset 0 -1px 2px rgba(255, 255, 255, 0.2);
+        }
+
+        /* Glass Secondary Button */
+        .glass-button {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 9999px;
+            box-shadow: 
+                0 4px 14px -2px rgba(0, 0, 0, 0.4),
+                inset 0 1px 1px rgba(255, 255, 255, 0.25);
+            transition: all 0.25s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .glass-button:hover {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%);
+            border-color: rgba(255, 255, 255, 0.35);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px -2px rgba(0, 0, 0, 0.5), inset 0 1px 2px rgba(255, 255, 255, 0.4);
+        }
+
+        /* Debossed tactile inset container (Skeuomorphic Slot) */
+        .tactile-slot {
+            background: rgba(4, 6, 12, 0.65);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            box-shadow: 
+                inset 0 3px 8px rgba(0, 0, 0, 0.8),
+                inset 0 1px 2px rgba(0, 0, 0, 0.9),
+                0 1px 1px rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+        }
+
+        /* Glossy metallic badge */
+        .glossy-badge {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.02) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3), inset 0 1px 1px rgba(255,255,255,0.3);
+            border-radius: 9999px;
+        }
+
+        /* Bento Grid Specific Stylings */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 1.5rem;
+        }
+
+        /* Interactive Dynamic 3D Card Tilt */
+        .tilt-card {
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            will-change: transform;
+        }
+
+        .tilt-content {
+            transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateZ(0);
+        }
+
+        /* Shimmering specular border effect */
+        .shimmer-border::before {
             content: '';
             position: absolute;
             top: 0;
-            left: 0;
-            width: 100%;
+            left: -100%;
+            width: 50%;
             height: 100%;
-            background: repeating-linear-gradient(
-                0deg,
-                rgba(0, 0, 0, 0.1),
-                rgba(0, 0, 0, 0.1) 1px,
-                transparent 1px,
-                transparent 2px
-            );
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.18), transparent);
+            transform: skewX(-25deg);
             pointer-events: none;
+            transition: 0.75s;
         }
 
-        .tape {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.9);
-            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-            transform: rotate(-2deg);
-            z-index: 10;
+        .shimmer-border:hover::before {
+            left: 200%;
         }
 
-        .doodle-border {
-            border: 3px solid #111111;
-            border-radius: 20px 5px 20px 5px;
-        }
-
-        .doodle-border-2 {
-            border: 3px solid #111111;
-            border-radius: 5px 20px 5px 20px;
-        }
-
-        ::selection {
-            background: #FF006E;
-            color: #FFFFFF;
-        }
-
+        /* Custom Scrollbar */
         ::-webkit-scrollbar {
-            width: 10px;
+            width: 8px;
         }
-
         ::-webkit-scrollbar-track {
-            background: #FFE600;
-            border-left: 2px solid #111111;
+            background: #06080F;
         }
-
         ::-webkit-scrollbar-thumb {
-            background: #111111;
-            border: 2px solid #FFE600;
+            background: rgba(255, 255, 255, 0.18);
+            border-radius: 4px;
+            border: 2px solid #06080F;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(99, 102, 241, 0.6);
         }
 
-        .hide-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-        .hide-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-
-        img {
-            max-width: 100%;
-            height: auto;
+        /* Extractor Scanner Animation */
+        .laser-scanner {
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #06B6D4, #6366F1, #06B6D4, transparent);
+            box-shadow: 0 0 15px #06B6D4, 0 0 30px #6366F1;
+            animation: laserScan 2.4s ease-in-out infinite alternate;
         }
 
-        h1, h2, h3, h4, h5, h6, p {
-            overflow-wrap: break-word;
-            word-wrap: break-word;
+        @keyframes laserScan {
+            0% { top: 5%; opacity: 0.2; }
+            50% { opacity: 1; }
+            100% { top: 95%; opacity: 0.2; }
         }
 
-        @media (max-width: 768px) {
-            .glitch::before,
-            .glitch::after {
-                display: none;
-            }
-            
-            .sticker {
-                animation: none;
-            }
-        }
-
-        a, button {
-            min-height: 44px;
-            min-width: 44px;
-        }
-
-        /* Preview Modal Styles */
-        .preview-modal {
-            position: fixed;
-            inset: 0;
-            z-index: 100;
-            background: rgba(0, 0, 0, 0.9);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .preview-modal.active {
-            display: flex;
-        }
-
-        .preview-container {
-            width: 100%;
-            max-width: 1200px;
-            height: 90vh;
-            background: #111;
-            border: 4px solid #111;
-            position: relative;
-        }
-
-        .preview-iframe {
-            width: 100%;
-            height: calc(100% - 50px);
-            border: none;
-            background: white;
-        }
-
-        .preview-header {
-            height: 50px;
-            background: #111;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 20px;
-            color: white;
-            font-family: 'Space Mono', monospace;
-        }
-
-        .preview-close {
-            background: #FF006E;
-            border: none;
-            color: white;
-            width: 32px;
-            height: 32px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-        }
-
-        .preview-close:hover {
-            background: #ff3385;
-        }
-
-        /* Card Preview Thumbnail */
-        .card-preview {
-            position: relative;
-            height: 200px;
-            overflow: hidden;
-            background: #f0f0f0;
-        }
-
-        .card-preview iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
+        /* Glow Sphere helper */
+        .glow-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
             pointer-events: none;
-            transform: scale(0.25);
-            transform-origin: 0 0;
-            width: 400%;
-            height: 400%;
+            z-index: 0;
         }
 
-        .preview-overlay {
-            position: absolute;
-            inset: 0;
-            background: rgba(0,0,0,0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.3s;
+        /* Responsive Iframe Sandbox Viewport */
+        .preview-iframe-wrapper {
+            transition: max-width 0.3s ease, height 0.3s ease;
         }
-
-        .card-preview:hover .preview-overlay {
-            opacity: 1;
-        }
-
-        .preview-btn {
-            background: #FF006E;
-            color: white;
-            border: 3px solid #111;
-            padding: 10px 20px;
-            font-family: 'Space Mono', monospace;
-            font-weight: bold;
-            cursor: pointer;
-            transform: scale(0.9);
-            transition: transform 0.2s;
-        }
-
-        .preview-btn:hover {
-            transform: scale(1);
-        }
-
-        /* Loading state */
-        .preview-loading {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #f0f0f0;
-            font-family: 'Space Mono', monospace;
-            font-size: 12px;
-            color: #666;
-        }
-
-        .preview-fallback {
-            position: absolute;
-            inset: 0;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            font-family: 'Space Mono', monospace;
-            text-align: center;
-            padding: 20px;
-        }
-
-        .preview-fallback.active {
-            display: flex;
-        }
-
-        .preview-fallback i {
-            width: 48px;
-            height: 48px;
-            margin-bottom: 10px;
-        }
-
-        /* Mobile optimizations */
-        @media (max-width: 640px) {
-            .card-preview {
-                height: 160px;
-            }
-            
-            .preview-container {
-                height: 95vh;
-                width: 95vw;
-            }
-            
-            .preview-modal {
-                padding: 10px;
-            }
-        }
-        
-        /* Extractor Custom Scrollbar */
-        .extractor-scroll::-webkit-scrollbar { width: 6px; }
-        .extractor-scroll::-webkit-scrollbar-track { background: transparent; border: none; }
-        .extractor-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; border: none; }
-        .extractor-scroll::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
     </style>
 </head>
-<body class="bg-brutal-yellow">
 
-    <!-- Extractor Modal (Pop-up) -->
-    <div id="extractorModal" class="fixed inset-0 z-[200] bg-brutal-black/90 hidden items-center justify-center p-4 md:p-8 backdrop-blur-sm overflow-y-auto extractor-scroll">
-        <div class="relative w-full max-w-3xl bg-white rounded-[24px] shadow-2xl border border-slate-100 overflow-hidden my-auto font-sans text-slate-800">
-            
-            <!-- Tombol Close Modal -->
-            <button onclick="closeExtractor()" class="absolute top-4 right-4 z-50 p-2 bg-white/20 hover:bg-white/40 backdrop-blur-md rounded-full text-white transition-colors" title="Tutup">
-                <i data-lucide="x" class="w-6 h-6"></i>
-            </button>
+<body class="selection:bg-cyber-primary selection:text-white">
 
-            <!-- Header Section Extractor -->
-            <div class="bg-brand-900 px-8 py-10 text-white relative overflow-hidden">
-                <div class="absolute -top-24 -right-24 w-64 h-64 bg-brand-600 rounded-full blur-3xl opacity-50"></div>
-                <div class="absolute -bottom-24 -left-24 w-64 h-64 bg-brand-700 rounded-full blur-3xl opacity-50"></div>
-                
-                <div class="relative z-10 flex items-center space-x-4 mb-4">
-                    <div class="p-3 bg-white/10 rounded-2xl backdrop-blur-sm border border-white/20">
-                        <i class="ph ph-shield-check text-3xl text-brand-100"></i>
-                    </div>
-                    <div>
-                        <h1 class="text-2xl md:text-3xl font-bold tracking-tight m-0">Authenticator Extractor</h1>
-                        <p class="text-brand-100 mt-1 font-medium text-sm md:text-base m-0">Ekstrak Secret Key dari QR Google Auth</p>
-                    </div>
-                </div>
-            </div>
+    <!-- 3D Interactive WebGL Canvas -->
+    <canvas id="webgl-canvas"></canvas>
 
-            <!-- Body Extractor -->
-            <div class="p-8">
-                <div class="flex flex-col items-center justify-center max-w-md mx-auto">
-                    <!-- Option 1: Image Upload Only -->
-                    <div class="w-full space-y-4">
-                        <h2 class="text-lg font-semibold flex items-center justify-center gap-2 text-slate-800 mb-2">
-                            <i class="ph-fill ph-image text-brand-500"></i> Upload QR Code
-                        </h2>
-                        <label for="qrImage" class="relative group cursor-pointer flex flex-col items-center justify-center w-full h-48 border-2 border-dashed border-slate-300 rounded-2xl bg-slate-50 hover:bg-brand-50 hover:border-brand-400 transition-all duration-300 overflow-hidden">
-                            <div class="flex flex-col items-center justify-center pt-5 pb-6 px-4 text-center">
-                                <i class="ph ph-upload-simple text-4xl text-slate-400 group-hover:text-brand-500 mb-3 transition-colors"></i>
-                                <p class="mb-1 text-base font-semibold text-slate-700 group-hover:text-brand-600 transition-colors">Klik untuk pilih gambar</p>
-                                <p class="text-sm text-slate-500">PNG, JPG, atau JPEG</p>
-                            </div>
-                            <input id="qrImage" type="file" accept="image/*" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" />
-                        </label>
+    <!-- Noise Grid Subtle Matrix -->
+    <div class="ambient-noise"></div>
+
+    <!-- Glowing Background Ambient Spheres -->
+    <div class="glow-orb w-[500px] h-[500px] bg-indigo-600/15 top-10 left-[-150px]"></div>
+    <div class="glow-orb w-[600px] h-[600px] bg-cyan-600/10 top-[35%] right-[-200px]"></div>
+    <div class="glow-orb w-[650px] h-[650px] bg-fuchsia-600/10 bottom-[10%] left-[-200px]"></div>
+
+    <!-- ========================================================================= -->
+    <!-- NAVIGATION (Modern Frosted Glass Bar with Skeuomorphic Tactile Accents) -->
+    <!-- ========================================================================= -->
+    <header class="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 lg:px-8 pt-4">
+        <nav class="max-w-7xl mx-auto glass-panel px-4 sm:px-6 py-3.5 flex items-center justify-between !rounded-full border border-white/10 shadow-glass-md backdrop-blur-2xl">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-cyber-primary to-cyber-cyan p-[1.5px] shadow-neon-purple transition-transform group-hover:scale-105">
+                    <div class="w-full h-full rounded-full bg-cyber-surface flex items-center justify-center font-display font-black text-white text-base">
+                        ED
                     </div>
                 </div>
-
-                <!-- Error Alert -->
-                <div id="errorBox" class="hidden mt-6 flex items-start space-x-3 bg-red-50 border border-red-200 p-4 rounded-xl text-red-600">
-                    <i class="ph-fill ph-x-circle text-xl mt-0.5"></i>
-                    <p id="errorMessage" class="text-sm font-medium m-0"></p>
+                <div>
+                    <span class="font-display font-bold text-lg tracking-tight text-white group-hover:text-cyber-cyan transition-colors">
+                        EDWARD<span class="text-cyber-primary">.DEV</span>
+                    </span>
+                    <span class="hidden sm:flex items-center gap-1.5 text-[10px] font-mono text-emerald-400">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+                        Available for EduTech Innovation
+                    </span>
                 </div>
-
-                <!-- Results -->
-                <div id="results" class="hidden mt-10">
-                    <div class="flex items-center justify-between mb-6 border-b border-slate-100 pb-4">
-                        <h2 class="text-xl font-bold text-slate-800 flex items-center gap-2 m-0">
-                            <i class="ph-fill ph-list-checks text-brand-500"></i>
-                            Hasil Ekstraksi (<span id="accountCount" class="text-brand-600">0</span>)
-                        </h2>
-                    </div>
-                    
-                    <div id="accountsList" class="grid grid-cols-1 md:grid-cols-2 gap-5 max-h-[40vh] overflow-y-auto extractor-scroll pr-2 pb-4">
-                        <!-- Akun yang diekstrak akan muncul di sini -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Preview Modal (Original Portfolio) -->
-    <div id="previewModal" class="preview-modal">
-        <div class="preview-container">
-            <div class="preview-header">
-                <span id="previewTitle">Website Preview</span>
-                <div class="flex items-center gap-3">
-                    <a id="previewLink" href="#" target="_blank" class="text-sm hover:text-brutal-cyan transition-colors flex items-center gap-1">
-                        <span>Open in New Tab</span>
-                        <i data-lucide="external-link" class="w-4 h-4"></i>
-                    </a>
-                    <button class="preview-close" onclick="closePreview()" aria-label="Close preview">
-                        <i data-lucide="x" class="w-5 h-5"></i>
-                    </button>
-                </div>
-            </div>
-            <iframe id="previewFrame" class="preview-iframe" src=""></iframe>
-        </div>
-    </div>
-
-    <!-- Navigation -->
-    <nav class="fixed top-0 left-0 right-0 z-50 bg-brutal-white border-b-4 border-brutal-black">
-        <div class="w-full px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16 sm:h-20">
-                <a href="#" class="font-display text-xl sm:text-2xl tracking-tighter hover:text-brutal-pink transition-colors shrink-0">
-                    EDWARD<span class="text-brutal-pink">.</span>
-                </a>
-
-                <div class="hidden md:flex items-center gap-2">
-                    <a href="#about" class="font-mono text-xs lg:text-sm font-bold px-3 py-2 border-2 border-transparent hover:border-brutal-black hover:bg-brutal-cyan transition-all wiggle">
-                        PROFILE
-                    </a>
-                    <a href="#services" class="font-mono text-xs lg:text-sm font-bold px-3 py-2 border-2 border-transparent hover:border-brutal-black hover:bg-brutal-pink hover:text-white transition-all wiggle">
-                        SERVICES
-                    </a>
-                    <a href="#works" class="font-mono text-xs lg:text-sm font-bold px-3 py-2 border-2 border-transparent hover:border-brutal-black hover:bg-brutal-purple hover:text-white transition-all wiggle">
-                        WORKS
-                    </a>
-                    
-                    <!-- NEW: Extractor Button Desktop -->
-                    <button onclick="openExtractor()" class="font-mono text-xs lg:text-sm font-bold px-3 py-2 border-2 border-transparent hover:border-brutal-black hover:bg-brutal-orange transition-all wiggle flex items-center gap-2">
-                        <i data-lucide="qr-code" class="w-4 h-4"></i> EXTRACTOR
-                    </button>
-                    
-                    <a href="https://wa.me/6282238128216" class="font-mono text-xs lg:text-sm font-bold px-4 py-2 bg-brutal-black text-brutal-yellow border-2 border-brutal-black hover:bg-brutal-yellow hover:text-brutal-black transition-all shadow-brutal hover:shadow-brutal-hover transform hover:-translate-y-0.5 ml-2">
-                        LET'S TALK!
-                    </a>
-                </div>
-
-                <button id="mobile-menu-btn" class="md:hidden p-2 border-2 border-brutal-black bg-brutal-cyan active:scale-95 transition-transform">
-                    <i data-lucide="menu" class="w-5 h-5"></i>
-                </button>
-            </div>
-        </div>
-
-        <div id="mobile-menu" class="hidden md:hidden bg-brutal-cyan border-t-4 border-brutal-black absolute top-full left-0 right-0">
-            <div class="px-4 py-4 space-y-2">
-                <a href="#about" class="block font-mono font-bold text-base py-3 border-2 border-brutal-black bg-white text-center hover:bg-brutal-pink hover:text-white transition-colors">PROFILE</a>
-                <a href="#services" class="block font-mono font-bold text-base py-3 border-2 border-brutal-black bg-white text-center hover:bg-brutal-purple hover:text-white transition-colors">SERVICES</a>
-                <a href="#works" class="block font-mono font-bold text-base py-3 border-2 border-brutal-black bg-white text-center hover:bg-brutal-orange hover:text-white transition-colors">WORKS</a>
-                
-                <!-- NEW: Extractor Button Mobile -->
-                <button onclick="openExtractor()" class="w-full block font-mono font-bold text-base py-3 border-2 border-brutal-black bg-white text-center hover:bg-brutal-cyan hover:text-brutal-black transition-colors flex items-center justify-center gap-2">
-                    <i data-lucide="qr-code" class="w-5 h-5"></i> QR EXTRACTOR
-                </button>
-
-                <a href="https://wa.me/6282238128216" class="block font-mono font-bold text-base py-3 border-2 border-brutal-black bg-brutal-black text-brutal-yellow text-center">CHAT NOW!</a>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class="pt-24 sm:pt-28 md:pt-32 pb-12 sm:pb-16 px-4 relative overflow-hidden min-h-[calc(100vh-80px)] flex items-center">
-        <div class="absolute inset-0 bg-grid opacity-20 pointer-events-none"></div>
-        
-        <div class="absolute top-28 left-4 sticker hidden lg:block">
-            <div class="w-16 h-16 sm:w-20 sm:h-20 bg-brutal-pink border-3 border-brutal-black rounded-full flex items-center justify-center shadow-brutal-sm">
-                <span class="font-display text-white text-[10px] sm:text-xs text-center leading-tight">NEW<br>2026</span>
-            </div>
-        </div>
-
-        <div class="absolute bottom-20 right-4 sticker hidden lg:block" style="animation-direction: reverse;">
-            <div class="w-20 h-20 sm:w-24 sm:h-24 bg-brutal-cyan border-3 border-brutal-black rotate-12 shadow-brutal-sm p-1">
-                <div class="w-full h-full border-2 border-brutal-black border-dashed flex items-center justify-center">
-                    <i data-lucide="code-2" class="w-8 h-8 sm:w-10 sm:h-10"></i>
-                </div>
-            </div>
-        </div>
-
-        <div class="w-full max-w-7xl mx-auto relative z-10">
-            <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-                <div class="order-2 lg:order-1 text-center lg:text-left">
-                    <div class="inline-block mb-4 sm:mb-6 transform -rotate-2">
-                        <div class="bg-brutal-white border-3 border-brutal-black px-3 py-1.5 sm:px-4 sm:py-2 shadow-brutal-sm font-mono text-xs sm:text-sm font-bold">
-                            <span class="inline-block w-2 h-2 sm:w-3 sm:h-3 bg-brutal-pink rounded-full mr-1 sm:mr-2 animate-pulse"></span>
-                            DEVELOPER SEKOLAH & EDUKASI
-                        </div>
-                    </div>
-
-                    <h1 class="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-tight mb-4 sm:mb-6">
-                        MEMBANGUN<br>
-                        <span class="text-brutal-pink">MASA DEPAN</span><br>
-                        <span class="bg-brutal-black text-brutal-yellow px-2 inline-block transform -rotate-1 mt-1">DIGITAL</span>
-                    </h1>
-
-                    <p class="font-mono text-sm sm:text-base md:text-lg mb-6 sm:mb-8 max-w-lg mx-auto lg:mx-0 bg-brutal-white border-3 border-brutal-black p-3 sm:p-4 shadow-brutal transform rotate-1">
-                        Solusi teknologi modern untuk ekosistem pendidikan di Kepulauan Tanimbar.
-                    </p>
-
-                    <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
-                        <a href="#works" class="inline-flex items-center justify-center gap-2 font-mono font-bold text-sm sm:text-base px-4 sm:px-6 py-3 sm:py-4 bg-brutal-pink text-white border-3 border-brutal-black shadow-brutal hover:shadow-brutal-hover hover:-translate-y-0.5 transition-all wiggle">
-                            LIHAT PROJECT
-                            <i data-lucide="arrow-right" class="w-4 h-4 sm:w-5 sm:h-5"></i>
-                        </a>
-                        <a href="https://wa.me/6282238128216" class="inline-flex items-center justify-center gap-2 font-mono font-bold text-sm sm:text-base px-4 sm:px-6 py-3 sm:py-4 bg-brutal-cyan border-3 border-brutal-black shadow-brutal hover:shadow-brutal-hover hover:-translate-y-0.5 transition-all wiggle">
-                            <i data-lucide="message-circle" class="w-4 h-4 sm:w-5 sm:h-5"></i>
-                            CHAT
-                        </a>
-                    </div>
-                </div>
-
-                <div class="order-1 lg:order-2 flex justify-center">
-                    <div class="relative max-w-[280px] sm:max-w-[320px] md:max-w-[380px]">
-                        <div class="tape w-20 sm:w-24 h-5 sm:h-6 -top-2 sm:-top-3 left-1/2 -translate-x-1/2"></div>
-                        
-                        <div class="relative bg-brutal-white border-3 border-brutal-black p-2 sm:p-3 shadow-brutal transform rotate-2 hover:rotate-0 transition-transform duration-300">
-                            <div class="bg-brutal-gray border-3 border-brutal-black overflow-hidden">
-                                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhcgX_ACgXPCUAXU8VnYkern3AmVP500MT7r7YUKzF2qR3Tb28_lpFsqTrj_MIQl4GzikDse4jM1D7f55p0_vs-uPwKCib4zHziZC8jEYzMXV4jLsvRax5ERjZwNGiX5ZCpKdV5dy-ftNYwGWitVnKjwY_L7r5yn81b2ovGGVA9C0dzMSWjQv6IeGn9_fT7/s250/IMG-20251212-WA0016.jpg" 
-                                     alt="Edward" 
-                                     class="w-full aspect-square object-cover">
-                            </div>
-                            
-                            <div class="mt-2 sm:mt-3 bg-brutal-yellow border-3 border-brutal-black p-1.5 sm:p-2 font-mono text-[10px] sm:text-xs font-bold text-center transform -rotate-1">
-                                EDWARD DOMAKUBUN // FULLSTACK DEV
-                            </div>
-                        </div>
-
-                        <div class="absolute -bottom-4 -right-4 sm:-bottom-6 sm:-right-6 w-16 h-16 sm:w-20 sm:h-20 bg-brutal-orange border-3 border-brutal-black rounded-full flex items-center justify-center shadow-brutal-sm z-10">
-                            <span class="font-display text-white text-center text-[10px] sm:text-xs leading-tight">10+<br>PROJECTS</span>
-                        </div>
-
-                        <div class="absolute -top-2 -left-2 sm:-top-4 sm:-left-4 w-10 h-10 sm:w-14 sm:h-14 bg-brutal-purple border-3 border-brutal-black flex items-center justify-center shadow-brutal-sm z-10 rotate-12">
-                            <i data-lucide="star" class="w-5 h-5 sm:w-7 sm:h-7 text-white fill-white"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Marquee Section -->
-    <div class="w-full bg-brutal-black text-brutal-yellow py-3 sm:py-4 border-y-3 border-brutal-black overflow-hidden">
-        <div class="marquee-container">
-            <div class="marquee-content font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
-                <span class="mx-4 sm:mx-8">WEB DEVELOPMENT</span>
-                <span class="text-brutal-pink mx-2 sm:mx-4">★</span>
-                <span class="mx-4 sm:mx-8">MOBILE APPS</span>
-                <span class="text-brutal-cyan mx-2 sm:mx-4">★</span>
-                <span class="mx-4 sm:mx-8">QR SYSTEMS</span>
-                <span class="text-brutal-orange mx-2 sm:mx-4">★</span>
-                <span class="mx-4 sm:mx-8">SIAKAD</span>
-                <span class="text-brutal-purple mx-2 sm:mx-4">★</span>
-                <span class="mx-4 sm:mx-8">UI/UX DESIGN</span>
-                <span class="text-brutal-pink mx-2 sm:mx-4">★</span>
-                <span class="mx-4 sm:mx-8">WEB DEVELOPMENT</span>
-                <span class="text-brutal-pink mx-2 sm:mx-4">★</span>
-                <span class="mx-4 sm:mx-8">MOBILE APPS</span>
-                <span class="text-brutal-cyan mx-2 sm:mx-4">★</span>
-                <span class="mx-4 sm:mx-8">QR SYSTEMS</span>
-                <span class="text-brutal-orange mx-2 sm:mx-4">★</span>
-                <span class="mx-4 sm:mx-8">SIAKAD</span>
-                <span class="text-brutal-purple mx-2 sm:mx-4">★</span>
-                <span class="mx-4 sm:mx-8">UI/UX DESIGN</span>
-                <span class="text-brutal-pink mx-2 sm:mx-4">★</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- About Section -->
-    <section id="about" class="w-full py-16 sm:py-20 md:py-24 px-4 bg-brutal-white relative">
-        <div class="absolute top-0 left-0 w-full h-3 bg-brutal-black"></div>
-        
-        <div class="w-full max-w-6xl mx-auto">
-            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 sm:mb-16 gap-4">
-                <div class="text-center md:text-left">
-                    <div class="inline-block bg-brutal-cyan border-3 border-brutal-black px-3 py-1 sm:px-4 sm:py-1.5 font-mono font-bold text-xs sm:text-sm mb-3 sm:mb-4 shadow-brutal-sm transform -rotate-2">
-                        01 // ABOUT
-                    </div>
-                    <h2 class="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-tight">
-                        SIAPA <span class="bg-brutal-pink text-white px-2 inline-block transform rotate-1">SAYA?</span>
-                    </h2>
-                </div>
-                <div class="hidden md:block">
-                    <div class="w-20 h-20 lg:w-24 lg:h-24 bg-brutal-yellow border-3 border-brutal-black rounded-full flex items-center justify-center shadow-brutal-sm">
-                        <i data-lucide="zap" class="w-10 h-10 lg:w-12 lg:h-12"></i>
-                    </div>
-                </div>
-            </div>
-
-            <div class="grid md:grid-cols-2 gap-6 sm:gap-8">
-                <div class="bg-brutal-yellow border-3 border-brutal-black p-5 sm:p-6 md:p-8 shadow-brutal doodle-border relative">
-                    <div class="tape w-16 sm:w-20 h-4 sm:h-5 -top-2 sm:-top-3 left-4 sm:left-8"></div>
-                    <h3 class="font-display text-xl sm:text-2xl md:text-3xl mb-3 sm:mb-4">Mendigitalkan Pendidikan</h3>
-                    <p class="font-body text-sm sm:text-base leading-relaxed mb-4 sm:mb-6">
-                        Mahasiswa Pendidikan Bahasa Inggris di Univ. Lelemuku yang memadukan kemampuan komunikasi dan keahlian koding untuk menciptakan solusi teknologi berdampak.
-                    </p>
-                    <div class="flex gap-3 sm:gap-4">
-                        <div class="flex-1 bg-brutal-white border-3 border-brutal-black p-2 sm:p-3 text-center shadow-brutal-sm">
-                            <div class="font-display text-2xl sm:text-3xl text-brutal-pink">10+</div>
-                            <div class="font-mono text-[10px] sm:text-xs">Projects</div>
-                        </div>
-                        <div class="flex-1 bg-brutal-white border-3 border-brutal-black p-2 sm:p-3 text-center shadow-brutal-sm">
-                            <div class="font-display text-2xl sm:text-3xl text-brutal-cyan">5+</div>
-                            <div class="font-mono text-[10px] sm:text-xs">Schools</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-brutal-black text-brutal-yellow border-3 border-brutal-black p-5 sm:p-6 md:p-8 shadow-brutal doodle-border-2 relative scanlines">
-                    <div class="absolute -top-3 -right-3 sm:-top-4 sm:-right-4 w-10 h-10 sm:w-12 sm:h-12 bg-brutal-orange border-3 border-brutal-black flex items-center justify-center shadow-brutal-sm">
-                        <i data-lucide="quote" class="w-5 h-5 sm:w-6 sm:h-6 text-white"></i>
-                    </div>
-                    <p class="font-mono text-base sm:text-lg md:text-xl leading-relaxed mb-4 sm:mb-6">
-                        "Teknologi terbaik adalah yang tidak menyulitkan, melainkan mempermudah pekerjaan guru dan siswa setiap harinya."
-                    </p>
-                    <div class="flex items-center gap-3 sm:gap-4">
-                        <div class="w-10 h-10 sm:w-12 sm:h-12 bg-brutal-yellow border-3 border-brutal-white rounded-full overflow-hidden shrink-0">
-                            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhcgX_ACgXPCUAXU8VnYkern3AmVP500MT7r7YUKzF2qR3Tb28_lpFsqTrj_MIQl4GzikDse4jM1D7f55p0_vs-uPwKCib4zHziZC8jEYzMXV4jLsvRax5ERjZwNGiX5ZCpKdV5dy-ftNYwGWitVnKjwY_L7r5yn81b2ovGGVA9C0dzMSWjQv6IeGn9_fT7/s250/IMG-20251212-WA0016.jpg" 
-                                 class="w-full h-full object-cover">
-                        </div>
-                        <div class="min-w-0">
-                            <div class="font-display text-base sm:text-lg truncate">Edward D.</div>
-                            <div class="font-mono text-[10px] sm:text-xs text-brutal-cyan">Fullstack Developer</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section id="services" class="w-full py-16 sm:py-20 md:py-24 px-4 bg-brutal-cyan relative overflow-hidden">
-        <div class="absolute inset-0 bg-grid-small opacity-20 pointer-events-none"></div>
-        
-        <div class="w-full max-w-7xl mx-auto relative z-10">
-            <div class="text-center mb-10 sm:mb-16">
-                <div class="inline-block bg-brutal-black text-brutal-yellow border-3 border-brutal-black px-4 py-1.5 sm:px-6 sm:py-2 font-mono font-bold text-xs sm:text-sm mb-3 sm:mb-4 shadow-brutal transform rotate-1">
-                    02 // SERVICES
-                </div>
-                <h2 class="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-tight">
-                    LAYANAN <span class="bg-brutal-white px-2 inline-block transform -rotate-2 shadow-brutal-sm">UNGGULAN</span>
-                </h2>
-            </div>
-
-            <div class="grid sm:grid-cols-2 gap-4 sm:gap-6">
-                <div class="group bg-brutal-white border-3 border-brutal-black p-4 sm:p-6 shadow-brutal hover:shadow-brutal-hover hover:-translate-y-1 transition-all cursor-pointer">
-                    <div class="flex justify-between items-start mb-3 sm:mb-4">
-                        <div class="w-12 h-12 sm:w-14 sm:h-14 bg-brutal-pink border-3 border-brutal-black flex items-center justify-center group-hover:rotate-6 transition-transform shrink-0">
-                            <i data-lucide="globe" class="w-6 h-6 sm:w-7 sm:h-7 text-white"></i>
-                        </div>
-                        <span class="font-display text-4xl sm:text-5xl text-brutal-black/10 group-hover:text-brutal-pink transition-colors">01</span>
-                    </div>
-                    <h3 class="font-display text-lg sm:text-xl md:text-2xl mb-1 sm:mb-2 group-hover:text-brutal-pink transition-colors">Website & PPDB</h3>
-                    <p class="font-mono text-xs sm:text-sm leading-relaxed">
-                        Website profil sekolah resmi, portal informasi publik, dan sistem PPDB online yang cepat dan responsif.
-                    </p>
-                </div>
-
-                <div class="group bg-brutal-white border-3 border-brutal-black p-4 sm:p-6 shadow-brutal hover:shadow-brutal-hover hover:-translate-y-1 transition-all cursor-pointer">
-                    <div class="flex justify-between items-start mb-3 sm:mb-4">
-                        <div class="w-12 h-12 sm:w-14 sm:h-14 bg-brutal-purple border-3 border-brutal-black flex items-center justify-center group-hover:-rotate-6 transition-transform shrink-0">
-                            <i data-lucide="smartphone" class="w-6 h-6 sm:w-7 sm:h-7 text-white"></i>
-                        </div>
-                        <span class="font-display text-4xl sm:text-5xl text-brutal-black/10 group-hover:text-brutal-purple transition-colors">02</span>
-                    </div>
-                    <h3 class="font-display text-lg sm:text-xl md:text-2xl mb-1 sm:mb-2 group-hover:text-brutal-purple transition-colors">Aplikasi Android</h3>
-                    <p class="font-mono text-xs sm:text-sm leading-relaxed">
-                        Aplikasi mobile kustom untuk e-learning, portal siswa, dan sistem perpustakaan digital.
-                    </p>
-                </div>
-
-                <div class="group bg-brutal-white border-3 border-brutal-black p-4 sm:p-6 shadow-brutal hover:shadow-brutal-hover hover:-translate-y-1 transition-all cursor-pointer">
-                    <div class="flex justify-between items-start mb-3 sm:mb-4">
-                        <div class="w-12 h-12 sm:w-14 sm:h-14 bg-brutal-orange border-3 border-brutal-black flex items-center justify-center group-hover:rotate-6 transition-transform shrink-0">
-                            <i data-lucide="scan-line" class="w-6 h-6 sm:w-7 sm:h-7 text-white"></i>
-                        </div>
-                        <span class="font-display text-4xl sm:text-5xl text-brutal-black/10 group-hover:text-brutal-orange transition-colors">03</span>
-                    </div>
-                    <h3 class="font-display text-lg sm:text-xl md:text-2xl mb-1 sm:mb-2 group-hover:text-brutal-orange transition-colors">Sistem Presensi QR</h3>
-                    <p class="font-mono text-xs sm:text-sm leading-relaxed">
-                        Sistem absensi digital modern menggunakan pemindaian QR Code. Cepat, akurat, dan terhubung database.
-                    </p>
-                </div>
-
-                <div class="group bg-brutal-white border-3 border-brutal-black p-4 sm:p-6 shadow-brutal hover:shadow-brutal-hover hover:-translate-y-1 transition-all cursor-pointer">
-                    <div class="flex justify-between items-start mb-3 sm:mb-4">
-                        <div class="w-12 h-12 sm:w-14 sm:h-14 bg-brutal-black border-3 border-brutal-black flex items-center justify-center group-hover:-rotate-6 transition-transform shrink-0">
-                            <i data-lucide="database" class="w-6 h-6 sm:w-7 sm:h-7 text-brutal-yellow"></i>
-                        </div>
-                        <span class="font-display text-4xl sm:text-5xl text-brutal-black/10 group-hover:text-brutal-black transition-colors">04</span>
-                    </div>
-                    <h3 class="font-display text-lg sm:text-xl md:text-2xl mb-1 sm:mb-2">SIAKAD & Arsip</h3>
-                    <p class="font-mono text-xs sm:text-sm leading-relaxed">
-                        Sistem Informasi Akademik Terpadu dan repositori awan untuk manajemen dokumen dan nilai.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Works Section with Live Preview -->
-    <section id="works" class="w-full py-16 sm:py-20 md:py-24 px-4 bg-brutal-pink relative overflow-hidden">
-        <div class="w-full max-w-7xl mx-auto">
-            <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-12 gap-4">
-                <div class="text-center md:text-left">
-                    <div class="inline-block bg-brutal-yellow border-3 border-brutal-black px-3 py-1 sm:px-4 sm:py-1.5 font-mono font-bold text-xs sm:text-sm mb-3 sm:mb-4 shadow-brutal-sm transform rotate-2">
-                        03 // PORTFOLIO
-                    </div>
-                    <h2 class="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white leading-tight">
-                        KARYA <span class="bg-brutal-black text-brutal-yellow px-2 inline-block transform -rotate-1">TERBARU</span>
-                    </h2>
-                </div>
-                <div class="hidden md:block font-mono text-white text-xs sm:text-sm bg-brutal-black border-3 border-brutal-white px-3 py-1.5 sm:px-4 sm:py-2 shadow-brutal-sm">
-                    ← SCROLL TO EXPLORE →
-                </div>
-            </div>
-
-            <!-- Horizontal Scroll Container -->
-            <div class="flex gap-4 sm:gap-6 overflow-x-auto pb-6 sm:pb-8 snap-x snap-mandatory hide-scrollbar -mx-4 px-4 sm:-mx-6 sm:px-6 md:-mx-8 md:px-8">
-                <!-- Project 1 - EduQuest.ai -->
-                <div class="flex-shrink-0 w-[300px] sm:w-[340px] md:w-[400px] snap-center">
-                    <div class="bg-brutal-white border-3 border-brutal-black shadow-brutal group hover:-translate-y-1 hover:shadow-brutal-hover transition-all h-full flex flex-col">
-                        <!-- Live Preview Thumbnail -->
-                        <div class="card-preview border-b-3 border-brutal-black relative bg-brutal-cyan">
-                            <iframe src="https://eduquest-pro-ka55.vercel.app/login" 
-                                    title="Preview EduQuest.ai"
-                                    loading="lazy"
-                                    sandbox="allow-same-origin allow-scripts"
-                                    onerror="this.style.display='none'; this.nextElementSibling.classList.add('active');"></iframe>
-                            <div class="preview-fallback bg-gradient-to-br from-blue-500 to-cyan-500">
-                                <i data-lucide="school" class="w-12 h-12 text-white"></i>
-                                <span class="text-sm font-bold mt-2">EduQuest.ai</span>
-                            </div>
-                            <div class="preview-overlay">
-                                <button onclick="openPreview('https://eduquest-pro-ka55.vercel.app/login', 'EduQuest.ai')" class="preview-btn">
-                                    <i data-lucide="maximize-2" class="w-4 h-4 inline mr-1"></i>
-                                    PREVIEW
-                                </button>
-                            </div>
-                            <div class="absolute top-3 right-3 bg-brutal-black text-brutal-cyan font-mono text-[10px] sm:text-xs px-2 py-1 border-2 border-brutal-black z-10">
-                                WEBSITE
-                            </div>
-                        </div>
-                        <div class="p-4 sm:p-5 flex flex-col flex-grow">
-                            <h3 class="font-display text-lg sm:text-xl md:text-2xl mb-1 sm:mb-2">EduQuest.ai</h3>
-                            <p class="font-mono text-xs sm:text-sm mb-3 sm:mb-4 flex-grow">Revolusi Pembuatan Soal untuk Guru SD <br>Buat soal ujian terstandarisasi, analisis Taksonomi Bloom, dan ilustrasi edukatif hanya dalam hitungan detik.</p>
-                            <div class="flex gap-2">
-                                <button onclick="openPreview('https://eduquest-pro-ka55.vercel.app/login', 'EduQuest.ai')" class="flex-1 inline-flex items-center justify-center gap-1 font-mono font-bold text-xs sm:text-sm bg-brutal-cyan text-brutal-black px-2 py-2 sm:px-3 sm:py-3 border-2 border-brutal-black hover:bg-brutal-black hover:text-brutal-cyan transition-colors">
-                                    <i data-lucide="eye" class="w-3 h-3 sm:w-4 sm:h-4"></i>
-                                    PREVIEW
-                                </button>
-                                <a href="https://eduquest-pro-ka55.vercel.app/login" target="_blank" class="flex-1 inline-flex items-center justify-center gap-1 font-mono font-bold text-xs sm:text-sm bg-brutal-black text-brutal-cyan px-2 py-2 sm:px-3 sm:py-3 border-2 border-brutal-black hover:bg-brutal-cyan hover:text-brutal-black transition-colors">
-                                    <i data-lucide="external-link" class="w-3 h-3 sm:w-4 sm:h-4"></i>
-                                    VISIT
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Project 2 - SD Inpres Lelingluan -->
-                <div class="flex-shrink-0 w-[300px] sm:w-[340px] md:w-[400px] snap-center">
-                    <div class="bg-brutal-white border-3 border-brutal-black shadow-brutal group hover:-translate-y-1 hover:shadow-brutal-hover transition-all h-full flex flex-col">
-                        <!-- Live Preview Thumbnail -->
-                        <div class="card-preview border-b-3 border-brutal-black relative bg-brutal-cyan">
-                            <iframe src="https://www.sdinpreslelingluan.com" 
-                                    title="Preview SD Inpres Lelingluan"
-                                    loading="lazy"
-                                    sandbox="allow-same-origin allow-scripts"
-                                    onerror="this.style.display='none'; this.nextElementSibling.classList.add('active');"></iframe>
-                            <div class="preview-fallback bg-gradient-to-br from-blue-500 to-cyan-500">
-                                <i data-lucide="school" class="w-12 h-12 text-white"></i>
-                                <span class="text-sm font-bold mt-2">SD Inpres Lelingluan</span>
-                            </div>
-                            <div class="preview-overlay">
-                                <button onclick="openPreview('https://www.sdinpreslelingluan.com', 'SD Inpres Lelingluan')" class="preview-btn">
-                                    <i data-lucide="maximize-2" class="w-4 h-4 inline mr-1"></i>
-                                    PREVIEW
-                                </button>
-                            </div>
-                            <div class="absolute top-3 right-3 bg-brutal-black text-brutal-cyan font-mono text-[10px] sm:text-xs px-2 py-1 border-2 border-brutal-black z-10">
-                                WEBSITE
-                            </div>
-                        </div>
-                        <div class="p-4 sm:p-5 flex flex-col flex-grow">
-                            <h3 class="font-display text-lg sm:text-xl md:text-2xl mb-1 sm:mb-2">SD Inpres Lelingluan</h3>
-                            <p class="font-mono text-xs sm:text-sm mb-3 sm:mb-4 flex-grow">Website profil resmi dengan manajemen konten berita & galeri.</p>
-                            <div class="flex gap-2">
-                                <button onclick="openPreview('https://www.sdinpreslelingluan.com', 'SD Inpres Lelingluan')" class="flex-1 inline-flex items-center justify-center gap-1 font-mono font-bold text-xs sm:text-sm bg-brutal-cyan text-brutal-black px-2 py-2 sm:px-3 sm:py-3 border-2 border-brutal-black hover:bg-brutal-black hover:text-brutal-cyan transition-colors">
-                                    <i data-lucide="eye" class="w-3 h-3 sm:w-4 sm:h-4"></i>
-                                    PREVIEW
-                                </button>
-                                <a href="https://www.sdinpreslelingluan.com" target="_blank" class="flex-1 inline-flex items-center justify-center gap-1 font-mono font-bold text-xs sm:text-sm bg-brutal-black text-brutal-cyan px-2 py-2 sm:px-3 sm:py-3 border-2 border-brutal-black hover:bg-brutal-cyan hover:text-brutal-black transition-colors">
-                                    <i data-lucide="external-link" class="w-3 h-3 sm:w-4 sm:h-4"></i>
-                                    VISIT
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 3 - PPDB Online -->
-                <div class="flex-shrink-0 w-[300px] sm:w-[340px] md:w-[400px] snap-center">
-                    <div class="bg-brutal-white border-3 border-brutal-black shadow-brutal group hover:-translate-y-1 hover:shadow-brutal-hover transition-all h-full flex flex-col">
-                        <div class="card-preview border-b-3 border-brutal-black relative bg-brutal-purple">
-                            <iframe src="https://sdinpreslelingluan-ppdb.pages.dev" 
-                                    title="Preview PPDB Online"
-                                    loading="lazy"
-                                    sandbox="allow-same-origin allow-scripts"
-                                    onerror="this.style.display='none'; this.nextElementSibling.classList.add('active');"></iframe>
-                            <div class="preview-fallback bg-gradient-to-br from-purple-600 to-pink-600">
-                                <i data-lucide="user-plus" class="w-12 h-12 text-white"></i>
-                                <span class="text-sm font-bold mt-2">PPDB Online</span>
-                            </div>
-                            <div class="preview-overlay">
-                                <button onclick="openPreview('https://sdinpreslelingluan-ppdb.pages.dev', 'PPDB Online')" class="preview-btn">
-                                    <i data-lucide="maximize-2" class="w-4 h-4 inline mr-1"></i>
-                                    PREVIEW
-                                </button>
-                            </div>
-                            <div class="absolute top-3 right-3 bg-brutal-black text-brutal-purple font-mono text-[10px] sm:text-xs px-2 py-1 border-2 border-brutal-black z-10">
-                                WEB APP
-                            </div>
-                        </div>
-                        <div class="p-4 sm:p-5 flex flex-col flex-grow">
-                            <h3 class="font-display text-lg sm:text-xl md:text-2xl mb-1 sm:mb-2">PPDB Online</h3>
-                            <p class="font-mono text-xs sm:text-sm mb-3 sm:mb-4 flex-grow">Sistem Penerimaan Peserta Didik Baru digital yang transparan.</p>
-                            <div class="flex gap-2">
-                                <button onclick="openPreview('https://sdinpreslelingluan-ppdb.pages.dev', 'PPDB Online')" class="flex-1 inline-flex items-center justify-center gap-1 font-mono font-bold text-xs sm:text-sm bg-brutal-purple text-white px-2 py-2 sm:px-3 sm:py-3 border-2 border-brutal-black hover:bg-brutal-black hover:text-brutal-purple transition-colors">
-                                    <i data-lucide="eye" class="w-3 h-3 sm:w-4 sm:h-4"></i>
-                                    PREVIEW
-                                </button>
-                                <a href="https://sdinpreslelingluan-ppdb.pages.dev" target="_blank" class="flex-1 inline-flex items-center justify-center gap-1 font-mono font-bold text-xs sm:text-sm bg-brutal-black text-brutal-purple px-2 py-2 sm:px-3 sm:py-3 border-2 border-brutal-black hover:bg-brutal-purple hover:text-white transition-colors">
-                                    <i data-lucide="external-link" class="w-3 h-3 sm:w-4 sm:h-4"></i>
-                                    VISIT
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 4 - PresensiSaya -->
-                <div class="flex-shrink-0 w-[300px] sm:w-[340px] md:w-[400px] snap-center">
-                    <div class="bg-brutal-white border-3 border-brutal-black shadow-brutal group hover:-translate-y-1 hover:shadow-brutal-hover transition-all h-full flex flex-col">
-                        <div class="card-preview border-b-3 border-brutal-black relative bg-brutal-orange">
-                            <iframe src="https://www.sdinpreslelingluan.com/2026/01/rilis-aplikasi-presensi-digital-v52.html" 
-                                    title="Preview PresensiSaya"
-                                    loading="lazy"
-                                    sandbox="allow-same-origin allow-scripts"
-                                    onerror="this.style.display='none'; this.nextElementSibling.classList.add('active');"></iframe>
-                            <div class="preview-fallback bg-gradient-to-br from-orange-500 to-red-500">
-                                <i data-lucide="qr-code" class="w-12 h-12 text-white"></i>
-                                <span class="text-sm font-bold mt-2">PresensiSaya</span>
-                            </div>
-                            <div class="preview-overlay">
-                                <button onclick="openPreview('https://www.sdinpreslelingluan.com/2026/01/rilis-aplikasi-presensi-digital-v52.html', 'PresensiSaya')" class="preview-btn">
-                                    <i data-lucide="maximize-2" class="w-4 h-4 inline mr-1"></i>
-                                    PREVIEW
-                                </button>
-                            </div>
-                            <div class="absolute top-3 right-3 bg-brutal-black text-brutal-orange font-mono text-[10px] sm:text-xs px-2 py-1 border-2 border-brutal-black z-10">
-                                MOBILE
-                            </div>
-                        </div>
-                        <div class="p-4 sm:p-5 flex flex-col flex-grow">
-                            <h3 class="font-display text-lg sm:text-xl md:text-2xl mb-1 sm:mb-2">PresensiSaya</h3>
-                            <p class="font-mono text-xs sm:text-sm mb-3 sm:mb-4 flex-grow">Aplikasi absensi mobile dengan QR Code scanner real-time.</p>
-                            <div class="flex gap-2">
-                                <button onclick="openPreview('https://www.sdinpreslelingluan.com/2026/01/rilis-aplikasi-presensi-digital-v52.html', 'PresensiSaya')" class="flex-1 inline-flex items-center justify-center gap-1 font-mono font-bold text-xs sm:text-sm bg-brutal-orange text-white px-2 py-2 sm:px-3 sm:py-3 border-2 border-brutal-black hover:bg-brutal-black hover:text-brutal-orange transition-colors">
-                                    <i data-lucide="eye" class="w-3 h-3 sm:w-4 sm:h-4"></i>
-                                    PREVIEW
-                                </button>
-                                <a href="https://www.sdinpreslelingluan.com/2026/01/rilis-aplikasi-presensi-digital-v52.html" target="_blank" class="flex-1 inline-flex items-center justify-center gap-1 font-mono font-bold text-xs sm:text-sm bg-brutal-black text-brutal-orange px-2 py-2 sm:px-3 sm:py-3 border-2 border-brutal-black hover:bg-brutal-orange hover:text-white transition-colors">
-                                    <i data-lucide="external-link" class="w-3 h-3 sm:w-4 sm:h-4"></i>
-                                    VISIT
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 5 - Simple 6JA -->
-                <div class="flex-shrink-0 w-[300px] sm:w-[340px] md:w-[400px] snap-center">
-                    <div class="bg-brutal-white border-3 border-brutal-black shadow-brutal group hover:-translate-y-1 hover:shadow-brutal-hover transition-all h-full flex flex-col">
-                        <div class="card-preview border-b-3 border-brutal-black relative bg-brutal-yellow">
-                            <iframe src="https://simple-6ja.pages.dev/" 
-                                    title="Preview Simple 6JA"
-                                    loading="lazy"
-                                    sandbox="allow-same-origin allow-scripts"
-                                    onerror="this.style.display='none'; this.nextElementSibling.classList.add('active');"></iframe>
-                            <div class="preview-fallback bg-gradient-to-br from-yellow-400 to-orange-500">
-                                <i data-lucide="layout-dashboard" class="w-12 h-12 text-white"></i>
-                                <span class="text-sm font-bold mt-2">Simple 6JA</span>
-                            </div>
-                            <div class="preview-overlay">
-                                <button onclick="openPreview('https://simple-6ja.pages.dev/', 'Simple 6JA')" class="preview-btn">
-                                    <i data-lucide="maximize-2" class="w-4 h-4 inline mr-1"></i>
-                                    PREVIEW
-                                </button>
-                            </div>
-                            <div class="absolute top-3 right-3 bg-brutal-black text-brutal-yellow font-mono text-[10px] sm:text-xs px-2 py-1 border-2 border-brutal-black z-10">
-                                SMART
-                            </div>
-                        </div>
-                        <div class="p-4 sm:p-5 flex flex-col flex-grow">
-                            <h3 class="font-display text-lg sm:text-xl md:text-2xl mb-1 sm:mb-2">Simple 6JA</h3>
-                            <p class="font-mono text-xs sm:text-sm mb-3 sm:mb-4 flex-grow">Sistem Data Siswa Digital & aplikasi interaksi visual kelas.</p>
-                            <div class="flex gap-2">
-                                <button onclick="openPreview('https://simple-6ja.pages.dev/', 'Simple 6JA')" class="flex-1 inline-flex items-center justify-center gap-1 font-mono font-bold text-xs sm:text-sm bg-brutal-yellow text-brutal-black px-2 py-2 sm:px-3 sm:py-3 border-2 border-brutal-black hover:bg-brutal-black hover:text-brutal-yellow transition-colors">
-                                    <i data-lucide="eye" class="w-3 h-3 sm:w-4 sm:h-4"></i>
-                                    PREVIEW
-                                </button>
-                                <a href="https://simple-6ja.pages.dev/" target="_blank" class="flex-1 inline-flex items-center justify-center gap-1 font-mono font-bold text-xs sm:text-sm bg-brutal-black text-brutal-yellow px-2 py-2 sm:px-3 sm:py-3 border-2 border-brutal-black hover:bg-brutal-yellow hover:text-brutal-black transition-colors">
-                                    <i data-lucide="external-link" class="w-3 h-3 sm:w-4 sm:h-4"></i>
-                                    VISIT
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 6 - Arsip Digital -->
-                <div class="flex-shrink-0 w-[300px] sm:w-[340px] md:w-[400px] snap-center">
-                    <div class="bg-brutal-white border-3 border-brutal-black shadow-brutal group hover:-translate-y-1 hover:shadow-brutal-hover transition-all h-full flex flex-col">
-                        <div class="card-preview border-b-3 border-brutal-black relative bg-brutal-black">
-                            <iframe src="https://archive-sdinleling.blogspot.com/" 
-                                    title="Preview Arsip Digital"
-                                    loading="lazy"
-                                    sandbox="allow-same-origin allow-scripts"
-                                    onerror="this.style.display='none'; this.nextElementSibling.classList.add('active');"></iframe>
-                            <div class="preview-fallback bg-gradient-to-br from-gray-700 to-gray-900">
-                                <i data-lucide="archive" class="w-12 h-12 text-brutal-cyan"></i>
-                                <span class="text-sm font-bold mt-2 text-white">Arsip Digital</span>
-                            </div>
-                            <div class="preview-overlay">
-                                <button onclick="openPreview('https://archive-sdinleling.blogspot.com/', 'Arsip Digital')" class="preview-btn">
-                                    <i data-lucide="maximize-2" class="w-4 h-4 inline mr-1"></i>
-                                    PREVIEW
-                                </button>
-                            </div>
-                            <div class="absolute top-3 right-3 bg-brutal-cyan text-brutal-black font-mono text-[10px] sm:text-xs px-2 py-1 border-2 border-brutal-black z-10">
-                                CLOUD
-                            </div>
-                        </div>
-                        <div class="p-4 sm:p-5 flex flex-col flex-grow">
-                            <h3 class="font-display text-lg sm:text-xl md:text-2xl mb-1 sm:mb-2">Arsip Digital</h3>
-                            <p class="font-mono text-xs sm:text-sm mb-3 sm:mb-4 flex-grow">Repositori awan modern untuk pengarsipan dokumen sekolah.</p>
-                            <div class="flex gap-2">
-                                <button onclick="openPreview('https://archive-sdinleling.blogspot.com/', 'Arsip Digital')" class="flex-1 inline-flex items-center justify-center gap-1 font-mono font-bold text-xs sm:text-sm bg-brutal-cyan text-brutal-black px-2 py-2 sm:px-3 sm:py-3 border-2 border-brutal-black hover:bg-brutal-black hover:text-brutal-cyan transition-colors">
-                                    <i data-lucide="eye" class="w-3 h-3 sm:w-4 sm:h-4"></i>
-                                    PREVIEW
-                                </button>
-                                <a href="https://archive-sdinleling.blogspot.com/" target="_blank" class="flex-1 inline-flex items-center justify-center gap-1 font-mono font-bold text-xs sm:text-sm bg-brutal-black text-brutal-cyan px-2 py-2 sm:px-3 sm:py-3 border-2 border-brutal-black hover:bg-brutal-cyan hover:text-brutal-black transition-colors">
-                                    <i data-lucide="external-link" class="w-3 h-3 sm:w-4 sm:h-4"></i>
-                                    VISIT
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 7 - SIAKAD Terpadu -->
-                <div class="flex-shrink-0 w-[300px] sm:w-[340px] md:w-[400px] snap-center">
-                    <div class="bg-brutal-white border-3 border-brutal-black shadow-brutal group hover:-translate-y-1 hover:shadow-brutal-hover transition-all h-full flex flex-col">
-                        <div class="card-preview border-b-3 border-brutal-black relative bg-brutal-gray">
-                            <iframe src="https://siakadterpadu.pages.dev/" 
-                                    title="Preview SIAKAD Terpadu"
-                                    loading="lazy"
-                                    sandbox="allow-same-origin allow-scripts"
-                                    onerror="this.style.display='none'; this.nextElementSibling.classList.add('active');"></iframe>
-                            <div class="preview-fallback bg-gradient-to-br from-emerald-500 to-teal-600">
-                                <i data-lucide="graduation-cap" class="w-12 h-12 text-white"></i>
-                                <span class="text-sm font-bold mt-2">SIAKAD</span>
-                            </div>
-                            <div class="preview-overlay">
-                                <button onclick="openPreview('https://siakadterpadu.pages.dev/', 'SIAKAD Terpadu')" class="preview-btn">
-                                    <i data-lucide="maximize-2" class="w-4 h-4 inline mr-1"></i>
-                                    PREVIEW
-                                </button>
-                            </div>
-                            <div class="absolute top-3 right-3 bg-brutal-black text-white font-mono text-[10px] sm:text-xs px-2 py-1 border-2 border-brutal-black z-10">
-                                ENTERPRISE
-                            </div>
-                        </div>
-                        <div class="p-4 sm:p-5 flex flex-col flex-grow">
-                            <h3 class="font-display text-lg sm:text-xl md:text-2xl mb-1 sm:mb-2">SIAKAD Terpadu</h3>
-                            <p class="font-mono text-xs sm:text-sm mb-3 sm:mb-4 flex-grow">Sistem Informasi Akademik sentralisasi data untuk staf pendidik.</p>
-                            <div class="flex gap-2">
-                                <button onclick="openPreview('https://siakadterpadu.pages.dev/', 'SIAKAD Terpadu')" class="flex-1 inline-flex items-center justify-center gap-1 font-mono font-bold text-xs sm:text-sm bg-brutal-black text-white px-2 py-2 sm:px-3 sm:py-3 border-2 border-brutal-black hover:bg-white hover:text-brutal-black transition-colors">
-                                    <i data-lucide="eye" class="w-3 h-3 sm:w-4 sm:h-4"></i>
-                                    PREVIEW
-                                </button>
-                                <a href="https://siakadterpadu.pages.dev/" target="_blank" class="flex-1 inline-flex items-center justify-center gap-1 font-mono font-bold text-xs sm:text-sm bg-brutal-black text-white px-2 py-2 sm:px-3 sm:py-3 border-2 border-brutal-black hover:bg-white hover:text-brutal-black transition-colors">
-                                    <i data-lucide="external-link" class="w-3 h-3 sm:w-4 sm:h-4"></i>
-                                    VISIT
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            
-            <div class="flex justify-center mt-4 gap-1 md:hidden">
-                <div class="w-1.5 h-1.5 rounded-full bg-white/50 animate-pulse"></div>
-                <div class="w-1.5 h-1.5 rounded-full bg-white/50 animate-pulse delay-75"></div>
-                <div class="w-1.5 h-1.5 rounded-full bg-white/50 animate-pulse delay-150"></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section class="w-full py-16 sm:py-20 md:py-24 px-4 bg-brutal-black relative overflow-hidden">
-        <div class="absolute top-10 left-10 w-24 h-24 sm:w-32 sm:h-32 bg-brutal-pink rounded-full opacity-20 blur-3xl"></div>
-        <div class="absolute bottom-10 right-10 w-32 h-32 sm:w-48 sm:h-48 bg-brutal-cyan rounded-full opacity-20 blur-3xl"></div>
-        
-        <div class="w-full max-w-4xl mx-auto text-center relative z-10">
-            <div class="inline-block bg-brutal-yellow border-3 border-brutal-black px-4 py-1.5 sm:px-6 sm:py-2 font-mono font-bold text-xs sm:text-sm mb-6 sm:mb-8 shadow-brutal transform -rotate-2">
-                04 // CONTACT
-            </div>
-            
-            <h2 class="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white mb-4 sm:mb-6 leading-tight">
-                AYO <span class="bg-brutal-pink text-white px-2 inline-block transform rotate-1">KOLABORASI!</span>
-            </h2>
-            
-            <p class="font-mono text-brutal-gray text-sm sm:text-base md:text-lg mb-8 sm:mb-12 max-w-2xl mx-auto px-2">
-                Punya visi untuk mendigitalkan sekolah Anda? Mari ngobrol dan wujudkan sistem yang tepat guna.
-            </p>
-
-            <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-10 sm:mb-12 px-2">
-                <a href="https://wa.me/6282238128216" class="inline-flex items-center justify-center gap-2 font-mono font-bold text-sm sm:text-base px-6 py-3 sm:py-4 bg-brutal-yellow border-3 border-brutal-black text-brutal-black shadow-brutal hover:shadow-brutal-hover hover:-translate-y-0.5 transition-all">
-                    <i data-lucide="message-circle" class="w-5 h-5 sm:w-6 sm:h-6"></i>
-                    CHAT WHATSAPP
-                </a>
-                <a href="mailto:edo.domakubun@gmail.com" class="inline-flex items-center justify-center gap-2 font-mono font-bold text-sm sm:text-base px-6 py-3 sm:py-4 bg-brutal-white border-3 border-brutal-black text-brutal-black shadow-brutal hover:shadow-brutal-hover hover:-translate-y-0.5 transition-all">
-                    <i data-lucide="mail" class="w-5 h-5 sm:w-6 sm:h-6"></i>
-                    SEND EMAIL
-                </a>
-            </div>
-
-            <div class="flex justify-center gap-3 sm:gap-4">
-                <a href="https://www.instagram.com/dmkbn.e" class="w-12 h-12 sm:w-14 sm:h-14 bg-brutal-pink border-3 border-brutal-white flex items-center justify-center text-white hover:scale-110 hover:rotate-6 transition-transform">
-                    <i data-lucide="instagram" class="w-5 h-5 sm:w-6 sm:h-6"></i>
-                </a>
-                <a href="https://www.facebook.com/dmkbn.e" class="w-12 h-12 sm:w-14 sm:h-14 bg-brutal-cyan border-3 border-brutal-white flex items-center justify-center text-brutal-black hover:scale-110 hover:-rotate-6 transition-transform">
-                    <i data-lucide="facebook" class="w-5 h-5 sm:w-6 sm:h-6"></i>
-                </a>
-                <a href="#" class="w-12 h-12 sm:w-14 sm:h-14 bg-brutal-yellow border-3 border-brutal-white flex items-center justify-center text-brutal-black hover:scale-110 hover:rotate-6 transition-transform">
-                    <i data-lucide="github" class="w-5 h-5 sm:w-6 sm:h-6"></i>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="w-full bg-brutal-yellow border-t-3 border-brutal-black py-6 sm:py-8 px-4">
-        <div class="w-full max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-3 sm:gap-4">
-            <a href="#" class="font-display text-xl sm:text-2xl tracking-tighter">
-                EDWARD<span class="text-brutal-pink">.</span>
             </a>
-            
-            <p class="font-mono text-xs sm:text-sm font-bold bg-brutal-white border-2 border-brutal-black px-3 py-1.5 sm:px-4 sm:py-2 text-center">
-                © 2026 ALL RIGHTS RESERVED
-            </p>
-            
-            <div class="flex items-center gap-2 font-mono text-xs sm:text-sm">
-                <span>MADE IN</span>
-                <span class="bg-brutal-black text-brutal-yellow px-1.5 py-0.5 sm:px-2 sm:py-1 font-bold">TANIMBAR</span>
-                <span class="w-2 h-2 sm:w-3 sm:h-3 bg-brutal-pink rounded-full animate-pulse"></span>
+
+            <!-- Desktop Links -->
+            <div class="hidden md:flex items-center gap-1 bg-white/[0.04] p-1.5 rounded-full border border-white/10 shadow-inner">
+                <a href="#about" class="px-4 py-2 text-xs font-heading font-medium tracking-wide text-slate-300 hover:text-white hover:bg-white/10 rounded-full transition-all">ABOUT</a>
+                <a href="#services" class="px-4 py-2 text-xs font-heading font-medium tracking-wide text-slate-300 hover:text-white hover:bg-white/10 rounded-full transition-all">SERVICES</a>
+                <a href="#works" class="px-4 py-2 text-xs font-heading font-medium tracking-wide text-slate-300 hover:text-white hover:bg-white/10 rounded-full transition-all">WORKS</a>
+                <a href="#tools" class="px-4 py-2 text-xs font-heading font-medium tracking-wide text-slate-300 hover:text-white hover:bg-white/10 rounded-full transition-all">BENTO SUITE</a>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="hidden md:flex items-center gap-3">
+                <!-- QR Extractor Modal Launcher -->
+                <button onclick="openExtractor()" class="glass-button px-4 py-2 text-xs font-mono font-semibold text-cyber-cyan border-cyber-cyan/30 hover:border-cyber-cyan gap-2 shadow-sm">
+                    <i class="ph ph-qr-code text-base text-cyber-cyan"></i>
+                    <span>QR EXTRACTOR</span>
+                    <span class="px-1.5 py-0.5 text-[9px] bg-cyber-cyan/20 rounded font-bold uppercase text-cyber-cyan">Tool</span>
+                </button>
+
+                <!-- WhatsApp CTA -->
+                <a href="https://wa.me/6282238128216" target="_blank" class="skeuo-button px-5 py-2.5 text-xs font-heading font-bold text-white tracking-wider gap-2">
+                    <i class="ph-fill ph-chat-teardrop-dots text-base"></i>
+                    <span>LET'S TALK</span>
+                </a>
+            </div>
+
+            <!-- Mobile Hamburger Button -->
+            <button id="mobile-toggle-btn" class="md:hidden w-10 h-10 rounded-full glass-button text-white flex items-center justify-center" aria-label="Toggle Menu">
+                <i data-lucide="menu" class="w-5 h-5"></i>
+            </button>
+        </nav>
+
+        <!-- Mobile Drawer Menu -->
+        <div id="mobile-nav-drawer" class="hidden md:hidden mt-3 max-w-7xl mx-auto glass-panel p-5 border border-white/15 rounded-3xl animate-in slide-in-from-top-2 duration-300">
+            <div class="flex flex-col gap-3 font-heading font-medium text-sm">
+                <a href="#about" class="mobile-nav-link py-2.5 px-4 rounded-xl hover:bg-white/10 flex items-center justify-between text-slate-200">
+                    <span>ABOUT PROFILE</span>
+                    <i data-lucide="chevron-right" class="w-4 h-4 text-slate-500"></i>
+                </a>
+                <a href="#services" class="mobile-nav-link py-2.5 px-4 rounded-xl hover:bg-white/10 flex items-center justify-between text-slate-200">
+                    <span>CORE SERVICES</span>
+                    <i data-lucide="chevron-right" class="w-4 h-4 text-slate-500"></i>
+                </a>
+                <a href="#works" class="mobile-nav-link py-2.5 px-4 rounded-xl hover:bg-white/10 flex items-center justify-between text-slate-200">
+                    <span>FEATURED WORKS</span>
+                    <i data-lucide="chevron-right" class="w-4 h-4 text-slate-500"></i>
+                </a>
+                <a href="#tools" class="mobile-nav-link py-2.5 px-4 rounded-xl hover:bg-white/10 flex items-center justify-between text-slate-200">
+                    <span>BENTO GRID ECOSYSTEM</span>
+                    <i data-lucide="chevron-right" class="w-4 h-4 text-slate-500"></i>
+                </a>
+                
+                <div class="pt-3 border-t border-white/10 flex flex-col gap-2.5">
+                    <button onclick="openExtractor()" class="glass-button w-full py-3 text-xs font-mono font-bold text-cyber-cyan justify-center gap-2">
+                        <i class="ph ph-qr-code text-lg"></i>
+                        <span>LAUNCH QR EXTRACTOR</span>
+                    </button>
+                    <a href="https://wa.me/6282238128216" target="_blank" class="skeuo-button w-full py-3 text-xs font-heading font-bold text-white justify-center gap-2">
+                        <i class="ph-fill ph-whatsapp-logo text-lg"></i>
+                        <span>HUBUNGI VIA WHATSAPP</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ========================================================================= -->
+    <!-- HERO SECTION (High-Depth Skeuo-Glass with 3D Motion Drivers & Bento Teaser) -->
+    <!-- ========================================================================= -->
+    <main class="relative z-10 pt-32 sm:pt-36 lg:pt-40 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <section class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center mb-24">
+            <!-- Left Column: Typographic & Action Hero -->
+            <div class="lg:col-span-7 text-left space-y-6">
+                <!-- Status Pill Badge -->
+                <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full glossy-badge border border-indigo-400/30 text-indigo-200 text-xs font-mono tracking-wide shadow-glass-sm animate-float">
+                    <span class="relative flex h-2.5 w-2.5">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+                    </span>
+                    <span>TANIMBAR EDU-DIGITAL PIONEER 2026</span>
+                    <span class="w-px h-3.5 bg-white/20"></span>
+                    <span class="text-cyber-cyan font-semibold">EDWARD DOMAKUBUN</span>
+                </div>
+
+                <!-- Main Display Typography -->
+                <h1 class="font-display font-extrabold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.08] tracking-tight text-white">
+                    Membangun <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyber-primary via-cyber-cyan to-cyber-fuchsia animate-shimmer">
+                        Masa Depan Digital
+                    </span> <br>
+                    Pendidikan Nusantara.
+                </h1>
+
+                <!-- Body Context -->
+                <p class="font-sans text-slate-300 text-base sm:text-lg lg:text-xl max-w-2xl leading-relaxed font-light">
+                    Menggabungkan intuisi linguistik edukatif dengan arsitektur teknologi web, sistem QR pintar, dan portal terintegrasi untuk mendigitalkan ratusan sekolah di Kepulauan Tanimbar & Maluku Tenggara.
+                </p>
+
+                <!-- Interactive CTA Button Group -->
+                <div class="flex flex-wrap items-center gap-4 pt-2">
+                    <a href="#works" class="skeuo-button px-7 py-4 text-sm font-heading font-bold text-white tracking-wider gap-3 shadow-skeuo-btn group">
+                        <span>EXPLORE PROJECTS</span>
+                        <i data-lucide="arrow-right" class="w-4 h-4 transition-transform group-hover:translate-x-1"></i>
+                    </a>
+
+                    <button onclick="openExtractor()" class="glass-button px-6 py-4 text-sm font-heading font-bold text-slate-200 hover:text-white gap-2.5 border-white/20">
+                        <i class="ph-bold ph-shield-check text-cyber-cyan text-lg"></i>
+                        <span>QR EXTRACTOR TOOL</span>
+                    </button>
+                    
+                    <a href="https://wa.me/6282238128216" target="_blank" class="w-12 h-12 rounded-full glass-button text-emerald-400 border-emerald-500/30 hover:border-emerald-400 flex items-center justify-center transition-all hover:scale-105" title="Direct WhatsApp">
+                        <i class="ph-bold ph-whatsapp-logo text-2xl"></i>
+                    </a>
+                </div>
+
+                <!-- Mini Metric Badges -->
+                <div class="grid grid-cols-3 gap-3 pt-6 max-w-lg">
+                    <div class="tactile-slot p-3 text-center">
+                        <div class="font-display font-black text-2xl sm:text-3xl text-cyber-primary">10+</div>
+                        <div class="font-mono text-[10px] sm:text-xs text-slate-400">Deployed Systems</div>
+                    </div>
+                    <div class="tactile-slot p-3 text-center">
+                        <div class="font-display font-black text-2xl sm:text-3xl text-cyber-cyan">5+</div>
+                        <div class="font-mono text-[10px] sm:text-xs text-slate-400">Partner Schools</div>
+                    </div>
+                    <div class="tactile-slot p-3 text-center">
+                        <div class="font-display font-black text-2xl sm:text-3xl text-cyber-emerald">99.9%</div>
+                        <div class="font-mono text-[10px] sm:text-xs text-slate-400">Uptime Reliability</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: 3D Holographic Card & Skeuomorphic Interactive Profile -->
+            <div class="lg:col-span-5 flex justify-center">
+                <div class="tilt-card w-full max-w-[420px] relative">
+                    <!-- Ambient Glow Behind Profile -->
+                    <div class="absolute -inset-2 bg-gradient-to-r from-cyber-primary via-cyber-cyan to-cyber-fuchsia rounded-[32px] opacity-40 blur-2xl animate-pulse-slow"></div>
+
+                    <!-- Main Skeuo-Glass Card -->
+                    <div class="tilt-content glass-panel p-6 sm:p-7 border border-white/20 shadow-glass-lg relative z-10 !rounded-[32px]">
+                        <!-- Card Header Tactile Screw Accents -->
+                        <div class="flex items-center justify-between mb-5 border-b border-white/10 pb-4">
+                            <div class="flex items-center gap-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-red-500/80 shadow-inner"></span>
+                                <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/80 shadow-inner"></span>
+                                <span class="w-2.5 h-2.5 rounded-full bg-green-500/80 shadow-inner"></span>
+                                <span class="ml-2 font-mono text-[11px] text-slate-400">NODE://TANIMBAR.ID</span>
+                            </div>
+                            <span class="px-2 py-0.5 rounded-md tactile-slot font-mono text-[10px] text-cyber-cyan font-bold tracking-widest uppercase">PROD-ONLINE</span>
+                        </div>
+
+                        <!-- Profile Visual Container with Depth Rim -->
+                        <div class="relative rounded-2xl overflow-hidden mb-5 border-2 border-white/15 shadow-2xl group">
+                            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhcgX_ACgXPCUAXU8VnYkern3AmVP500MT7r7YUKzF2qR3Tb28_lpFsqTrj_MIQl4GzikDse4jM1D7f55p0_vs-uPwKCib4zHziZC8jEYzMXV4jLsvRax5ERjZwNGiX5ZCpKdV5dy-ftNYwGWitVnKjwY_L7r5yn81b2ovGGVA9C0dzMSWjQv6IeGn9_fT7/s250/IMG-20251212-WA0016.jpg" 
+                                 alt="Edward Domakubun" 
+                                 class="w-full aspect-[4/4] object-cover transition-transform duration-700 group-hover:scale-105 filter contrast-105">
+                            
+                            <!-- Glass Shimmer Overlay on Photo -->
+                            <div class="absolute inset-0 bg-gradient-to-t from-cyber-base/90 via-transparent to-transparent"></div>
+
+                            <!-- Floating Role Badge Inside Photo -->
+                            <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between p-3 rounded-xl glass-panel !rounded-xl border-white/20 backdrop-blur-md">
+                                <div>
+                                    <h4 class="font-display font-bold text-white text-base leading-snug">Edward Domakubun</h4>
+                                    <p class="font-mono text-[11px] text-cyber-cyan">Fullstack & EduTech Architect</p>
+                                </div>
+                                <div class="w-9 h-9 rounded-lg bg-cyber-primary/20 border border-cyber-primary/40 flex items-center justify-center text-cyber-primaryGlow">
+                                    <i class="ph-bold ph-code text-xl"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Skeuomorphic Physical Control Dial & Specs -->
+                        <div class="tactile-slot p-3.5 space-y-2.5">
+                            <div class="flex items-center justify-between text-xs font-mono text-slate-300">
+                                <span class="flex items-center gap-1.5">
+                                    <i class="ph ph-graduation-cap text-cyber-primary text-sm"></i>
+                                    Univ. Lelemuku (UNLEST)
+                                </span>
+                                <span class="text-emerald-400 font-semibold">Tanimbar, ID</span>
+                            </div>
+                            <div class="w-full bg-slate-900 rounded-full h-2 overflow-hidden border border-white/10 p-[1px]">
+                                <div class="bg-gradient-to-r from-cyber-primary via-cyber-cyan to-cyber-emerald h-full rounded-full w-[88%] animate-pulse"></div>
+                            </div>
+                            <div class="flex justify-between items-center text-[10px] font-mono text-slate-400">
+                                <span>Architecture: Hybrid Web & QR</span>
+                                <span>Status: Active Deployment</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================================= -->
+        <!-- BENTO GRID SECTION: PROFILE, REALTIME STATS, LIVE CLOCK & ECOSYSTEM       -->
+        <!-- ========================================================================= -->
+        <section id="about" class="mb-24">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+                <div>
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full glossy-badge border border-white/10 text-cyber-cyan text-xs font-mono mb-3">
+                        <i class="ph-bold ph-grid-four"></i>
+                        <span>MODULAR BENTO GRID // 01</span>
+                    </div>
+                    <h2 class="font-display font-extrabold text-3xl sm:text-4xl md:text-5xl text-white tracking-tight">
+                        Eksplorasi Profil & <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyber-primary to-cyber-cyan">Visi Edukasi</span>
+                    </h2>
+                </div>
+                <p class="font-sans text-slate-400 text-sm md:text-base max-w-md">
+                    Konstruksi komprehensif latar belakang, kapabilitas sistem, dan etos kerja dalam format bento multifaset.
+                </p>
+            </div>
+
+            <!-- Bento Matrix Grid Layout -->
+            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+
+                <!-- Bento Item 1: Large Narrative Card (Col 2, Row 2) -->
+                <div class="md:col-span-2 lg:col-span-2 glass-panel p-7 sm:p-8 flex flex-col justify-between relative group hover:border-cyber-primary/40">
+                    <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-cyber-primary/10 rounded-full blur-3xl pointer-events-none"></div>
+                    <div>
+                        <div class="flex items-center justify-between mb-6">
+                            <span class="w-12 h-12 rounded-2xl bg-cyber-primary/20 border border-cyber-primary/40 flex items-center justify-center text-cyber-primaryGlow shadow-glass-sm">
+                                <i class="ph-bold ph-lightbulb-filament text-2xl"></i>
+                            </span>
+                            <span class="font-mono text-xs text-slate-400 bg-white/5 px-3 py-1 rounded-full border border-white/10">VISION & MISSION</span>
+                        </div>
+                        <h3 class="font-display font-bold text-2xl sm:text-3xl text-white mb-4">
+                            Mendigitalkan Sekolah di Tapal Batas Selatan Maluku
+                        </h3>
+                        <p class="font-sans text-slate-300 text-sm sm:text-base leading-relaxed mb-6">
+                            Sebagai mahasiswa Pendidikan Bahasa Inggris di <strong>Universitas Lelemuku Saumlaki (UNLEST)</strong> yang memiliki hasrat mendalam pada rekayasa perangkat lunak, saya percaya bahwa teknologi terbaik adalah yang tidak mengintimidasi guru dan siswa, melainkan memberdayakan mereka melalui kesederhanaan, kecepatan, dan ketepatan fungsi.
+                        </p>
+                    </div>
+
+                    <div class="tactile-slot p-4 flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-xl bg-cyber-cyan/20 border border-cyber-cyan/30 flex items-center justify-center text-cyber-cyan shrink-0">
+                            <i class="ph-fill ph-quotes text-xl"></i>
+                        </div>
+                        <p class="font-mono text-xs text-slate-300 italic">
+                            "Solusi lokal berstandar global untuk transformasi pendidikan yang inklusif."
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Bento Item 2: Live Real-Time Tanimbar WIT Clock & Geolocation -->
+                <div class="glass-panel p-6 flex flex-col justify-between relative group hover:border-cyber-cyan/40">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="w-10 h-10 rounded-xl bg-cyber-cyan/20 border border-cyber-cyan/30 flex items-center justify-center text-cyber-cyan">
+                                <i class="ph-bold ph-clock text-xl"></i>
+                            </span>
+                            <span class="px-2 py-0.5 text-[10px] font-mono text-cyber-cyan bg-cyber-cyan/10 rounded-md border border-cyber-cyan/30">WIT (UTC+9)</span>
+                        </div>
+                        <span class="font-mono text-xs text-slate-400 block mb-1">LOCAL TIME ZONE</span>
+                        <div id="liveClock" class="font-display font-extrabold text-3xl sm:text-4xl text-white tracking-wider font-mono">
+                            00:00:00
+                        </div>
+                        <p id="liveDate" class="font-mono text-xs text-slate-400 mt-2">Saumlaki, Kep. Tanimbar</p>
+                    </div>
+
+                    <div class="tactile-slot p-3 mt-6 flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                            <span class="font-mono text-[11px] text-slate-300">Server Latency: 24ms</span>
+                        </div>
+                        <i class="ph-bold ph-globe-hemisphere-east text-cyber-cyan text-base"></i>
+                    </div>
+                </div>
+
+                <!-- Bento Item 3: Interactive 3D Tech Stack Matrix -->
+                <div class="glass-panel p-6 flex flex-col justify-between group hover:border-cyber-fuchsia/40">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="w-10 h-10 rounded-xl bg-cyber-fuchsia/20 border border-cyber-fuchsia/30 flex items-center justify-center text-cyber-fuchsia">
+                                <i class="ph-bold ph-stack text-xl"></i>
+                            </span>
+                            <span class="font-mono text-[10px] text-cyber-fuchsia uppercase bg-cyber-fuchsia/10 px-2 py-0.5 rounded border border-cyber-fuchsia/30">Fullstack</span>
+                        </div>
+                        <h4 class="font-display font-bold text-lg text-white mb-2">Core Tech Radar</h4>
+                        <p class="font-sans text-xs text-slate-400 mb-4">Teknologi handal untuk kinerja tinggi dan persistensi offline.</p>
+                    </div>
+
+                    <div class="flex flex-wrap gap-1.5">
+                        <span class="px-2.5 py-1 text-[11px] font-mono rounded-lg tactile-slot text-slate-200 border border-white/10 hover:border-cyber-cyan transition-colors">JavaScript ES6+</span>
+                        <span class="px-2.5 py-1 text-[11px] font-mono rounded-lg tactile-slot text-slate-200 border border-white/10 hover:border-cyber-primary transition-colors">Tailwind CSS</span>
+                        <span class="px-2.5 py-1 text-[11px] font-mono rounded-lg tactile-slot text-slate-200 border border-white/10 hover:border-cyber-fuchsia transition-colors">Protobuf / jsQR</span>
+                        <span class="px-2.5 py-1 text-[11px] font-mono rounded-lg tactile-slot text-slate-200 border border-white/10 hover:border-cyber-emerald transition-colors">Cloudflare Pages</span>
+                        <span class="px-2.5 py-1 text-[11px] font-mono rounded-lg tactile-slot text-slate-200 border border-white/10 hover:border-yellow-400 transition-colors">GSAP & Three.js</span>
+                        <span class="px-2.5 py-1 text-[11px] font-mono rounded-lg tactile-slot text-slate-200 border border-white/10 hover:border-red-400 transition-colors">REST API & Auth</span>
+                    </div>
+                </div>
+
+                <!-- Bento Item 4: Instant Tool Feature Teaser (QR Extractor Widget Card) -->
+                <div class="md:col-span-2 lg:col-span-2 glass-panel p-6 sm:p-7 flex flex-col justify-between group hover:border-cyber-cyan/40">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center text-white shadow-neon-cyan">
+                                <i class="ph-bold ph-shield-check text-2xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-display font-bold text-xl text-white">Google Authenticator Extractor</h4>
+                                <p class="font-mono text-xs text-cyber-cyan">Tool Mandiri Tanpa Server — 100% Client-Side Privacy</p>
+                            </div>
+                        </div>
+                        <button onclick="openExtractor()" class="skeuo-button px-5 py-2.5 text-xs font-mono font-bold text-white tracking-wider gap-2 shrink-0">
+                            <span>LAUNCH ENGINE</span>
+                            <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                        </button>
+                    </div>
+
+                    <p class="font-sans text-xs sm:text-sm text-slate-300 leading-relaxed mb-4">
+                        Modul khusus yang dibangun untuk mengekstrak dan memecahkan enkripsi Secret Key dari payload QR migrasi Google Authenticator (Protobuf). Sangat aman, tidak ada data yang dikirim ke server.
+                    </p>
+
+                    <div class="tactile-slot p-3 flex items-center justify-between text-xs font-mono text-slate-400">
+                        <span class="flex items-center gap-2">
+                            <i class="ph ph-lock-key text-emerald-400 text-sm"></i>
+                            Browser In-Memory Execution
+                        </span>
+                        <span class="text-cyber-cyan">jsQR + Protocol Buffers</span>
+                    </div>
+                </div>
+
+                <!-- Bento Item 5: Education & English Degree Bridge Card -->
+                <div class="glass-panel p-6 flex flex-col justify-between group hover:border-cyber-emerald/40">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="w-10 h-10 rounded-xl bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
+                                <i class="ph-bold ph-translate text-xl"></i>
+                            </span>
+                            <span class="font-mono text-[10px] text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/30">BILINGUAL</span>
+                        </div>
+                        <h4 class="font-display font-bold text-lg text-white mb-2">English & Pedagogic Mindset</h4>
+                        <p class="font-sans text-xs text-slate-300 leading-relaxed">
+                            Keahlian komunikasi bilingual dan metodologi pengajaran yang membuat dokumentasi serta pelatihan sistem sekolah menjadi mudah dipahami oleh guru.
+                        </p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-white/10 flex items-center gap-2 font-mono text-[11px] text-slate-400">
+                        <i class="ph-bold ph-check-circle text-emerald-400"></i>
+                        <span>User-Centric Documentation</span>
+                    </div>
+                </div>
+
+                <!-- Bento Item 6: Direct Collaboration Status Card -->
+                <div class="glass-panel p-6 flex flex-col justify-between group hover:border-amber-400/40">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="w-10 h-10 rounded-xl bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400">
+                                <i class="ph-bold ph-handshake text-xl"></i>
+                            </span>
+                            <span class="font-mono text-[10px] text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/30">OPEN FOR 2026</span>
+                        </div>
+                        <h4 class="font-display font-bold text-lg text-white mb-2">Siap Kolaborasi Sekolah</h4>
+                        <p class="font-sans text-xs text-slate-300 leading-relaxed">
+                            Menerima pembuatan website sekolah, SIAKAD kustom, PPDB digital, hingga aplikasi presensi QR offline-first.
+                        </p>
+                    </div>
+                    <a href="https://wa.me/6282238128216" target="_blank" class="glass-button w-full py-2.5 text-xs font-mono text-amber-300 border-amber-400/30 hover:border-amber-400 justify-center gap-1.5 mt-4">
+                        <span>KONSULTASI GRATIS</span>
+                        <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ========================================================================= -->
+        <!-- CORE SERVICES SECTION (Illustrative Skeuo-Glass Cards with Bento Rhythm)  -->
+        <!-- ========================================================================= -->
+        <section id="services" class="mb-24">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full glossy-badge border border-white/10 text-cyber-primary text-xs font-mono mb-3">
+                    <i class="ph-bold ph-sparkle"></i>
+                    <span>LAYANAN UTAMA // 02</span>
+                </div>
+                <h2 class="font-display font-extrabold text-3xl sm:text-4xl md:text-5xl text-white tracking-tight mb-4">
+                    Solusi Terpadu <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyber-cyan via-cyber-primary to-cyber-fuchsia">Teknologi Sekolah</span>
+                </h2>
+                <p class="font-sans text-slate-400 text-sm sm:text-base">
+                    Dirancang dengan arsitektur modern yang ringan, aman, dan mudah dioperasikan oleh tenaga pendidik maupun admin sekolah.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Service 1: Website Profil & PPDB Online -->
+                <div class="glass-panel p-7 flex flex-col justify-between group hover:border-cyber-primary/50 shimmer-border">
+                    <div>
+                        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-indigo-500/20 to-purple-600/30 border border-indigo-400/30 flex items-center justify-center text-cyber-primaryGlow mb-6 shadow-neon-purple group-hover:scale-110 transition-transform">
+                            <i class="ph-bold ph-browsers text-3xl"></i>
+                        </div>
+                        <span class="font-mono text-xs text-cyber-primary font-semibold tracking-wider uppercase block mb-1">01 / WEB PORTAL</span>
+                        <h3 class="font-display font-bold text-xl text-white mb-3 group-hover:text-cyber-primaryGlow transition-colors">
+                            Website & PPDB Online
+                        </h3>
+                        <p class="font-sans text-slate-300 text-sm leading-relaxed mb-6">
+                            Website profil resmi sekolah, portal warta berita terintegrasi, dan sistem pendaftaran siswa baru (PPDB) yang cepat, mobile-friendly, dan transparan.
+                        </p>
+                    </div>
+
+                    <div class="tactile-slot p-3.5 space-y-2">
+                        <div class="flex items-center gap-2 text-xs font-mono text-slate-300">
+                            <i class="ph-bold ph-check text-cyber-cyan text-sm"></i>
+                            <span>Domain Resmi & SEO Siap</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-xs font-mono text-slate-300">
+                            <i class="ph-bold ph-check text-cyber-cyan text-sm"></i>
+                            <span>Form PPDB Terintegrasi WA</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service 2: Aplikasi Mobile & Android -->
+                <div class="glass-panel p-7 flex flex-col justify-between group hover:border-cyber-cyan/50 shimmer-border">
+                    <div>
+                        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-teal-600/30 border border-cyan-400/30 flex items-center justify-center text-cyber-cyan mb-6 shadow-neon-cyan group-hover:scale-110 transition-transform">
+                            <i class="ph-bold ph-device-mobile text-3xl"></i>
+                        </div>
+                        <span class="font-mono text-xs text-cyber-cyan font-semibold tracking-wider uppercase block mb-1">02 / MOBILE ECOSYSTEM</span>
+                        <h3 class="font-display font-bold text-xl text-white mb-3 group-hover:text-cyber-cyan transition-colors">
+                            Aplikasi Android Sekolah
+                        </h3>
+                        <p class="font-sans text-slate-300 text-sm leading-relaxed mb-6">
+                            Aplikasi Android kustom untuk kebutuhan e-learning, portal informasi siswa, notifikasi kegiatan sekolah, dan modul ujian berbasis smartphone.
+                        </p>
+                    </div>
+
+                    <div class="tactile-slot p-3.5 space-y-2">
+                        <div class="flex items-center gap-2 text-xs font-mono text-slate-300">
+                            <i class="ph-bold ph-check text-cyber-cyan text-sm"></i>
+                            <span>Ringan & Cepat Diakses</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-xs font-mono text-slate-300">
+                            <i class="ph-bold ph-check text-cyber-cyan text-sm"></i>
+                            <span>Bisa Dijalankan Offline</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service 3: Presensi Pintar Berbasis QR Code -->
+                <div class="glass-panel p-7 flex flex-col justify-between group hover:border-cyber-fuchsia/50 shimmer-border">
+                    <div>
+                        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-fuchsia-500/20 to-pink-600/30 border border-fuchsia-400/30 flex items-center justify-center text-cyber-fuchsia mb-6 shadow-glass-sm group-hover:scale-110 transition-transform">
+                            <i class="ph-bold ph-scan text-3xl"></i>
+                        </div>
+                        <span class="font-mono text-xs text-cyber-fuchsia font-semibold tracking-wider uppercase block mb-1">03 / SMART ATTENDANCE</span>
+                        <h3 class="font-display font-bold text-xl text-white mb-3 group-hover:text-cyber-fuchsia transition-colors">
+                            Sistem Presensi QR
+                        </h3>
+                        <p class="font-sans text-slate-300 text-sm leading-relaxed mb-6">
+                            Sistem absensi digital realtime berbasis kartu QR / mobile QR. Mengurangi keterlambatan, rekap otomatis ke Google Sheets / Cloud Database dalam hitungan detik.
+                        </p>
+                    </div>
+
+                    <div class="tactile-slot p-3.5 space-y-2">
+                        <div class="flex items-center gap-2 text-xs font-mono text-slate-300">
+                            <i class="ph-bold ph-check text-cyber-cyan text-sm"></i>
+                            <span>Deteksi Cepat < 0.2 detik</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-xs font-mono text-slate-300">
+                            <i class="ph-bold ph-check text-cyber-cyan text-sm"></i>
+                            <span>Laporan Excel Otomatis</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service 4: SIAKAD & Repositori Arsip Digital -->
+                <div class="glass-panel p-7 flex flex-col justify-between group hover:border-cyber-emerald/50 shimmer-border">
+                    <div>
+                        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-500/20 to-teal-600/30 border border-emerald-400/30 flex items-center justify-center text-emerald-400 mb-6 shadow-glass-sm group-hover:scale-110 transition-transform">
+                            <i class="ph-bold ph-database text-3xl"></i>
+                        </div>
+                        <span class="font-mono text-xs text-emerald-400 font-semibold tracking-wider uppercase block mb-1">04 / DATA MANAGEMENT</span>
+                        <h3 class="font-display font-bold text-xl text-white mb-3 group-hover:text-emerald-300 transition-colors">
+                            SIAKAD & Arsip Digital
+                        </h3>
+                        <p class="font-sans text-slate-300 text-sm leading-relaxed mb-6">
+                            Sistem Informasi Akademik Terpadu dan repositori arsip awan untuk manajemen nilai rapor, berkas guru, ijazah, serta dokumen akreditasi sekolah.
+                        </p>
+                    </div>
+
+                    <div class="tactile-slot p-3.5 space-y-2">
+                        <div class="flex items-center gap-2 text-xs font-mono text-slate-300">
+                            <i class="ph-bold ph-check text-cyber-cyan text-sm"></i>
+                            <span>Sentralisasi Berkas Aman</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-xs font-mono text-slate-300">
+                            <i class="ph-bold ph-check text-cyber-cyan text-sm"></i>
+                            <span>Backup Awan Otomatis</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================================= -->
+        <!-- WORKS SHOWCASE BENTO SECTION (Live Iframe Previews & High-Tech Cards)    -->
+        <!-- ========================================================================= -->
+        <section id="works" class="mb-24">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+                <div>
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full glossy-badge border border-white/10 text-cyber-fuchsia text-xs font-mono mb-3">
+                        <i class="ph-bold ph-rocket-launch"></i>
+                        <span>PORTFOLIO SHOWCASE // 03</span>
+                    </div>
+                    <h2 class="font-display font-extrabold text-3xl sm:text-4xl md:text-5xl text-white tracking-tight">
+                        Karya & Sistem <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyber-fuchsia via-cyber-primary to-cyber-cyan">Terverifikasi</span>
+                    </h2>
+                </div>
+                <div class="flex items-center gap-2 text-xs font-mono text-slate-400">
+                    <span class="w-2.5 h-2.5 rounded-full bg-cyber-cyan animate-pulse"></span>
+                    <span>Klik "PREVIEW LIVE" untuk inspeksi modal langsung</span>
+                </div>
+            </div>
+
+            <!-- Bento Projects Grid Layout -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- PROJECT 1: FEATURED HERO WORK - EduQuest.ai -->
+                <div class="md:col-span-2 lg:col-span-2 glass-panel p-6 sm:p-8 flex flex-col justify-between group hover:border-cyber-primary/60 relative overflow-hidden">
+                    <div class="flex flex-wrap items-center justify-between gap-3 mb-5">
+                        <div class="flex items-center gap-3">
+                            <span class="w-10 h-10 rounded-xl bg-cyber-primary/20 border border-cyber-primary/40 flex items-center justify-center text-cyber-primaryGlow">
+                                <i class="ph-bold ph-brain text-xl"></i>
+                            </span>
+                            <div>
+                                <h3 class="font-display font-bold text-2xl text-white group-hover:text-cyber-primaryGlow transition-colors">
+                                    EduQuest.ai
+                                </h3>
+                                <span class="font-mono text-xs text-cyber-cyan">Platform AI Pembuat Soal Ujian SD Berstandar Kurikulum</span>
+                            </div>
+                        </div>
+                        <span class="px-3 py-1 rounded-full text-xs font-mono font-bold bg-cyber-primary/20 text-cyber-primaryGlow border border-cyber-primary/40">
+                            FLAGSHIP WEB APP
+                        </span>
+                    </div>
+
+                    <!-- Visual Project Showcase with Live Thumbnail Frame -->
+                    <div class="relative rounded-2xl overflow-hidden border border-white/15 bg-slate-900/80 mb-6 h-64 sm:h-72 group/frame">
+                        <iframe src="https://eduquest-pro-ka55.vercel.app/login" 
+                                class="w-full h-full border-none pointer-events-none transform scale-90 sm:scale-100 origin-top" 
+                                loading="lazy"
+                                sandbox="allow-same-origin allow-scripts"></iframe>
+                        
+                        <div class="absolute inset-0 bg-gradient-to-t from-cyber-base/95 via-cyber-base/40 to-transparent flex items-end p-5">
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-2.5 py-1 text-[11px] font-mono rounded-md bg-white/10 text-white backdrop-blur-md border border-white/15">Taksonomi Bloom</span>
+                                <span class="px-2.5 py-1 text-[11px] font-mono rounded-md bg-white/10 text-white backdrop-blur-md border border-white/15">Analisis Butir Soal</span>
+                                <span class="px-2.5 py-1 text-[11px] font-mono rounded-md bg-white/10 text-white backdrop-blur-md border border-white/15">Export PDF & Word</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2 border-t border-white/10">
+                        <p class="font-sans text-xs sm:text-sm text-slate-300 max-w-md">
+                            Membantu guru menyusun bank soal berkualitas tinggi dengan integrasi AI, validasi capaian pembelajaran, dan visualisasi interaktif.
+                        </p>
+                        <div class="flex items-center gap-3 w-full sm:w-auto">
+                            <button onclick="openPreview('https://eduquest-pro-ka55.vercel.app/login', 'EduQuest.ai — AI Question Platform')" class="glass-button px-4 py-2.5 text-xs font-mono font-bold text-cyber-cyan border-cyber-cyan/30 flex-1 sm:flex-none">
+                                <i class="ph-bold ph-eye text-base mr-1.5"></i>
+                                PREVIEW
+                            </button>
+                            <a href="https://eduquest-pro-ka55.vercel.app/login" target="_blank" class="skeuo-button px-5 py-2.5 text-xs font-heading font-bold text-white flex-1 sm:flex-none gap-1.5">
+                                <span>VISIT</span>
+                                <i class="ph-bold ph-arrow-up-right text-base"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PROJECT 2: SD Inpres Lelingluan -->
+                <div class="glass-panel p-6 flex flex-col justify-between group hover:border-cyber-cyan/50">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="w-10 h-10 rounded-xl bg-cyan-500/20 border border-cyan-400/30 flex items-center justify-center text-cyber-cyan">
+                                <i class="ph-bold ph-buildings text-xl"></i>
+                            </span>
+                            <span class="font-mono text-[10px] text-cyber-cyan bg-cyan-500/10 px-2 py-0.5 rounded border border-cyan-500/30">OFFICIAL PORTAL</span>
+                        </div>
+                        <h4 class="font-display font-bold text-xl text-white mb-2 group-hover:text-cyber-cyan transition-colors">
+                            SD Inpres Lelingluan
+                        </h4>
+                        <p class="font-sans text-xs text-slate-300 leading-relaxed mb-4">
+                            Website profil sekolah resmi dengan manajemen konten berita, agenda akademik, profil pendidik, dan galeri interaktif.
+                        </p>
+                    </div>
+
+                    <!-- Mini Live Thumbnail -->
+                    <div class="relative rounded-xl overflow-hidden border border-white/10 h-36 bg-slate-900 mb-4">
+                        <iframe src="https://www.sdinpreslelingluan.com" class="w-full h-full border-none pointer-events-none transform scale-75 origin-top-left w-[133%] h-[133%]" loading="lazy"></iframe>
+                        <div class="absolute inset-0 bg-cyber-base/30"></div>
+                    </div>
+
+                    <div class="flex items-center gap-2 pt-2 border-t border-white/10">
+                        <button onclick="openPreview('https://www.sdinpreslelingluan.com', 'SD Inpres Lelingluan Portal')" class="glass-button flex-1 py-2 text-xs font-mono font-bold text-cyber-cyan">
+                            PREVIEW
+                        </button>
+                        <a href="https://www.sdinpreslelingluan.com" target="_blank" class="skeuo-button flex-1 py-2 text-xs font-mono font-bold text-white">
+                            VISIT
+                        </a>
+                    </div>
+                </div>
+
+                <!-- PROJECT 3: PPDB Online -->
+                <div class="glass-panel p-6 flex flex-col justify-between group hover:border-cyber-fuchsia/50">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="w-10 h-10 rounded-xl bg-fuchsia-500/20 border border-fuchsia-400/30 flex items-center justify-center text-cyber-fuchsia">
+                                <i class="ph-bold ph-user-plus text-xl"></i>
+                            </span>
+                            <span class="font-mono text-[10px] text-cyber-fuchsia bg-fuchsia-500/10 px-2 py-0.5 rounded border border-fuchsia-500/30">CLOUDFLARE SPA</span>
+                        </div>
+                        <h4 class="font-display font-bold text-xl text-white mb-2 group-hover:text-cyber-fuchsia transition-colors">
+                            PPDB Online
+                        </h4>
+                        <p class="font-sans text-xs text-slate-300 leading-relaxed mb-4">
+                            Sistem pendaftaran penerimaan peserta didik baru terpusat dengan upload berkas mandiri dan notifikasi status real-time.
+                        </p>
+                    </div>
+
+                    <div class="relative rounded-xl overflow-hidden border border-white/10 h-36 bg-slate-900 mb-4">
+                        <iframe src="https://sdinpreslelingluan-ppdb.pages.dev" class="w-full h-full border-none pointer-events-none transform scale-75 origin-top-left w-[133%] h-[133%]" loading="lazy"></iframe>
+                        <div class="absolute inset-0 bg-cyber-base/30"></div>
+                    </div>
+
+                    <div class="flex items-center gap-2 pt-2 border-t border-white/10">
+                        <button onclick="openPreview('https://sdinpreslelingluan-ppdb.pages.dev', 'PPDB Online System')" class="glass-button flex-1 py-2 text-xs font-mono font-bold text-cyber-fuchsia">
+                            PREVIEW
+                        </button>
+                        <a href="https://sdinpreslelingluan-ppdb.pages.dev" target="_blank" class="skeuo-button flex-1 py-2 text-xs font-mono font-bold text-white">
+                            VISIT
+                        </a>
+                    </div>
+                </div>
+
+                <!-- PROJECT 4: PresensiSaya -->
+                <div class="glass-panel p-6 flex flex-col justify-between group hover:border-amber-400/50">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="w-10 h-10 rounded-xl bg-amber-500/20 border border-amber-400/30 flex items-center justify-center text-amber-400">
+                                <i class="ph-bold ph-qr-code text-xl"></i>
+                            </span>
+                            <span class="font-mono text-[10px] text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/30">MOBILE QR APP</span>
+                        </div>
+                        <h4 class="font-display font-bold text-xl text-white mb-2 group-hover:text-amber-300 transition-colors">
+                            PresensiSaya v5.2
+                        </h4>
+                        <p class="font-sans text-xs text-slate-300 leading-relaxed mb-4">
+                            Aplikasi presensi Android terdistribusi dengan scanner QR Code kecepatan tinggi dan sinkronisasi berkala.
+                        </p>
+                    </div>
+
+                    <div class="relative rounded-xl overflow-hidden border border-white/10 h-36 bg-slate-900 mb-4">
+                        <iframe src="https://www.sdinpreslelingluan.com/2026/01/rilis-aplikasi-presensi-digital-v52.html" class="w-full h-full border-none pointer-events-none transform scale-75 origin-top-left w-[133%] h-[133%]" loading="lazy"></iframe>
+                        <div class="absolute inset-0 bg-cyber-base/30"></div>
+                    </div>
+
+                    <div class="flex items-center gap-2 pt-2 border-t border-white/10">
+                        <button onclick="openPreview('https://www.sdinpreslelingluan.com/2026/01/rilis-aplikasi-presensi-digital-v52.html', 'Aplikasi PresensiSaya v5.2')" class="glass-button flex-1 py-2 text-xs font-mono font-bold text-amber-400">
+                            PREVIEW
+                        </button>
+                        <a href="https://www.sdinpreslelingluan.com/2026/01/rilis-aplikasi-presensi-digital-v52.html" target="_blank" class="skeuo-button flex-1 py-2 text-xs font-mono font-bold text-white">
+                            VISIT
+                        </a>
+                    </div>
+                </div>
+
+                <!-- PROJECT 5: Simple 6JA -->
+                <div class="glass-panel p-6 flex flex-col justify-between group hover:border-yellow-400/50">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="w-10 h-10 rounded-xl bg-yellow-500/20 border border-yellow-400/30 flex items-center justify-center text-yellow-400">
+                                <i class="ph-bold ph-chalkboard-teacher text-xl"></i>
+                            </span>
+                            <span class="font-mono text-[10px] text-yellow-400 bg-yellow-500/10 px-2 py-0.5 rounded border border-yellow-500/30">SMART CLASSROOM</span>
+                        </div>
+                        <h4 class="font-display font-bold text-xl text-white mb-2 group-hover:text-yellow-300 transition-colors">
+                            Simple 6JA
+                        </h4>
+                        <p class="font-sans text-xs text-slate-300 leading-relaxed mb-4">
+                            Sistem data siswa visual dan aplikasi interaksi belajar di kelas dengan rekapitulasi keaktifan belajar siswa.
+                        </p>
+                    </div>
+
+                    <div class="relative rounded-xl overflow-hidden border border-white/10 h-36 bg-slate-900 mb-4">
+                        <iframe src="https://simple-6ja.pages.dev/" class="w-full h-full border-none pointer-events-none transform scale-75 origin-top-left w-[133%] h-[133%]" loading="lazy"></iframe>
+                        <div class="absolute inset-0 bg-cyber-base/30"></div>
+                    </div>
+
+                    <div class="flex items-center gap-2 pt-2 border-t border-white/10">
+                        <button onclick="openPreview('https://simple-6ja.pages.dev/', 'Simple 6JA Smart Classroom')" class="glass-button flex-1 py-2 text-xs font-mono font-bold text-yellow-400">
+                            PREVIEW
+                        </button>
+                        <a href="https://simple-6ja.pages.dev/" target="_blank" class="skeuo-button flex-1 py-2 text-xs font-mono font-bold text-white">
+                            VISIT
+                        </a>
+                    </div>
+                </div>
+
+                <!-- PROJECT 6: Arsip Digital -->
+                <div class="glass-panel p-6 flex flex-col justify-between group hover:border-cyber-primary/50">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="w-10 h-10 rounded-xl bg-indigo-500/20 border border-indigo-400/30 flex items-center justify-center text-cyber-primaryGlow">
+                                <i class="ph-bold ph-archive-box text-xl"></i>
+                            </span>
+                            <span class="font-mono text-[10px] text-cyber-primaryGlow bg-indigo-500/10 px-2 py-0.5 rounded border border-indigo-500/30">CLOUD ARCHIVE</span>
+                        </div>
+                        <h4 class="font-display font-bold text-xl text-white mb-2 group-hover:text-cyber-primaryGlow transition-colors">
+                            Arsip Digital Sekolah
+                        </h4>
+                        <p class="font-sans text-xs text-slate-300 leading-relaxed mb-4">
+                            Repositori digital untuk mengamankan sertifikat, berkas akreditasi, dan instrumen penilaian agar bebas resiko kehilangan fisik.
+                        </p>
+                    </div>
+
+                    <div class="relative rounded-xl overflow-hidden border border-white/10 h-36 bg-slate-900 mb-4">
+                        <iframe src="https://archive-sdinleling.blogspot.com/" class="w-full h-full border-none pointer-events-none transform scale-75 origin-top-left w-[133%] h-[133%]" loading="lazy"></iframe>
+                        <div class="absolute inset-0 bg-cyber-base/30"></div>
+                    </div>
+
+                    <div class="flex items-center gap-2 pt-2 border-t border-white/10">
+                        <button onclick="openPreview('https://archive-sdinleling.blogspot.com/', 'Arsip Digital Cloud Repository')" class="glass-button flex-1 py-2 text-xs font-mono font-bold text-cyber-primaryGlow">
+                            PREVIEW
+                        </button>
+                        <a href="https://archive-sdinleling.blogspot.com/" target="_blank" class="skeuo-button flex-1 py-2 text-xs font-mono font-bold text-white">
+                            VISIT
+                        </a>
+                    </div>
+                </div>
+
+                <!-- PROJECT 7: SIAKAD Terpadu -->
+                <div class="md:col-span-2 lg:col-span-3 glass-panel p-6 sm:p-7 flex flex-col md:flex-row items-center justify-between gap-6 group hover:border-emerald-500/50">
+                    <div class="flex items-start sm:items-center gap-4">
+                        <div class="w-14 h-14 rounded-2xl bg-emerald-500/20 border border-emerald-400/30 flex items-center justify-center text-emerald-400 shrink-0 shadow-glass-sm">
+                            <i class="ph-bold ph-graduation-cap text-3xl"></i>
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-2 mb-1">
+                                <h4 class="font-display font-bold text-xl text-white">SIAKAD Terpadu</h4>
+                                <span class="px-2 py-0.5 text-[10px] font-mono text-emerald-400 bg-emerald-500/10 rounded border border-emerald-500/30">ENTERPRISE</span>
+                            </div>
+                            <p class="font-sans text-xs sm:text-sm text-slate-300 max-w-2xl">
+                                Sistem Informasi Akademik yang mengintegrasikan data master siswa, rapor elektronik, jadwal mengajar, dan rekapitulasi data DAPODIK sekolah secara terstruktur.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-3 w-full md:w-auto shrink-0">
+                        <button onclick="openPreview('https://siakadterpadu.pages.dev/', 'SIAKAD Terpadu Enterprise')" class="glass-button px-5 py-2.5 text-xs font-mono font-bold text-emerald-400 flex-1 md:flex-none">
+                            <i class="ph-bold ph-eye text-base mr-1"></i>
+                            PREVIEW
+                        </button>
+                        <a href="https://siakadterpadu.pages.dev/" target="_blank" class="skeuo-button px-6 py-2.5 text-xs font-heading font-bold text-white flex-1 md:flex-none gap-1.5">
+                            <span>KUNJUNGI SISTEM</span>
+                            <i class="ph-bold ph-arrow-up-right text-base"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ========================================================================= -->
+        <!-- SKEUOMORPHIC QR EXTRACTOR SECTION (Embedded Bento Diagnostic Tool)        -->
+        <!-- ========================================================================= -->
+        <section id="tools" class="mb-24">
+            <div class="glass-panel p-8 sm:p-10 border border-white/20 shadow-glass-lg relative overflow-hidden !rounded-[36px]">
+                <div class="absolute top-0 right-0 w-96 h-96 bg-cyber-cyan/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                <div class="grid lg:grid-cols-12 gap-8 items-center">
+                    <!-- Left Descriptor -->
+                    <div class="lg:col-span-5 space-y-5">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full glossy-badge border border-cyber-cyan/30 text-cyber-cyan text-xs font-mono">
+                            <i class="ph-bold ph-shield-check"></i>
+                            <span>NATIVE UTILITY TOOL</span>
+                        </div>
+                        <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-white">
+                            Authenticator <br>
+                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyber-cyan to-cyber-primary">
+                                Secret Key Extractor
+                            </span>
+                        </h2>
+                        <p class="font-sans text-slate-300 text-sm leading-relaxed">
+                            Pernah kehilangan akses aplikasi atau perlu memindahkan token OTP Google Authenticator ke password manager (1Password, Bitwarden, KeePass)? 
+                            Ekstrak QR Code migrasi Anda secara aman langsung di browser tanpa koneksi server.
+                        </p>
+
+                        <div class="tactile-slot p-4 space-y-2 text-xs font-mono text-slate-300">
+                            <div class="flex items-center gap-2">
+                                <i class="ph-fill ph-check-circle text-emerald-400"></i>
+                                <span>Zero-Knowledge: 100% Client-Side In-Memory</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i class="ph-fill ph-check-circle text-emerald-400"></i>
+                                <span>Mendukung Ekstraksi Batch Multi-Akun</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i class="ph-fill ph-check-circle text-emerald-400"></i>
+                                <span>Mendukung Format PNG, JPG & Screenshot Kamera</span>
+                            </div>
+                        </div>
+
+                        <button onclick="openExtractor()" class="skeuo-button px-7 py-3.5 text-xs font-heading font-bold text-white tracking-wider gap-2">
+                            <i class="ph-bold ph-scan text-base"></i>
+                            <span>BUKA FULLSCREEN EXTRACTOR</span>
+                        </button>
+                    </div>
+
+                    <!-- Right Interactive Drag & Drop Skeuo-Card -->
+                    <div class="lg:col-span-7">
+                        <div class="tactile-slot p-6 sm:p-8 rounded-[28px] border border-white/10 relative">
+                            <!-- Laser scan line animation on container -->
+                            <div class="laser-scanner"></div>
+
+                            <div class="text-center space-y-4">
+                                <div class="w-16 h-16 rounded-2xl bg-cyber-cyan/20 border border-cyber-cyan/40 flex items-center justify-center text-cyber-cyan mx-auto shadow-neon-cyan">
+                                    <i class="ph-bold ph-qr-code text-3xl"></i>
+                                </div>
+                                <h4 class="font-display font-bold text-lg text-white">Unggah Gambar QR Authenticator</h4>
+                                <p class="font-sans text-xs text-slate-400 max-w-sm mx-auto">
+                                    Ambil screenshot QR migrasi dari Google Authenticator di HP Anda, lalu seret atau pilih gambar di sini.
+                                </p>
+
+                                <!-- File Upload Trigger -->
+                                <label for="embeddedQrInput" class="relative group cursor-pointer block border-2 border-dashed border-white/20 hover:border-cyber-cyan rounded-2xl p-6 bg-white/[0.02] hover:bg-white/[0.05] transition-all">
+                                    <div class="flex flex-col items-center justify-center space-y-2">
+                                        <i class="ph-bold ph-upload-simple text-3xl text-slate-400 group-hover:text-cyber-cyan transition-colors"></i>
+                                        <span class="font-mono text-xs font-semibold text-slate-200 group-hover:text-white">Klik untuk memilih file gambar</span>
+                                        <span class="font-mono text-[10px] text-slate-400">PNG, JPG, WEBP hingga 10MB</span>
+                                    </div>
+                                    <input id="embeddedQrInput" type="file" accept="image/*" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" />
+                                </label>
+
+                                <div id="embeddedStatus" class="hidden font-mono text-xs p-3 rounded-xl tactile-slot text-cyber-cyan"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================================= -->
+        <!-- CONTACT & CALL TO ACTION (Tactile Holographic Console)                   -->
+        <!-- ========================================================================= -->
+        <section class="mb-20">
+            <div class="glass-panel p-8 sm:p-12 md:p-16 text-center relative overflow-hidden border border-white/20 shadow-glass-lg !rounded-[36px]">
+                <div class="absolute -top-24 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-cyber-primary/20 rounded-full blur-[100px] pointer-events-none"></div>
+
+                <div class="relative z-10 max-w-3xl mx-auto space-y-6">
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glossy-badge border border-white/10 text-emerald-400 text-xs font-mono">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                        <span>TERSEDIA UNTUK PROJECT 2026 // CONTACT</span>
+                    </div>
+
+                    <h2 class="font-display font-extrabold text-3xl sm:text-5xl md:text-6xl text-white tracking-tight leading-tight">
+                        Wujudkan Ekosistem <br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyber-cyan via-cyber-primary to-cyber-fuchsia">
+                            Sekolah Pintar Anda.
+                        </span>
+                    </h2>
+
+                    <p class="font-sans text-slate-300 text-sm sm:text-base md:text-lg max-w-2xl mx-auto leading-relaxed font-light">
+                        Punya visi untuk mendigitalkan sistem sekolah, absensi siswa, atau repositori data di Tanimbar dan sekitarnya? Mari berbincang untuk merancang arsitektur sistem yang tepat guna.
+                    </p>
+
+                    <!-- Contact Actions -->
+                    <div class="flex flex-wrap items-center justify-center gap-4 pt-4">
+                        <a href="https://wa.me/6282238128216" target="_blank" class="skeuo-button px-8 py-4 text-sm font-heading font-bold text-white tracking-wider gap-3 shadow-skeuo-btn">
+                            <i class="ph-bold ph-whatsapp-logo text-xl"></i>
+                            <span>CHAT WHATSAPP RESMI</span>
+                        </a>
+
+                        <a href="mailto:edo.domakubun@gmail.com" class="glass-button px-7 py-4 text-sm font-heading font-bold text-slate-200 hover:text-white gap-2.5 border-white/20">
+                            <i class="ph-bold ph-envelope text-xl text-cyber-cyan"></i>
+                            <span>KIRIM EMAIL</span>
+                        </a>
+                    </div>
+
+                    <!-- Social Presence Buttons -->
+                    <div class="flex items-center justify-center gap-3 pt-6">
+                        <a href="https://www.instagram.com/dmkbn.e" target="_blank" class="w-12 h-12 rounded-2xl glass-button text-slate-300 hover:text-cyber-fuchsia hover:border-cyber-fuchsia/40 transition-all hover:scale-110" title="Instagram @dmkbn.e">
+                            <i class="ph-bold ph-instagram-logo text-xl"></i>
+                        </a>
+                        <a href="https://www.facebook.com/dmkbn.e" target="_blank" class="w-12 h-12 rounded-2xl glass-button text-slate-300 hover:text-cyber-cyan hover:border-cyber-cyan/40 transition-all hover:scale-110" title="Facebook @dmkbn.e">
+                            <i class="ph-bold ph-facebook-logo text-xl"></i>
+                        </a>
+                        <a href="https://wa.me/6282238128216" target="_blank" class="w-12 h-12 rounded-2xl glass-button text-slate-300 hover:text-emerald-400 hover:border-emerald-500/40 transition-all hover:scale-110" title="Direct Phone / WA">
+                            <i class="ph-bold ph-phone-call text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ========================================================================= -->
+    <!-- FOOTER (Modern Skeuo-Glass Tanimbar Node Signature)                      -->
+    <!-- ========================================================================= -->
+    <footer class="relative z-10 border-t border-white/10 bg-cyber-base/80 backdrop-blur-xl py-10 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-cyber-primary to-cyber-cyan p-[1px] shadow-sm">
+                    <div class="w-full h-full rounded-full bg-cyber-surface flex items-center justify-center font-display font-bold text-white text-xs">
+                        ED
+                    </div>
+                </div>
+                <div>
+                    <span class="font-display font-bold text-white text-base">EDWARD DOMAKUBUN</span>
+                    <span class="block font-mono text-[11px] text-slate-400">Pendidikan Bahasa Inggris & Fullstack Software Engineering</span>
+                </div>
+            </div>
+
+            <div class="font-mono text-xs text-slate-400 tactile-slot px-4 py-2">
+                © 2026 EDWARD DOMAKUBUN. ALL RIGHTS RESERVED.
+            </div>
+
+            <div class="flex items-center gap-2 font-mono text-xs text-slate-400">
+                <span>CRAFTED IN</span>
+                <span class="px-2 py-0.5 rounded bg-white/10 text-cyber-cyan font-bold border border-white/10">TANIMBAR, ID</span>
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
             </div>
         </div>
     </footer>
 
-    <!-- Scripts Gabungan: Portofolio & Extractor -->
+    <!-- ========================================================================= -->
+    <!-- HIGH-PRECISION MODALS: LIVE PORTFOLIO PREVIEW & GOOGLE AUTH EXTRACTOR      -->
+    <!-- ========================================================================= -->
+
+    <!-- 1. Live Preview Modal with Device Viewport Toggle (Desktop / Tablet / Mobile) -->
+    <div id="previewModal" class="fixed inset-0 z-[100] bg-cyber-base/90 backdrop-blur-xl hidden items-center justify-center p-2 sm:p-4 md:p-6 transition-all duration-300">
+        <div class="w-full max-w-6xl h-[92vh] glass-panel border border-white/20 flex flex-col overflow-hidden shadow-2xl !rounded-3xl animate-in zoom-in-95 duration-200">
+            <!-- Modal Header Console -->
+            <div class="px-5 py-3.5 bg-cyber-surface/90 border-b border-white/10 flex items-center justify-between gap-4">
+                <div class="flex items-center gap-3 min-w-0">
+                    <div class="flex items-center gap-1.5">
+                        <span class="w-3 h-3 rounded-full bg-red-500/80 cursor-pointer" onclick="closePreview()"></span>
+                        <span class="w-3 h-3 rounded-full bg-yellow-500/80"></span>
+                        <span class="w-3 h-3 rounded-full bg-green-500/80"></span>
+                    </div>
+                    <span id="previewTitle" class="font-display font-bold text-sm sm:text-base text-white truncate max-w-xs sm:max-w-md">Live Preview</span>
+                </div>
+
+                <!-- Viewport Mode Switcher Buttons -->
+                <div class="hidden sm:flex items-center gap-1 bg-white/5 p-1 rounded-xl border border-white/10">
+                    <button onclick="setViewport('desktop')" id="vp-desktop" class="px-3 py-1 text-xs font-mono text-white bg-white/15 rounded-lg transition-all" title="Desktop View">
+                        <i class="ph-bold ph-desktop text-sm"></i>
+                    </button>
+                    <button onclick="setViewport('tablet')" id="vp-tablet" class="px-3 py-1 text-xs font-mono text-slate-400 hover:text-white rounded-lg transition-all" title="Tablet View">
+                        <i class="ph-bold ph-device-tablet text-sm"></i>
+                    </button>
+                    <button onclick="setViewport('mobile')" id="vp-mobile" class="px-3 py-1 text-xs font-mono text-slate-400 hover:text-white rounded-lg transition-all" title="Mobile View">
+                        <i class="ph-bold ph-device-mobile text-sm"></i>
+                    </button>
+                </div>
+
+                <!-- External Link & Close -->
+                <div class="flex items-center gap-2">
+                    <a id="previewLink" href="#" target="_blank" class="glass-button px-3 py-1.5 text-xs font-mono text-cyber-cyan border-cyber-cyan/30 gap-1.5">
+                        <span class="hidden sm:inline">Buka Tab Baru</span>
+                        <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                    </a>
+                    <button onclick="closePreview()" class="w-8 h-8 rounded-xl bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors">
+                        <i data-lucide="x" class="w-4 h-4"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Iframe Viewing Arena -->
+            <div class="flex-1 bg-slate-950 flex items-center justify-center p-1 sm:p-2 overflow-hidden relative">
+                <div id="iframeWrapper" class="preview-iframe-wrapper w-full h-full rounded-2xl overflow-hidden border border-white/10 bg-white relative">
+                    <iframe id="previewFrame" class="w-full h-full border-none" src="" sandbox="allow-same-origin allow-scripts allow-forms allow-popups"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. Google Authenticator Extractor Modal -->
+    <div id="extractorModal" class="fixed inset-0 z-[120] bg-cyber-base/95 backdrop-blur-2xl hidden items-center justify-center p-3 sm:p-6 overflow-y-auto">
+        <div class="w-full max-w-3xl glass-panel border border-white/25 shadow-2xl overflow-hidden my-auto !rounded-[32px] text-white">
+            <!-- Modal Header -->
+            <div class="relative bg-gradient-to-r from-blue-900/80 via-indigo-900/80 to-purple-900/80 px-6 sm:px-8 py-8 border-b border-white/15">
+                <button onclick="closeExtractor()" class="absolute top-5 right-5 p-2 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors" title="Tutup">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+                
+                <div class="flex items-center gap-4">
+                    <div class="w-14 h-14 rounded-2xl bg-cyber-cyan/20 border border-cyber-cyan/40 flex items-center justify-center text-cyber-cyan shadow-neon-cyan">
+                        <i class="ph-bold ph-shield-check text-3xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-display font-extrabold text-2xl sm:text-3xl text-white">Authenticator Secret Extractor</h3>
+                        <p class="font-mono text-xs sm:text-sm text-cyber-cyan mt-1">Ekstrak Secret Key Base32 dari QR Migration Google Authenticator</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="p-6 sm:p-8 space-y-6">
+                <!-- Dropzone Area -->
+                <div class="tactile-slot p-6 rounded-2xl border border-white/15 text-center relative overflow-hidden">
+                    <div class="laser-scanner"></div>
+
+                    <label for="qrImage" class="relative group cursor-pointer flex flex-col items-center justify-center w-full py-8 border-2 border-dashed border-white/20 hover:border-cyber-cyan rounded-2xl bg-white/[0.02] hover:bg-white/[0.06] transition-all">
+                        <i class="ph-bold ph-qr-code text-4xl text-slate-400 group-hover:text-cyber-cyan mb-2 transition-colors"></i>
+                        <p class="font-heading font-bold text-sm sm:text-base text-slate-200 group-hover:text-white">Pilih atau Seret Screenshot QR Code Di Sini</p>
+                        <p class="font-mono text-xs text-slate-400 mt-1">Format gambar: PNG, JPG, JPEG (Diproses lokal tanpa server)</p>
+                        <input id="qrImage" type="file" accept="image/*" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" />
+                    </label>
+                </div>
+
+                <!-- Error Notice -->
+                <div id="errorBox" class="hidden tactile-slot p-4 border border-rose-500/40 bg-rose-950/30 text-rose-300 rounded-xl flex items-start gap-3">
+                    <i class="ph-bold ph-warning-circle text-xl text-rose-400 shrink-0 mt-0.5"></i>
+                    <p id="errorMessage" class="text-xs font-mono leading-relaxed"></p>
+                </div>
+
+                <!-- Result Container -->
+                <div id="results" class="hidden space-y-4">
+                    <div class="flex items-center justify-between border-b border-white/10 pb-3">
+                        <h4 class="font-display font-bold text-lg text-white flex items-center gap-2">
+                            <i class="ph-bold ph-list-checks text-emerald-400"></i>
+                            Hasil Ekstraksi Token (<span id="accountCount" class="text-cyber-cyan font-mono font-bold">0</span>)
+                        </h4>
+                    </div>
+
+                    <div id="accountsList" class="grid grid-cols-1 gap-4 max-h-[35vh] overflow-y-auto pr-2">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- CORE SCRIPTS: THREE.JS 3D ENGINE, GSAP MOTION & APPLICATION LOGIC         -->
+    <!-- ========================================================================= -->
     <script>
-        // === INITIALIZE PORTFOLIO ICONS ===
+        // 1. INITIALIZE ICONS
         lucide.createIcons();
 
-        // === PORTFOLIO MENU & PREVIEW FUNCTIONS ===
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        let isMenuOpen = false;
+        // 2. LIVE CLOCK (WIT UTC+9 - SAUMLAKI, TANIMBAR)
+        function updateLiveClock() {
+            const clockEl = document.getElementById('liveClock');
+            const dateEl = document.getElementById('liveDate');
+            if (!clockEl) return;
 
-        mobileMenuBtn.addEventListener('click', () => {
-            isMenuOpen = !isMenuOpen;
-            mobileMenu.classList.toggle('hidden');
-            
-            const icon = mobileMenuBtn.querySelector('i');
-            if (icon) icon.remove();
-            
-            const newIcon = document.createElement('i');
-            newIcon.setAttribute('data-lucide', isMenuOpen ? 'x' : 'menu');
-            newIcon.className = 'w-5 h-5';
-            mobileMenuBtn.appendChild(newIcon);
-            lucide.createIcons();
-        });
+            const now = new Date();
+            // Calculate WIT time (UTC + 9 hours)
+            const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+            const witDate = new Date(utc + (3600000 * 9));
 
-        mobileMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-                isMenuOpen = false;
-                const icon = mobileMenuBtn.querySelector('i');
-                if (icon) icon.remove();
-                const newIcon = document.createElement('i');
-                newIcon.setAttribute('data-lucide', 'menu');
-                newIcon.className = 'w-5 h-5';
-                mobileMenuBtn.appendChild(newIcon);
-                lucide.createIcons();
+            const hours = String(witDate.getHours()).padStart(2, '0');
+            const minutes = String(witDate.getMinutes()).padStart(2, '0');
+            const seconds = String(witDate.getSeconds()).padStart(2, '0');
+            clockEl.textContent = `${hours}:${minutes}:${seconds}`;
+
+            const options = { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' };
+            dateEl.textContent = witDate.toLocaleDateString('id-ID', options) + ' • Saumlaki, ID';
+        }
+        setInterval(updateLiveClock, 1000);
+        updateLiveClock();
+
+        // 3. THREE.JS 3D INTERACTIVE PARTICLE & WIREFRAME ENVIRONMENT
+        (function initThreeBackground() {
+            const canvas = document.getElementById('webgl-canvas');
+            if (!canvas || typeof THREE === 'undefined') return;
+
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 40;
+
+            const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+            // Particle Constellation
+            const particleCount = 200;
+            const geometry = new THREE.BufferGeometry();
+            const positions = new Float32Array(particleCount * 3);
+            const colors = new Float32Array(particleCount * 3);
+
+            const color1 = new THREE.Color(0x6366F1); // Indigo
+            const color2 = new THREE.Color(0x06B6D4); // Cyan
+
+            for (let i = 0; i < particleCount; i++) {
+                positions[i * 3] = (Math.random() - 0.5) * 120;
+                positions[i * 3 + 1] = (Math.random() - 0.5) * 120;
+                positions[i * 3 + 2] = (Math.random() - 0.5) * 80;
+
+                const mixedColor = color1.clone().lerp(color2, Math.random());
+                colors[i * 3] = mixedColor.r;
+                colors[i * 3 + 1] = mixedColor.g;
+                colors[i * 3 + 2] = mixedColor.b;
+            }
+
+            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+            const pMaterial = new THREE.PointsMaterial({
+                size: 1.8,
+                vertexColors: true,
+                transparent: true,
+                opacity: 0.75,
+                blending: THREE.AdditiveBlending
+            });
+
+            const particles = new THREE.Points(geometry, pMaterial);
+            scene.add(particles);
+
+            // Floating Wireframe Icosahedron (Geometric 3D Motif)
+            const icoGeo = new THREE.IcosahedronGeometry(12, 1);
+            const icoMat = new THREE.MeshBasicMaterial({
+                color: 0x6366F1,
+                wireframe: true,
+                transparent: true,
+                opacity: 0.15
+            });
+            const icosahedron = new THREE.Mesh(icoGeo, icoMat);
+            icosahedron.position.set(25, -5, -10);
+            scene.add(icosahedron);
+
+            // Floating Torus Motif
+            const torusGeo = new THREE.TorusGeometry(8, 2, 16, 50);
+            const torusMat = new THREE.MeshBasicMaterial({
+                color: 0x06B6D4,
+                wireframe: true,
+                transparent: true,
+                opacity: 0.12
+            });
+            const torus = new THREE.Mesh(torusGeo, torusMat);
+            torus.position.set(-28, 15, -15);
+            scene.add(torus);
+
+            // Mouse Motion Interactivity
+            let mouseX = 0;
+            let mouseY = 0;
+            let targetX = 0;
+            let targetY = 0;
+
+            window.addEventListener('mousemove', (e) => {
+                mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+                mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+            });
+
+            // Render loop with smooth damping
+            function animate() {
+                requestAnimationFrame(animate);
+
+                targetX += (mouseX - targetX) * 0.05;
+                targetY += (mouseY - targetY) * 0.05;
+
+                particles.rotation.y += 0.0008;
+                particles.rotation.x += 0.0004;
+
+                icosahedron.rotation.x += 0.003;
+                icosahedron.rotation.y += 0.004;
+                icosahedron.position.x = 25 + targetX * 6;
+                icosahedron.position.y = -5 - targetY * 6;
+
+                torus.rotation.x -= 0.002;
+                torus.rotation.y -= 0.003;
+                torus.position.x = -28 + targetX * 4;
+                torus.position.y = 15 - targetY * 4;
+
+                camera.position.x += (targetX * 5 - camera.position.x) * 0.05;
+                camera.position.y += (-targetY * 5 - camera.position.y) * 0.05;
+                camera.lookAt(scene.position);
+
+                renderer.render(scene, camera);
+            }
+            animate();
+
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        })();
+
+        // 4. GSAP SCROLL & ENTRANCE ANIMATIONS
+        if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+            gsap.registerPlugin(ScrollTrigger);
+
+            // Stagger hero elements
+            gsap.from('main h1, main p, main .skeuo-button, main .tactile-slot', {
+                opacity: 0,
+                y: 30,
+                duration: 1,
+                stagger: 0.12,
+                ease: 'power3.out'
+            });
+
+            // Smooth parallax on bento panels
+            gsap.utils.toArray('.glass-panel').forEach(panel => {
+                gsap.from(panel, {
+                    scrollTrigger: {
+                        trigger: panel,
+                        start: 'top 88%',
+                        toggleActions: 'play none none none'
+                    },
+                    opacity: 0,
+                    y: 40,
+                    duration: 0.8,
+                    ease: 'power2.out'
+                });
+            });
+        }
+
+        // 5. 3D CARD TILT ON MOUSE HOVER
+        document.querySelectorAll('.tilt-card').forEach(card => {
+            const content = card.querySelector('.tilt-content');
+            if (!content) return;
+
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                const rotateX = (-y / rect.height) * 16;
+                const rotateY = (x / rect.width) * 16;
+                content.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                content.style.transform = `rotateX(0deg) rotateY(0deg) translateZ(0px)`;
             });
         });
 
+        // 6. MOBILE NAVIGATION DRAWER
+        const mobileToggleBtn = document.getElementById('mobile-toggle-btn');
+        const mobileNavDrawer = document.getElementById('mobile-nav-drawer');
+        if (mobileToggleBtn && mobileNavDrawer) {
+            mobileToggleBtn.addEventListener('click', () => {
+                mobileNavDrawer.classList.toggle('hidden');
+            });
+            document.querySelectorAll('.mobile-nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileNavDrawer.classList.add('hidden');
+                });
+            });
+        }
+
+        // 7. PREVIEW MODAL FUNCTIONS WITH MULTI-DEVICE VIEWPORTS
         function openPreview(url, title) {
             const modal = document.getElementById('previewModal');
             const frame = document.getElementById('previewFrame');
             const titleEl = document.getElementById('previewTitle');
             const linkEl = document.getElementById('previewLink');
-            
+
             frame.src = url;
             titleEl.textContent = title;
             linkEl.href = url;
-            
-            modal.classList.add('active');
+
+            setViewport('desktop');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
             document.body.style.overflow = 'hidden';
             setTimeout(() => lucide.createIcons(), 100);
         }
@@ -1252,31 +1619,50 @@
         function closePreview() {
             const modal = document.getElementById('previewModal');
             const frame = document.getElementById('previewFrame');
-            
-            modal.classList.remove('active');
+            modal.classList.remove('flex');
+            modal.classList.add('hidden');
             frame.src = '';
             document.body.style.overflow = '';
         }
 
-        // === EXTRACTOR MODAL FUNCTIONS ===
+        function setViewport(mode) {
+            const wrapper = document.getElementById('iframeWrapper');
+            const btnDesktop = document.getElementById('vp-desktop');
+            const btnTablet = document.getElementById('vp-tablet');
+            const btnMobile = document.getElementById('vp-mobile');
+
+            [btnDesktop, btnTablet, btnMobile].forEach(b => {
+                if (b) {
+                    b.classList.remove('bg-white/15', 'text-white');
+                    b.classList.add('text-slate-400');
+                }
+            });
+
+            if (mode === 'desktop') {
+                wrapper.style.maxWidth = '100%';
+                if (btnDesktop) { btnDesktop.classList.add('bg-white/15', 'text-white'); btnDesktop.classList.remove('text-slate-400'); }
+            } else if (mode === 'tablet') {
+                wrapper.style.maxWidth = '768px';
+                if (btnTablet) { btnTablet.classList.add('bg-white/15', 'text-white'); btnTablet.classList.remove('text-slate-400'); }
+            } else if (mode === 'mobile') {
+                wrapper.style.maxWidth = '390px';
+                if (btnMobile) { btnMobile.classList.add('bg-white/15', 'text-white'); btnMobile.classList.remove('text-slate-400'); }
+            }
+        }
+
+        // Close preview on background click
+        document.getElementById('previewModal').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) closePreview();
+        });
+
+        // 8. GOOGLE AUTHENTICATOR EXTRACTOR MODAL & PROTOBUF LOGIC
         function openExtractor() {
             const modal = document.getElementById('extractorModal');
             modal.classList.remove('hidden');
             modal.classList.add('flex');
             document.body.style.overflow = 'hidden';
-            
-            // Tutup menu mobile jika sedang terbuka
-            if(isMenuOpen) {
-                mobileMenu.classList.add('hidden');
-                isMenuOpen = false;
-                const icon = mobileMenuBtn.querySelector('i');
-                if (icon) icon.remove();
-                const newIcon = document.createElement('i');
-                newIcon.setAttribute('data-lucide', 'menu');
-                newIcon.className = 'w-5 h-5';
-                mobileMenuBtn.appendChild(newIcon);
-                lucide.createIcons();
-            }
+            if (mobileNavDrawer) mobileNavDrawer.classList.add('hidden');
+            setTimeout(() => lucide.createIcons(), 100);
         }
 
         function closeExtractor() {
@@ -1286,86 +1672,7 @@
             document.body.style.overflow = '';
         }
 
-        // Auto-scroll Portfolio (Dikembalikan agar portofolio berfungsi persis seperti aslinya)
-        const portfolioScroll = document.querySelector('#works .flex');
-        let scrollAmount = 0;
-        const cardWidth = 320;
-
-        setInterval(() => {
-            if (portfolioScroll && !portfolioScroll.matches(':hover')) {
-                scrollAmount += cardWidth;
-                const maxScroll = portfolioScroll.scrollWidth - portfolioScroll.clientWidth;
-                if (scrollAmount > maxScroll) {
-                    scrollAmount = 0;
-                }
-                portfolioScroll.scrollTo({
-                    left: scrollAmount,
-                    behavior: 'smooth'
-                });
-            }
-        }, 4000);
-
-        // Close modals on Escape
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                closePreview();
-                // closeExtractor(); // Baris ini dihapus agar Extractor tidak tertutup saat tombol Esc ditekan
-            }
-        });
-
-        // Close Modals on background click
-        document.getElementById('previewModal').addEventListener('click', (e) => {
-            if (e.target === e.currentTarget) closePreview();
-        });
-        
-        // Event listener klik background untuk extractorModal dihapus 
-        // agar pop-up tidak tertutup saat area luar diklik.
-
-        // Smooth Scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                
-                const target = document.querySelector(targetId);
-                if (target) {
-                    const offsetTop = target.offsetTop - 80;
-                    window.scrollTo({ top: offsetTop, behavior: 'smooth' });
-                }
-            });
-        });
-
-        // Portfolio Animations
-        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('section > div').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(20px)';
-            el.style.transition = 'all 0.5s ease-out';
-            observer.observe(el);
-        });
-
-        // Hapus blok setTimeout yang mengecek contentDocument agar tidak terkena error CORS dari Chrome
-        document.querySelectorAll('.card-preview iframe').forEach(iframe => {
-            iframe.addEventListener('error', function() {
-                this.style.display = 'none';
-                this.nextElementSibling.classList.add('active');
-            });
-        });
-
-        // ==========================================
-        // === LOGIKA INTI GOOGLE AUTH EXTRACTOR ===
-        // ==========================================
-
+        // Protobuf Schema for Google Authenticator Migration
         const protoDefinition = `
             syntax = "proto3";
             message MigrationPayload {
@@ -1427,24 +1734,24 @@
             return bytes;
         }
 
-        function showError(message) {
+        function showExtractorError(message) {
             const errorBox = document.getElementById('errorBox');
             document.getElementById('errorMessage').textContent = message;
             errorBox.classList.remove('hidden');
             document.getElementById('results').classList.add('hidden');
         }
 
-        function hideError() {
+        function hideExtractorError() {
             document.getElementById('errorBox').classList.add('hidden');
         }
 
         function processMigrationUri(uri) {
-            hideError();
+            hideExtractorError();
             try {
                 const url = new URL(uri.trim());
-                if (url.protocol !== 'otpauth-migration:') throw new Error("Protokol tidak valid.");
+                if (url.protocol !== 'otpauth-migration:') throw new Error("Format QR bukan otpauth-migration.");
                 const dataParam = url.searchParams.get('data');
-                if (!dataParam) throw new Error("Parameter 'data' tidak ditemukan.");
+                if (!dataParam) throw new Error("Parameter payload data tidak ditemukan.");
 
                 const payloadBuffer = decodeUrlSafeBase64(dataParam);
                 const root = protobuf.parse(protoDefinition).root;
@@ -1453,12 +1760,12 @@
                 const payload = MigrationPayload.toObject(message, { enums: String, bytes: Array });
 
                 if (!payload.otpParameters || payload.otpParameters.length === 0) {
-                    throw new Error("Tidak ada akun yang ditemukan.");
+                    throw new Error("Tidak ada akun OTP yang ditemukan di payload.");
                 }
 
                 displayAccounts(payload.otpParameters);
             } catch (err) {
-                showError("Gagal mengekstrak: " + err.message);
+                showExtractorError("Gagal mendekode QR: " + err.message);
             }
         }
 
@@ -1471,93 +1778,100 @@
             otpParamsList.forEach((account) => {
                 const secretUint8 = new Uint8Array(account.secret);
                 const secretBase32 = base32Encode(secretUint8);
-                const name = account.name || "Unknown Account";
+                const name = account.name || "Unknown Service";
+                const issuer = account.issuer || "Authenticator Token";
                 
                 const card = document.createElement('div');
-                card.className = "group relative bg-white border border-slate-200 rounded-2xl p-5 hover:border-brand-300 transition-all duration-300 flex flex-col justify-between";
+                card.className = "tactile-slot p-4 rounded-2xl border border-white/10 flex flex-col justify-between gap-3 group";
                 card.innerHTML = `
-                    <div class="mb-4">
-                        <div class="flex items-center gap-3 mb-1">
-                            <div class="w-8 h-8 rounded-full bg-brand-50 flex items-center justify-center text-brand-600">
-                                <i class="ph-fill ph-user text-lg"></i>
+                    <div class="flex items-center justify-between gap-3">
+                        <div class="flex items-center gap-3 min-w-0">
+                            <div class="w-9 h-9 rounded-xl bg-cyber-primary/20 border border-cyber-primary/30 flex items-center justify-center text-cyber-primaryGlow shrink-0">
+                                <i class="ph-bold ph-key text-lg"></i>
                             </div>
-                            <h3 class="font-bold text-slate-800 break-words flex-1 line-clamp-2" title="${name}">${name}</h3>
+                            <div class="min-w-0">
+                                <h5 class="font-display font-bold text-white text-sm truncate" title="${name}">${name}</h5>
+                                <span class="font-mono text-[11px] text-cyber-cyan block truncate">${issuer}</span>
+                            </div>
                         </div>
+                        <span class="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[10px] font-mono">TOTP</span>
                     </div>
-                    <div class="bg-slate-50 border border-slate-100 rounded-xl p-3 relative">
-                        <span class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Secret Key</span>
-                        <div class="flex items-center justify-between gap-2">
-                            <code class="font-code text-brand-600 font-semibold text-sm break-all">${secretBase32}</code>
-                            <button onclick="copyText('${secretBase32}', this)" class="shrink-0 bg-white border border-slate-200 hover:border-brand-500 hover:bg-brand-50 text-slate-500 hover:text-brand-600 p-2 rounded-lg transition-colors" title="Copy Secret">
-                                <i class="ph ph-copy text-lg"></i>
-                            </button>
+
+                    <div class="bg-black/50 border border-white/10 rounded-xl p-3 flex items-center justify-between gap-3">
+                        <div class="min-w-0 flex-1">
+                            <span class="block text-[9px] font-mono text-slate-400 uppercase tracking-widest">Base32 Secret</span>
+                            <code class="font-mono text-cyber-cyan font-bold text-xs sm:text-sm break-all">${secretBase32}</code>
                         </div>
+                        <button onclick="copySecret('${secretBase32}', this)" class="skeuo-button px-3 py-2 text-xs font-mono text-white gap-1.5 shrink-0" title="Salin Secret">
+                            <i class="ph-bold ph-copy text-sm"></i>
+                            <span>SALIN</span>
+                        </button>
                     </div>
                 `;
                 accountsList.appendChild(card);
             });
-            
-            // Scroll sedikit agar hasil terlihat di modal
-            setTimeout(() => {
-                const modal = document.getElementById('extractorModal');
-                modal.scrollTo({ top: modal.scrollHeight, behavior: 'smooth' });
-            }, 100);
         }
 
-        function copyText(text, btnElement) {
-            if (navigator.clipboard && window.isSecureContext) {
-                navigator.clipboard.writeText(text).then(showFeedback);
-            } else {
-                const textArea = document.createElement("textarea");
-                textArea.value = text;
-                textArea.style.position = "fixed";
-                document.body.appendChild(textArea);
-                textArea.focus();
-                textArea.select();
-                try { document.execCommand('copy'); showFeedback(); } catch (err) {}
-                textArea.remove();
-            }
-
-            function showFeedback() {
-                const icon = btnElement.querySelector('i');
-                const originalClass = icon.className;
-                icon.className = "ph-bold ph-check text-green-500";
-                btnElement.classList.add("border-green-500", "bg-green-50");
+        function copySecret(text, btn) {
+            navigator.clipboard.writeText(text).then(() => {
+                const originalHtml = btn.innerHTML;
+                btn.innerHTML = `<i class="ph-bold ph-check text-emerald-400"></i><span>TERSALIN!</span>`;
+                btn.classList.add('border-emerald-400');
                 setTimeout(() => {
-                    icon.className = originalClass;
-                    btnElement.classList.remove("border-green-500", "bg-green-50");
-                }, 1500);
-            }
+                    btn.innerHTML = originalHtml;
+                    btn.classList.remove('border-emerald-400');
+                }, 1800);
+            });
         }
 
-        // File upload listener untuk Extractor
-        document.getElementById('qrImage').addEventListener('change', function(e) {
-            const file = e.target.files[0];
+        function handleQrFile(file) {
             if (!file) return;
-
-            hideError();
+            hideExtractorError();
             const reader = new FileReader();
             reader.onload = function(event) {
                 const img = new Image();
                 img.onload = function() {
                     const canvas = document.createElement('canvas');
-                    const context = canvas.getContext('2d');
+                    const ctx = canvas.getContext('2d');
                     canvas.width = img.width;
                     canvas.height = img.height;
-                    context.drawImage(img, 0, 0, img.width, img.height);
+                    ctx.drawImage(img, 0, 0, img.width, img.height);
                     
-                    const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-                    const code = jsQR(imageData.data, imageData.width, imageData.height, {
-                        inversionAttempts: "dontInvert",
+                    const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                    const code = jsQR(imgData.data, imgData.width, imgData.height, {
+                        inversionAttempts: "dontInvert"
                     });
 
-                    if (code) processMigrationUri(code.data);
-                    else showError("QR Code tidak terdeteksi. Pastikan gambar jelas dan merupakan QR Google Authenticator.");
+                    if (code && code.data) {
+                        processMigrationUri(code.data);
+                        openExtractor();
+                    } else {
+                        showExtractorError("QR Code tidak dapat dideteksi. Pastikan gambar jelas dan merupakan QR Migration Google Authenticator.");
+                        openExtractor();
+                    }
                 };
                 img.src = event.target.result;
             };
             reader.readAsDataURL(file);
-            e.target.value = '';
+        }
+
+        // Listeners for QR file inputs (Modal and Embedded section)
+        const qrInputModal = document.getElementById('qrImage');
+        if (qrInputModal) {
+            qrInputModal.addEventListener('change', (e) => handleQrFile(e.target.files[0]));
+        }
+
+        const embeddedQrInput = document.getElementById('embeddedQrInput');
+        if (embeddedQrInput) {
+            embeddedQrInput.addEventListener('change', (e) => handleQrFile(e.target.files[0]));
+        }
+
+        // Close modal on Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closePreview();
+                closeExtractor();
+            }
         });
     </script>
 </body>
